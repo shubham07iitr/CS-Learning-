@@ -1,0 +1,203 @@
+import tester.*;
+import java.util.*;
+
+
+
+//============================================================================================================
+//ADJACENCY LIST REPRESENTATION
+
+//CLASS VERTEX
+//Each vertex will have name of vertex, and the list of edges from the vertext
+
+class VertexA {
+String name;
+IList<EdgeA> listOfEdges ; //all edges emanating from the vertex
+
+//Defining the Constructor
+VertexA (String name, IList<EdgeA> listOfEdges) {this.name = name; this.listOfEdges = listOfEdges;}
+
+//TEMPLATE
+/*
+ * FIELDS
+ * ...this.listOfEdges ... IList<Edge>
+ * METHODS
+ * ...this.pathExistsVertex(Vertex v2) .... boolean
+ */
+
+//METHODS
+
+//METHO PATHEXISTSVERTEX
+//Returns true if path exists from this vertex to given vertex
+//Signature> Self, Vertex v2 > boolean
+
+
+
+//HELPER METHOD for PATHEXISTS
+//We check for whether:
+//-- there is a direct edge from v2 > v2
+//-- or the first vertex is connected to v2
+//-- or any of the ther vertices are connected to v2
+
+}
+
+//CLASS EDGE
+//Edge is of type (From - Vertex, To - Vertex, Weight - Int)
+
+class EdgeA {
+VertexA from;
+VertexA to;
+int weight;
+
+//Defining the constructor 
+EdgeA (VertexA from, VertexA to, int weight) {this.from = from; this.to = to; this.weight = weight;}
+}
+
+
+//============================================================================================================
+//CLASS GRAPHLIST
+//It will be just a list of vertices
+
+class GraphListA {
+	IList<VertexA> listOfVertices;
+
+	//Defining the constructor 
+	GraphListA(IList<VertexA> listOfVertices) {this.listOfVertices = listOfVertices;}
+
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.listOfVertices.... IList<Vertex>
+	 * METHODS
+	 * ...this.pathExists(Vertex v1, Vertex v2) ... boolean
+	 */
+
+
+	//METHODS
+
+
+	//METHOD PATHEXISTSDFS
+	//Returns true if starting from a particular vertex, it is possible to reach to the destination vertex
+	//We will need one accumulator for worklist, which all nodes we want to cover, and visited list, so lets use Deque
+	//Will run through a stack where we go deep into a branch before backtracking
+	//Signature> Vertex v1, Vertex v2 > boolean
+	
+	boolean pathExistsDFS (VertexA a, VertexA b) {
+		Deque<VertexA> worklist = new ArrayDeque<VertexA>(); //we use Java's inbuilt interface for Deque, which has two implementations - ArrayDeque for arrays, and LinkedList() for recursion
+		Deque<VertexA> visited = new ArrayDeque<VertexA>();
+
+		worklist.addFirst(a); // we kick off by adding the from element in the worklist
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.removeFirst();  //we define the next element as the first element from the wrklist, next would be checked for destination, and its neighbors would be added to wrorklist
+			if (next.equals(b)) {return true;} //we check wthere next element is same as the destination
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				worklist.addFirst(e.to);
+				edges = cons.rest;}
+			visited.addFirst(next);}}} //and then we add eleemnt/next to the visited deque
+		return false;}
+	
+	//METHOD PATHEXISTSBFS
+	//Exactly same as DFS, instead we will add at the end from the deque 
+	
+	boolean pathExistsBFS (VertexA a, VertexA b) {
+		Deque<VertexA> worklist = new ArrayDeque<VertexA>(); //we use Java's inbuilt interface for Deque, which has two implementations - ArrayDeque for arrays, and LinkedList() for recursion
+		Deque<VertexA> visited = new ArrayDeque<VertexA>();
+
+		worklist.addLast(a); // we kick off by adding the from element in the worklist
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.removeFirst();  //we define the next element as the first element from the wrklist, next would be checked for destination, and its neighbors would be added to wrorklist
+			if (next.equals(b)) {return true;} //we check wthere next element is same as the destination
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				worklist.addLast(e.to);
+				edges = cons.rest;}
+			visited.addFirst(next);}}} //and then we add eleemnt/next to the visited deque
+		return false;}
+	
+
+
+}
+
+
+//============================================================================================================
+class ExamplesGraphAdvanced {
+	ExamplesGraphAdvanced() {}
+	
+	//Graph defined as per this link -https://course.ccs.neu.edu/cs2510sp22/lecture30.html
+	
+	
+	//Defining the vertices
+	VertexA a = new VertexA("A", new MtList<EdgeA>());
+	VertexA b = new VertexA("B", new MtList<EdgeA>());
+	VertexA c = new VertexA("C", new MtList<EdgeA>());
+	VertexA d = new VertexA("D", new MtList<EdgeA>());
+	VertexA e = new VertexA("E", new MtList<EdgeA>());
+	
+	//Defining the Edges
+	EdgeA ab = new EdgeA(a,b, 0);
+	EdgeA bc = new EdgeA(b,c, 0);
+	EdgeA bd = new EdgeA(b, d,0);
+	EdgeA ca = new EdgeA(c,a, 0);
+	EdgeA eb = new EdgeA(e, b, 0);
+	
+	//Defining list of edges 
+	IList<EdgeA> aEdges = new ConsList<EdgeA>(ab, new MtList<EdgeA>());
+	IList<EdgeA> bEdges = new ConsList<EdgeA>(bc, new ConsList<EdgeA> (bd, new MtList<EdgeA>()));
+	IList<EdgeA> cEdges = new ConsList<EdgeA> (ca, new MtList<EdgeA>());
+	IList<EdgeA> eEdges = new ConsList<EdgeA> (eb, new MtList<EdgeA>());
+	
+	//Updating the list of edges for vertices 
+	void initConditions() {
+		a.listOfEdges = aEdges;
+		b.listOfEdges = bEdges;
+		c.listOfEdges = cEdges;
+		e.listOfEdges = eEdges;
+		
+		IList<VertexA> listVertices = new ConsList<VertexA>(a, new ConsList<VertexA>(b, new ConsList<VertexA>(c, new ConsList<VertexA>(d, new ConsList<VertexA>(e,new MtList<VertexA>())))));
+		
+		//Defining the graph
+		GraphListA newGraph = new GraphListA (listVertices);}
+	
+	void testPathExistsDFS = new Grap
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

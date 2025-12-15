@@ -1,0 +1,95 @@
+import tester.Tester;
+import java.util.*;
+
+
+class ArrayListReverseIterator<T> implements Iterator<T>{
+	ArrayList<T> arrayList; 
+	int currentElement;
+
+	ArrayListReverseIterator(ArrayList<T> arrayList) {
+		this.arrayList = arrayList;
+		this.currentElement = this.arrayList.size() -1 ;}
+
+	public boolean hasNext() {return this.currentElement < this.arrayList.size();}
+
+	public T next() {
+		T answer = this.arrayList.get(currentElement); //current element starts with 0 and gets incremented
+		this.currentElement = this.currentElement -1 ;
+		return answer;}
+	
+	public void remove() {throw new UnsupportedOperationException("Remove is not implemented");
+	
+}}
+
+//=================================================================================
+//FIBONACCI ITERATOR
+
+class FibonacciIterator implements Iterator<Integer> {
+	int prevValue;
+	int currentValue;
+	
+	FibonacciIterator() {
+		this.prevValue = 0;
+		this.currentValue = 1;
+	};
+	
+	public boolean hasNext() {return true;}
+	
+	public Integer next() {
+		int answer = this.prevValue + this.currentValue;
+		this.prevValue = this.currentValue;
+		this.currentValue = answer;
+		return answer;}
+	
+	public void remove() {throw new UnsupportedOperationException("Remove is not implemented");}
+}
+
+//=================================================================================
+//HIGHER ORDER ITERATOR
+
+class EveryOtherElement<T> implements Iterator <T> {
+	Iterator<T> source;
+	EveryOtherElement(Iterator<T> source) {this.source = source;}
+	
+	public boolean hasNext() {return this.source.hasNext();}
+	
+	public T next() {
+		T answer = this.source.next();
+		if (this.source.hasNext()) {this.source.next();}
+		return answer;
+	}
+	
+}
+
+
+
+//=================================================================================
+//EXAMPLE CLASSES
+
+class IteratorOthersExamples {
+	IteratorOthersExamples() {}
+
+	void testSelfMadeForEachReverse(Tester t) {
+		ArrayList<Integer> aList = new ArrayList<Integer>();
+		aList.add(1);
+		aList.add(2);
+		aList.add(3);
+		int sum=0;
+
+
+		Iterator<Integer> iterator = new ArrayListReverseIterator<Integer>(aList);
+		while(iterator.hasNext()) {
+			Integer elem = iterator.next();
+			sum = sum + elem;}
+		t.checkExpect(sum, 6);
+
+	}
+	
+	void testFiboIterator(Tester t) {
+		int sum = 0;
+		Iterator<Integer> fibterator = new FibonacciIterator();
+		for (int i = 0; i < 5; i++) {
+			sum = sum + fibterator.next();}
+		t.checkExpect(sum, 19);
+	}
+}

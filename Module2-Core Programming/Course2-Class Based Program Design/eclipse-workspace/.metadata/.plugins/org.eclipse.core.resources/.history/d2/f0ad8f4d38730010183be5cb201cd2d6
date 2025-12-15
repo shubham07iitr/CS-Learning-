@@ -1,0 +1,78 @@
+import java.util.*;
+import tester.*;
+//=====================================================================
+//DEFINING DICTIONARY CLASS
+
+class DictionaryEntry{
+	String word;
+	String definition;
+	
+	DictionaryEntry (String word, String definition) {
+		this.word = word; 
+		this.definition = definition;
+	}
+}
+
+interface IDictionary <T, U> {
+	boolean contains (T word);
+	void put (T word, U meaning);
+	U getMeaning (T word);
+}
+
+class StringDictionary implements IDictionary < String, String> {
+	ArrayList<DictionaryEntry> entries;
+	
+	StringDictionary() {entries = new ArrayList<DictionaryEntry>();}
+	
+	public boolean contains(String word) {
+		for (DictionaryEntry entry: entries) {
+			if (entry.word.equals(word)) {return true;}}
+		return false;}
+	
+	public void put (String word, String meaning) {return;}
+	
+	public String getMeaning (String word) {return word;}
+	
+}
+
+//=====================================================================
+//EXAMPLE CLASS
+
+
+
+class Examples {
+	Examples() {}
+	
+	void testExamples(Tester t) {
+		ArrayList<String> dictionary = new ArrayList<String> ();
+		String word = "Java";
+		String meaning = "A modern programming language.";
+		
+		dictionary.add(word);
+		dictionary.add(meaning);
+		
+		t.checkExpect(dictionary.get(0), "Java");
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

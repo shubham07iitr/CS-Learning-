@@ -1,0 +1,127 @@
+<!--
+Problem statement from https://www.codechef.com/practice/course/html/ROMCQ/problems/FASH01
+Sample website at https://www.codechef-apps.com/project/FASH01/files/index.html
+Things to do
+1. Create the nav bar , with purple BG, and write Fashion Store in white Font color, perhaps h1 and no bold
+2. Create a div with white backgroun, add 6 images for T-shirts, Sun Glasses, Shirts, Shoes, Pants, Pefumes
+3. Create another div with grey BG, which will have 3 components, a shopping time image, a text for "Our Upcoming Sales" and a table for upcoming sales
+4. h2 heading for "Fashion Store: The One-stop Fashion Destination" and some text both in grey color, heading should be bold
+5. h3 heading for "Festival Sales" and some text, and some text both in grey color, heading should be bold
+6. h3 heading for "Payment Options" and some text, and some text both in grey color, heading should be bold
+7. End bar , black in BG, with centered aligned text "© 2012-2023 FashionStore.com"
+-->
+
+
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Fashion Store </title>
+        <link rel="stylesheet" href="./style.css" />
+        <body>
+            <div class = "NavBar">
+                <!--Nav bar PH-->
+                <h1>FASHION STORE</h1>
+                
+            </div>
+            <div class = "menu">
+                <!--white BG placeholder-->
+                <figure>
+                    <img  src="./images/t-shirts.png">
+                    <figcaption>T-shirts</figcaption>
+                </figure>
+                <figure>
+                    <img  src="./images/sunglasses.png">
+                    <figcaption>Sunglasses</figcaption>
+                </figure>
+                <figure>
+                    <img  src="./images/shirts.png">
+                    <figcaption>Shirts</figcaption>
+                </figure>
+                <figure>
+                    <img  src="./images/shoes.png">
+                    <figcaption>Shoes</figcaption>
+                </figure>
+                <figure>
+                    <img  src="./images/pants.png">
+                    <figcaption>Pants</figcaption>
+                </figure>
+                <figure>
+                    <img  src="./images/perfumes.png">
+                    <figcaption>Perfumes</figcaption>
+                </figure>
+                
+
+            </div>
+            <div class="main_body">
+                <!--Grey BG PH-->
+                <img src = "./images/ShoppingTime.png">
+                <h2> OUR UPCOMING SALES</h2>
+                <table border = "1">
+                    <thead>
+                        <tr>
+                            <th>Festival</th>
+                            <th>Discount</th>
+                            <th>Starting Date</th>
+                            <th>Ending Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Independence Day</td>
+                            <td>  <s>30%</s> 40%</td>
+                            <td>  10 August</td>
+                            <td>  18 August</td>
+                        </tr>
+                        <tr>
+                            <td>Diwali</td>
+                            <td>  <s>50%</s> 40%</td>
+                            <td>  10 November</td>
+                            <td>  21 November</td>                        
+                        </tr>
+                        <tr>
+                            <td>Christmas</td>
+                            <td>  <s>35%</s> 50%</td>
+                            <td>  20 December</td>
+                            <td>  26 December</td>
+                        </tr>
+                        <tr>
+                            <td>New Year Day</td>
+                            <td>  <s>60%</s> 75%</td>
+                            <td>  30 December</td>
+                            <td>  6 January</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class = "info">
+                <!--h2 heading for FS PH-->
+                <h2> Fashion Store: The One-stop Fashion Destination </h2>
+                <!--FS para-->
+                <p>Stepping out and finding a perfect fashion choice is difficult? Why worry when you have your own Fashion Store at home where you can browse through thousands of choices and you can order clothes according to your liking. Don't worry if you don't like the item after you receive it, you can always consider the option for exchanging your item or even you can return your item and you will get the full amount back. Isn't that amazing? Start searching for your desired clothes and see it yourself. Once you are done with your first shopping, we are very sure that you will continue that in future as well and we will try our best to give you more and more choices so that you can have a variety of clothes to choose from and so you can find one which suits you the best.</p>
+                <p>What makes us Great? Well few things are listed below:
+
+                </p>
+                <!-- h3 heading for Festival Sales-->
+                <h3> Festival Sales</h3>
+                <!--Festival Sales PH-->
+                <!-- h3 heading for Payment Options-->
+                <p>We keep coming with different sales on our Indian Festivals where we offer huge discounts on your favorite clothes. If you want to get the notifications of all our future sales then you can subscribe to us and we will make sure that you will not miss any offer in future so that you can get your favorite cloth at the best possible price.</p>
+                <p>Some of our favorite sales are listed below:</p>
+                <ul>
+                    <li>Independence Day Sale</li>
+                    <li>Diwali Sale</li>
+                    <li>Christmas Sale</li>
+                    <li>New Year Sale</li>
+                </ul>
+                <h3> Payment Options</h3>
+                <!--Payment options para PH-->
+                <p> We support a large variety of payment options so that you won't miss a cloth due to unavailability of any payment option. You can use a debit card or your credit card to make the payment. Also, you can directly use your UPI ID to make the payment. We also provide EMI options if you think you can not afford a complete amount at once. Other than that, you can directly make your payment through your bank details and even if you are not sure or you are in doubt then you can choose the Cash option where you can pay the amount in cash to our partner who will be delivering your cloth at your doorstep.</p>
+            </div>                
+            <div class = "EndBar">
+                <h3>© 2012-2023 FashionStore.com</h3>
+                <!--End bar black in color PH-->
+            </div>
+        </body>
+    </head>
+</html>

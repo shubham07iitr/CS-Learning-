@@ -1,0 +1,3807 @@
+Standard ML of New Jersey [Version 110.99.8; 64-bit; April 25, 2025]
+- print (OS.FileSys.getDir () ^ "\n");
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 4/Code Along Files
+val it = () : unit
+- use "Dtype_Bindings.sml";
+[opening Dtype_Bindings.sml]
+datatype mytype = Pizza | Str of string | TwoInts of int * int
+val a = Str "hi" : mytype
+val b = fn : string -> mytype
+val c = Pizza : mytype
+val d = TwoInts (3,7) : mytype
+val e = Str "hi" : mytype
+val it = () : unit
+- d
+= ;
+val it = TwoInts (3,7) : mytype
+- d + d
+= ;
+stdIn:5.3 Error: overloaded variable not defined at type
+  symbol: +
+  type: mytype
+- use "case_expressions.sml";
+[opening case_expressions.sml]
+datatype mytype = Pizza | Str of string | TwoInts of int * int
+val f = fn : mytype -> int
+val it = () : unit
+- f Pizza;
+val it = 3 : int
+- f (Str "hi");
+val it = 8 : int
+- use "ex.sml";
+[opening ex.sml]
+ex.sml:19.29-19.37 Error: unbound variable or constructor: test_exp
+val it = () : unit
+- use "ex.sml";
+[opening ex.sml]
+datatype exp
+  = Add of exp * exp
+  | Constant of int
+  | Multiply of exp * exp
+  | Negate of exp
+val max_constant = fn : exp -> int
+val text_exp = Add (Constant 19,Negate (Constant 4)) : exp
+ex.sml:19.29-19.37 Error: unbound variable or constructor: test_exp
+val it = () : unit
+- use "ex.sml";
+[opening ex.sml]
+datatype exp
+  = Add of exp * exp
+  | Constant of int
+  | Multiply of exp * exp
+  | Negate of exp
+val max_constant = fn : exp -> int
+val test_exp = Add (Constant 19,Negate (Constant 4)) : exp
+val nineteen = 19 : int
+val it = () : unit
+- use "ex.sml";
+[opening ex.sml]
+datatype exp
+  = Add of exp * exp
+  | Constant of int
+  | Multiply of exp * exp
+  | Negate of exp
+val max_constant = fn : exp -> int
+val test_exp = Add (Constant 19,Negate (Constant 4)) : exp
+val nineteen = 19 : int
+val it = () : unit
+- use "type_synonyms.sml";
+[opening type_synonyms.sml]
+type_synonyms.sml:13.8 Error: unbound variable or constructor: C
+val it = () : unit
+- use "type_synonyms.sml";
+[opening type_synonyms.sml]
+type_synonyms.sml:13.8 Error: unbound variable or constructor: C
+val it = () : unit
+- use "type_synonyms.sml";
+[opening type_synonyms.sml]
+datatype suit = Club | Diamond | Heart | Spade
+datatype rank = Ace | Jack | King | Num of int | Queen
+type card = suit * rank
+type name_record =
+  {first:string, last:string, middle:string option, student_num:int option}
+val is_Queen_of_Spades = fn : card -> bool
+val c1 = (Diamond,Ace) : card
+val c2 = (Heart,Ace) : suit * rank
+val c3 = (Spade,Ace) : suit * rank
+val it = () : unit
+- use "type_inference.sml";
+[opening type_inference.sml]
+val sum_triple1 = fn : int * int * int -> int
+val full_name1 = fn : {first:string, last:string, middle:string} -> string
+val it = () : unit
+- use "type_inference.sml";
+[opening type_inference.sml]
+val sum_triple1 = fn : int * int * int -> int
+val full_name1 = fn : {first:string, last:string, middle:string} -> string
+val sum_partial = fn : int * 'a * int -> int
+val it = () : unit
+- print (OS.FileSys.getDir () ^ "\n");
+/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 4/Code Along Files
+val it = () : unit
+- OS.FileSys.chDir "/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 3/Assignments"
+= ;
+val it = () : unit
+- print (OS.FileSys.getDir () ^ "\n");
+/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 3/Assignments
+val it = () : unit
+- 
+- use "extra3.sml";
+[use failed: 'extra3.sml' does not exist or is unreadable]
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val a = 3 : int
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,4,5,2,5,10] : int list
+extra.sml:18.33-18.36 Error: unclosed string
+extra.sml:21.1-32.1 Error: unclosed comment
+extra.sml:32.1 Error: syntax error found at EOF
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,4,5,2,5,10] : int list
+extra.sml:18.30-18.34 Error: unclosed string
+extra.sml:32.1 Error: syntax error found at EOF
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,4,5,2,5,10] : int list
+extra.sml:15.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+extra.sml:6.27 Error: expression or pattern begins with infix identifier "-"
+extra.sml:6.17 Error: expression or pattern begins with infix identifier "-"
+extra.sml:6.13 Error: expression or pattern begins with infix identifier "-"
+extra.sml:6.12-6.30 Error: operator and operand do not agree [overload - bad instantiation]
+  operator domain: 'Z[OL(-)] * 'Z[OL(-)]
+  operand:         'Y[INT]
+  in expression:
+    - 2
+extra.sml:6.12-6.30 Error: operator and operand do not agree [overload - bad instantiation]
+  operator domain: 'Z[OL(-)] * 'Z[OL(-)]
+  operand:         'Y[INT]
+  in expression:
+    - 4
+extra.sml:6.12-6.30 Error: operator and operand do not agree [overload - bad instantiation]
+  operator domain: 'Z[OL(-)] * 'Z[OL(-)]
+  operand:         'Y[INT]
+  in expression:
+    - 5
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+extra.sml:43.49 Error: expression or pattern begins with infix identifier "-"
+extra.sml:43.13-43.52 Error: operator and operand do not agree [overload - bad instantiation]
+  operator domain: 'Z[OL(-)] * 'Z[OL(-)]
+  operand:         'Y[INT]
+  in expression:
+    - 6
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 failed
+val it = () : unit
+extra.sml:44.43-44.47 Error: unbound variable or constructor: LOI3
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 failed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.9 Error: syntax error: inserting  VAL
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.9 Error: syntax error: inserting  VAL
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.9 Error: syntax error: inserting  VAL
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.5-59.51 Error: operator is not a function [tycon mismatch]
+  operator: int
+  in expression:
+    let val alternate0 =
+              let val rec alternate0 =
+                            (fn (<pat>,<pat>) =>
+                                  if <exp> then <exp> else <exp>)
+            in alternate0
+            end
+    in alternate0 (loi,1)
+    end check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.5-59.51 Error: operator is not a function [tycon mismatch]
+  operator: int
+  in expression:
+    let val alternate0 =
+              let val rec alternate0 =
+                            (fn (<pat>,<pat>) =>
+                                  if <exp> then <exp> else <exp>)
+            in alternate0
+            end
+    in alternate0 (loi,1)
+    end check_expect
+val it = () : unit
+- 
+
+Process sml finished
+Standard ML of New Jersey [Version 110.99.8; 64-bit; April 25, 2025]
+- use "extra.sml";
+[use failed: 'extra.sml' does not exist or is unreadable]
+val it = () : unit
+-  OS.FileSys.chDir "/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 3/Assignments"
+= ;
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:50.5-59.51 Error: operator is not a function [tycon mismatch]
+  operator: int
+  in expression:
+    let val alternate0 =
+              let val rec alternate0 =
+                            (fn (<pat>,<pat>) =>
+                                  if <exp> then <exp> else <exp>)
+            in alternate0
+            end
+    in alternate0 (loi,1)
+    end check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 failed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+extra.sml:92.1-92.53 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: string * int * int
+  operand:         string * int * ('Z[INT] * 'Y[INT])
+  in expression:
+    check_expect ("min_max_test1",alternate LOI0,(0,0))
+val it = () : unit
+- use "module3.sml";
+[opening module3.sml]
+val D1 = (1989,9,25) : int * int * int
+val D2 = (1989,11,18) : int * int * int
+val D3 = (1990,9,25) : int * int * int
+val D4 = (1955,1,18) : int * int * int
+val LOD1 = [] : 'a list
+val LOD2 = [(1989,9,25),(1989,11,18),(1990,9,25),(1955,1,18)]
+  : (int * int * int) list
+[autoloading]
+[autoloading done]
+val LOM1 = [] : 'a list
+val LOM2 = [2,3,9,11] : int list
+val LOM3 = [2,3,4] : int list
+val LOS1 = [] : 'a list
+val LOS2 = ["shubham","sharvil","survi"] : string list
+val LOMS =
+  ["January","February","March","April","May","June","July","August",
+   "September","October","November","December"] : string list
+val LOI1 = [] : 'a list
+val LOI2 = [5,6,4,8,9] : int list
+val LOMSTRING = [31,28,31,30,31,30,31,31,30,31,30,31] : int list
+val dateListToString = fn : (int * int * int) list -> string
+val intListToString = fn : int list -> string
+module3.sml:39.13 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a * (''a -> string) -> unit
+val is_older = fn : (int * int * int) * (int * int * int) -> bool
+[autoloading]
+[autoloading done]
+Isolder_Tes1 passed
+val it = () : unit
+Isolder_Tes2 passed
+val it = () : unit
+Isolder_Tes3 passed
+val it = () : unit
+val number_in_month = fn : (int * int * int) list * int -> int
+Number_in_month_test1 passed
+val it = () : unit
+Number_in_month_test2 passed
+val it = () : unit
+Number_in_month_test3 passed
+val it = () : unit
+val number_in_months = fn : (int * int * int) list * int list -> int
+Number_in_months_test1 passed
+val it = () : unit
+Number_in_months_test2 passed
+val it = () : unit
+Number_in_months_test3 passed
+val it = () : unit
+Number_in_months_test4 passed
+val it = () : unit
+Number_in_months_test3 passed
+val it = () : unit
+val dates_in_month = fn
+  : (int * int * int) list * int -> (int * int * int) list
+dates_in_month_test1 passed
+val it = () : unit
+dates_in_month_test2 passed
+val it = () : unit
+dates_in_month_test3 passed
+val it = () : unit
+val dates_in_months = fn
+  : (int * int * int) list * int list -> (int * int * int) list
+dates_in_months_test1 passed
+val it = () : unit
+dates_in_months_test2 passed
+val it = () : unit
+dates_in_months_test3 passed
+val it = () : unit
+dates_in_months_test4 passed
+val it = () : unit
+dates_in_months_test5 passed
+val it = () : unit
+val get_nth = fn : string list * int -> string
+get_nth_test1 passed
+val it = () : unit
+get_nth_test2 passed
+val it = () : unit
+get_nth_test3 passed
+val it = () : unit
+get_nth_test4 passed
+val it = () : unit
+val date_to_string = fn : int * int * int -> string
+date_to_string_test1 passed
+val it = () : unit
+date_to_string_test2 passed
+val it = () : unit
+val number_before_reaching_sum = fn : int list * int -> int
+number_before_reaching_sum_test1 passed
+val it = () : unit
+number_before_reaching_sum_test2 passed
+val it = () : unit
+number_before_reaching_sum_test3 passed
+val it = () : unit
+val what_month = fn : int -> int
+what_month_test1 passed
+val it = () : unit
+what_month_test2 passed
+val it = () : unit
+what_month_test3 passed
+val it = () : unit
+val month_range = fn : int * int -> int list
+month_range_test1 passed
+val it = () : unit
+module3.sml:398.12-398.25 Warning: binding not exhaustive
+          SOME r = ...
+val oldest = fn : (int * int * int) list -> (int * int * int) option
+module3.sml:408.1-429.1 Error: unclosed comment
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 failed
+val it = () : unit
+min_max_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+
+uncaught exception Empty
+  raised at: smlnj/init/pervasive.sml:195.19-195.24
+             ../compiler/TopLevel/interact/interact.sml:56.51-56.55
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 failed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val it = () : unit
+- min_max LOI1;
+val it = (0,10) : int * int
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+extra.sml:84.33-92.8 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z list
+  operand:         'Y list -> 'Y list
+  in expression:
+    null tl
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+extra.sml:135.30-135.36 Error: unbound variable or constructor: sumsum
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 failed
+val it = () : unit
+cumsum_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+extra.sml:122.22-122.28 Error: non-constructor applied to argument in pattern: tl
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val repeat = fn : int list * int list -> 'a list
+extra.sml:167.13-167.52 Error: operator is not a function [tycon mismatch]
+  operator: 'Z list
+  in expression:
+    (repeat (LOI0,LOI0)) nil
+extra.sml:167.1-167.52 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: string * ''Z * ''Z
+  operand:         string * _
+  in expression:
+    check_expect ("repeat_test1",(repeat (LOI0,LOI0)) nil)
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val repeat = fn : int list * int list -> 'a list
+repeat_test1 passed
+val it = () : unit
+extra.sml:168.56 Error: syntax error: inserting  LBRACKET
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val repeat = fn : int list * int list -> 'a list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 failed
+val it = () : unit
+repeat_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+extra.sml:162.6 Error: syntax error: inserting  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+extra.sml:144.28-144.34 Error: unbound type constructor: Option
+val it = () : unit
+- use '
+stdIn:22.5 Error: illegal token
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 failed
+val it = () : unit
+greeting_test2 failed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+extra.sml:157.10-165.66 Error: operator is not a function [tycon mismatch]
+  operator: string
+  in expression:
+    ("Hello" ^ " " ^ "there" ^ "," ^ " " ^ "you") check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val option = fn : string option -> string
+greeting_test1 failed
+val it = () : unit
+greeting_test2 failed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val it = () : unit
+- greeting(NONE);
+val it = "" : string
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * 'a -> 'b option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+extra.sml:225.10-230.55 Error: operator is not a function [tycon mismatch]
+  operator: 'Z option
+  in expression:
+    NONE check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+extra.sml:18.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+extra.sml:249.31-249.36 Error: unbound type constructor: list2
+val it = () : unit
+- 
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> 'a option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> 'a option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+extra.sml:255.5 Error: syntax error: inserting  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+extra.sml:255.5 Error: syntax error: inserting  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+extra.sml:255.5 Error: syntax error: inserting  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+
+uncaught exception Option
+  raised at: smlnj/init/pre-perv.sml:25.28-25.34
+             ../compiler/TopLevel/interact/interact.sml:56.51-56.55
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+extra.sml:256.26-256.29 Error: syntax error: replacing  AND with  ANDALSO
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+
+uncaught exception Option
+  raised at: smlnj/init/pre-perv.sml:25.28-25.34
+             ../compiler/TopLevel/interact/interact.sml:56.51-56.55
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+extra.sml:21.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+extra.sml:23.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+extra.sml:286.27-309.43 Error: operator is not a function [tycon mismatch]
+  operator: bool
+  in expression:
+    false check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+extra.sml:23.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+extra.sml:23.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 failed
+val it = () : unit
+any_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+extra.sml:23.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+extra.sml:24.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+extra.sml:318.27-337.43 Error: operator is not a function [tycon mismatch]
+  operator: bool
+  in expression:
+    false check_expect
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+extra.sml:24.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 passed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+extra.sml:24.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:27.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> 'a option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:27.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+extra.sml:368.10-368.25 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: (string * int) list * string
+  operand:         (string * int) list
+  in expression:
+    lookup (tl lop)
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:27.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> int option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOI5 = [~1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:28.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> int option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 passed
+val it = () : unit
+val lookup = fn : int list -> int list * 'a list
+extra.sml:404.31-404.38 Error: unbound variable or constructor: splitup
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOI5 = [~1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:28.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> int option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 passed
+val it = () : unit
+val splitup = fn : int list -> int list * 'a list
+splitup_test1 passed
+val it = () : unit
+splitup_test2 passed
+val it = () : unit
+splitup_test3 failed
+val it = () : unit
+splitup_test4 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOI5 = [~1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:28.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> int option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 passed
+val it = () : unit
+extra.sml:400.45-400.64 Error: operator and operand do not agree [type mismatch]
+  operator domain: {1:'Y; 'Z}
+  operand:         int list -> 'X
+  in expression:
+    (fn {1=1,...} => 1) splitup
+extra.sml:401.23-401.42 Error: operator and operand do not agree [type mismatch]
+  operator domain: {2:'Y; 'Z}
+  operand:         int list -> 'X
+  in expression:
+    (fn {2=2,...} => 2) splitup
+extra.sml:399.5-401.43 Error: types of if branches do not agree [tycon mismatch]
+  then branch: 'Z list * 'Y list
+  else branch: int list
+  in expression:
+    if null loi
+  then (nil,nil)
+  else if hd loi >= 0
+  then hd loi :: ((fn {1=1,...} => 1) splitup) (tl loi)
+  else hd loi :: ((fn {2=2,...} => 2) splitup) (tl loi)
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI0 = [] : 'a list
+val LOI1 = [2,4,5,2,5,10] : int list
+val LOI2 = [~2,~4,6,3,~5] : int list
+val LOI3 = [1,3,5] : int list
+val LOI4 = [1,~4,~5] : int list
+val LOI5 = [~1,~4,~5] : int list
+val LOIO1 = [NONE,NONE,NONE] : 'a option list
+val LOIO2 = [NONE,SOME 5,SOME 10,SOME 15,NONE] : int option list
+val LOB1 = [false,false,false] : bool list
+val LOB2 = [false,false,true] : bool list
+val LOB3 = [] : 'a list
+val LOB4 = [true,true,true] : bool list
+val LOP1 = [("shubham",5),("survi",10),("sharvil",15)] : (string * int) list
+val LOP2 = [] : 'a list
+extra.sml:28.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val alternate = fn : int list -> int
+alternate_test1 passed
+val it = () : unit
+alternate_test2 passed
+val it = () : unit
+alternate_test3 passed
+val it = () : unit
+val min_max = fn : int list -> int * int
+min_max_test1 passed
+val it = () : unit
+min_max_test2 passed
+val it = () : unit
+min_max_test3 passed
+val it = () : unit
+val cumsum = fn : int list -> int list
+cumsum_test1 passed
+val it = () : unit
+cumsum_test2 passed
+val it = () : unit
+cumsum_test3 passed
+val it = () : unit
+val greeting = fn : string option -> string
+greeting_test1 passed
+val it = () : unit
+greeting_test2 passed
+val it = () : unit
+val repeat = fn : int list * int list -> int list
+repeat_test1 passed
+val it = () : unit
+repeat_test2 passed
+val it = () : unit
+repeat_test3 passed
+val it = () : unit
+val addopt = fn : int option * int option -> int option
+addopt_test1 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+addopt_test3 passed
+val it = () : unit
+addopt_test2 passed
+val it = () : unit
+val addallopt = fn : int option list -> int option
+addallopt_test1 passed
+val it = () : unit
+addallopt_test2 passed
+val it = () : unit
+val any = fn : bool list -> bool
+any_test1 passed
+val it = () : unit
+any_test2 passed
+val it = () : unit
+any_test3 passed
+val it = () : unit
+val all = fn : bool list -> bool
+all_test1 failed
+val it = () : unit
+all_test2 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+all_test3 passed
+val it = () : unit
+val lookup = fn : (string * int) list * string -> int option
+lookup_test1 passed
+val it = () : unit
+lookup_test2 passed
+val it = () : unit
+lookup_test3 passed
+val it = () : unit
+extra.sml:399.5-401.45 Error: types of if branches do not agree [tycon mismatch]
+  then branch: 'Z list * 'Y list
+  else branch: int list
+  in expression:
+    if null loi
+  then (nil,nil)
+  else if hd loi >= 0
+  then hd loi :: (fn {1=1,...} => 1) (splitup (tl loi))
+  else hd loi :: (fn {2=2,...} => 2) (splitup (tl loi))
+extra.sml:398.1-401.45 Error: unresolved flex record (need to know the names of ALL the fields
+ in this context)
+  type: {1:int list, 2:int list; 'Z}
+val it = () : unit
+- 

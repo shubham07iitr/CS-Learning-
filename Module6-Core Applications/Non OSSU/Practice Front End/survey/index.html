@@ -1,0 +1,54 @@
+<!--Project 8, From this website, https://blog.hubspot.com/website/html-projects-for-beginners -->
+
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Feedback Survey Form</title>
+        <link rel="stylesheet" href="./style.css">
+    </head>
+    <body>
+        <!--Backgrond color-->
+        <!--Main form-->
+        <form>
+            <!--h1 Feedback survey form-->
+            <h1>Feedback Survey Form</h1>
+            <!--Name and input field-->
+            <p>Name:</p>
+            <input class = "textinput" id ="name" autocomplete="off" autofocus>
+            <!--Email: and input field-->
+            <p>Email:</p>
+            <input class = "textinput"  id ="email" autocomplete="off" autofocus>
+            <!--Age and input field-->
+            <p>Age</p>
+            <input class = "textinput" id ="age" autocomplete="off" autofocus>
+            <!--Type of feedback and drop down-->
+            <p>Type of Feedback:</p>
+            <select name ="feedback_type">
+                <option value ="positive">Positive</option>
+                <option value ="positive"> Negative</option>
+                <option value="Neutral">Neutral</option>
+            </select>
+            
+            <!--Services Used: and check boxes-->
+            <p id="services_used">Services Used:</p>
+            <label>
+                <input class = "service" type="checkbox" name="Service_Type" value="Service_1">
+                Service 1
+            </label><br>
+            <label>
+                <input class ="service" type="checkbox" name="Service_Type" value="Service_2">
+                Service 2
+            </label> <br>
+            <label>
+                <input class="service" type="checkbox" name="Service_Type" value="Service_3">
+                Service 3
+            </label>
+            <!--Additional comments and input field-->
+            <p>Additional Comments</p>
+            <textarea name="comments" rows="5" cols="50"></textarea>
+            <!--Submit feedback button-->
+            <button> Submit Feedback</button>
+        </form>
+    </body>
+</html>

@@ -1,0 +1,74 @@
+/*Defining the styles fr layoyt*/
+
+.navbar {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-height: 80px;
+    font-size: 20px;
+}
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;  /* This pushes footer to bottom */
+}
+
+#footerLayout {
+    background-color: #212529;
+    color: white;
+    text-align: left;
+    align-items: center;
+    font-size: 20px;
+    padding: 20px 10px;
+    margin-top: auto;  /* Ensures it stays at bottom */
+}
+
+#footerLayout p {
+    margin: 0;  /* THIS IS KEY - removes default paragraph margin */
+}
+
+/*Defining the styles for index page*/
+.card-img-top {
+    height: 350px;
+}
+
+.card {
+    width: 500px;
+    margin-top: 1%;
+    margin-left: 35%;
+    margin-bottom: 1%;
+
+}
+
+.card-title{
+    text-align: center;
+}
+.btn-primary {
+    margin-left: 35%;
+}
+
+/*Defining the styles for education*/
+.accordion-button.collapsed {
+    background-color: #343a40;
+    color: white;
+}
+
+.accordion-item {
+    background-color: #343a40;
+    border-color: #495057;
+}
+
+/* Keep expanded one light */
+.accordion-button:not(.collapsed) {
+    background-color: #ffffff;
+    color: #212529;
+}
+
+

@@ -1,0 +1,196 @@
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* CONSTANTS *)
+
+val LOI1 = [2,6,3,4,1]; (*random test case *)
+
+		      
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* HELPER FUNCTIONS *)
+
+(*Implementing the check-expect function to test our functions*)
+(* Signature -> String, Function with argument, Expected Value -> String*)
+(*defining check-expect function which takes in a string (test name), and a value expected from a function and param, and the expected value, and prints pass or fail *)
+
+fun check_expect (name: string, actual: ''a, expected: ''a) =
+    if actual = expected then
+	print (name ^ " passed\n")
+    else
+	print (name ^ " failed\n") ;
+
+
+(* Testing the check_expect *)
+check_expect("Check_expect_Test1" , Int.abs ~5, 5); (* testing on integer for pass*)
+check_expect("Check_expect_Test2" , Int.abs ~5, 6); (* testing on integer for fail*)
+check_expect("Check_expect_Test3" ,String.size "hello", 5); (* testing on string for pass*)
+check_expect("Check_expect_Test4" ,String.size "hello", 6); (* testing on string for fail*)
+check_expect("Check_expect_Test5" ,hd LOI1, 6); (* testing on list for fail*)
+check_expect("Check_expect_Test6" ,hd LOI1, 2); (* testing on list for pass*)
+
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* DATA DEFINITIONS *)
+
+
+(* DATA STUDENT_ID *)
+type student_id = int;
+(* student_id is an Int *)
+(* interp. as the unique number for each student enrolled in the uni *)
+
+(* few examples *)
+val SID0 = 10001;
+val SID1 = 10002;
+val SID2 = 10003;
+val SID3 = 10004;
+val SID4 = 10005;
+	       
+
+(* template for grade *)
+(*
+fun fn-for-id i= (....i)		 
+*)	
+
+(*------------------------------------------*)
+(* DATA GRADE *)
+type grade = int; (* must be in 0 to 100 range *)
+(*grade is an Int [0,100]*)
+(*interp. as the grade of a student in a university *)
+
+(* few examples *)
+val G0 = 0;
+val G1 = 100;
+val G2 = 60;
+val G3 = 80;
+	     
+(* template for grade *)
+(*
+fun fn-for-grade g= (....g)		 
+*)			
+
+(*------------------------------------------*)
+(* DATA FINAL_GRADE *)
+type final_grade = { id : student_id, grade : grade option };
+
+(* final_grade is a record of two fields*)
+(* -- id is of student_id *)
+(* -- grade is of option grade , SOME grade if grade available else NONE *)
+
+(* few examples *)
+
+val FG0 = {id= SID0, grade= SOME G0 };
+val FG1 = {id= SID1, grade= SOME G1 };
+val FG2 = {id= SID2, grade= SOME G2 };
+val FG3 = {id= SID3, grade= SOME G3 };
+val FG4 = {id= SID4, grade=  NONE};
+val LFG0 = [] ; (* empty list of final grades, useful for P3*)
+val LFG1 = [FG0, FG1, FG2 FG3, FG4] ; (* list of FG for P3 *)
+
+(* template for final_grade *)
+
+(*
+fun fn-for-fg (id = x, grade = y)
+   (...x)
+   (...y)
+*)
+
+(*------------------------------------------*)
+(* DATA PASS_FAIL *)
+
+datatype pass_fail = pass | fail;
+(* Pass_fail is one of *)
+(* -- pass - representing a student has passed the exam*)
+(* -- fail - representing a student has failed the exam*)
+
+val PF0 = pass;
+val PF1 = fail;
+	      
+
+(* Template for enumeration *)
+(*
+fun fn-for-pf pf =
+    case pf of
+         pass => (...)
+       | fail  =>  (...)
+*)						
+
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* FUNCTIONS GRADES*)
+(* Problem 1 : PASS_OR_FAIL *)
+(* Signature , {grade: int option, id: 'a } -> pass_fail *)
+(* Takes in a record, or some general field , returns pass if grade field contians int >= 75 *)
+(* If grade is NONE then it should be FAIL *)
+
+(* defining the stub *)
+(*fun pass_or_fail fg = pass ; *)
+
+(*template from fg *)
+
+
+fun pass_or_fail ({grade = x, id = y}) =
+    case x of
+	NONE => fail
+      | SOME p => if p >= 75 then pass else fail;
+
+
+(* writing test cases *)
+check_expect("pass_or_fail_test1", pass_or_fail FG3 , pass); (* case when grade is >= 75 *)
+check_expect("pass_or_fail_test2", pass_or_fail FG4 , fail); (* case when grade is NONE *)
+check_expect("pass_or_fail_test3", pass_or_fail FG2 , fail); (* case when grade is <= 75  *)
+
+
+(*------------------------------------------*)
+(* FUNCTIONS GRADES*)
+(* Problem 2 : HAS_PASSED *)
+(* Signature , {grade: int option, id: 'a } -> BOOL *)
+(* Takes in a record, or some general field , returns true if the user passed, else false *)
+
+
+(* defining the stub *)
+(*fun has_passed fg = true ; *)
+
+(*template from fg *)
+
+
+fun has_passed fg =
+    let val result = pass_or_fail fg
+    in	
+	case result of
+	    pass => true
+	  | fail => false
+    end;
+
+
+(* writing test cases *)
+check_expect("has_passed_test1", has_passed FG3 , true); (* case when grade is >= 75 *)
+check_expect("has_passed_test2", has_passed FG4 , false); (* case when grade is NONE *)
+check_expect("has_passed_test3", has_passed FG2 , false); (* case when grade is <= 75  *)
+
+
+(*------------------------------------------*)
+(* FUNCTIONS GRADES*)
+(* Problem 2 : NUMBER_PASSED *)
+(* Signature , {grade: int option, id: 'a } list -Int *)
+(* Takes in a a list of Final Grades, and identifies the students who have passed *)
+
+
+(* defining the stub *)
+fun number_passed lfg = 0 ; 
+
+(*template from fg *)
+
+(*
+fun has_passed fg =
+    let val result = pass_or_fail fg
+    in	
+	case result of
+	    pass => true
+	  | fail => false
+    end;
+*)
+
+(* writing test cases *)
+check_expect("number_passed_test1", number_passed LFG0 , 0); (* case when list is empty *)
+check_expect("number_passed_test2", number_passed LFG1 , 2); (* case when list is non empty *)
+

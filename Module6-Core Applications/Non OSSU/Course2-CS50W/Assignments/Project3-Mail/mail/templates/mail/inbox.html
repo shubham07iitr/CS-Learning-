@@ -1,0 +1,50 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2>{{ request.user.email }}</h2>
+
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    <!--Mailbox view-->
+    <div id="emails-view">
+    </div>
+    <!--Compose email view-->
+    <div id="compose-view">
+        <h3>New Email</h3>
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <input  id = "sendEmail" type="submit" class="btn btn-primary"/>
+        </form>      
+    </div>
+    <!--Individual Email View-->
+    <div id = "render-email-view">
+        <h5 id = "render-from">From: </h5>
+        <h5 id = "render-to">To: </h5>
+        <h5 id = "render-subject">Subject: </h5>
+        <h5 id = "render-timestamp">Timestamp: </h5>
+        <button class="btn btn-sm btn-outline-primary" id="render-reply">Reply</button>
+        <hr id ="render-linebreak">
+        <div id="render-body"></div>
+        <button class="btn btn-sm btn-outline-primary" id="render-archive" value="Archive">Archive</button>
+    </div>
+    
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

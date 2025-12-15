@@ -1,0 +1,214 @@
+import tester.*;                // The tester library
+import javalib.worldimages.*;   // images, like RectangleImage or OverlayImages
+import javalib.funworld.*;      // the abstract World class and the big-bang library
+import java.awt.Color;          // general colors (as triples of red,green,blue values)
+import java.util.*;
+
+//==================================================================================================== 
+//Defining the final myworld class to run the game
+//Will have the following fields, properties
+//-- List of Bullets - to be initialised to MtList<Bullet>
+//-- Missile - will be fixed and will be initialised to standard missile config: new Missile(new Posn (250, 475));
+//--List of SpaceSihps - will be initialised to MtList to begin with 
+//--Scoreboard - will be initialised to standard scoreboard config
+//--Standard SS and Bullet to create new bullet and SS on screen 
+//--noTicks - to count the no. of ticks on screen yet
+class MyWorldFinal extends World{
+	IList<Bullet> lob;
+	Missile missile;
+	IList<SpaceShip> loss;
+	ScoreBoard sb;
+	int bulletsRemaining;
+	Bullet standardBullet;
+	SpaceShip standardSpaceShip;
+	int noTicks;
+
+	MyWorldFinal(int bulletsRemaining) {
+		this.lob = new MtList<Bullet>();
+		this.missile  = new Missile(new Posn (250, 475));
+		this.loss = new MtList<SpaceShip>();
+		this.sb = new ScoreBoard(10, 0, new Posn(450, 25));
+		this.bulletsRemaining = bulletsRemaining;
+		this.standardBullet = new Bullet (20, new Posn (250,250));;
+		this.standardSpaceShip = new SpaceShip(new Posn (50, 400), -1);
+		this.noTicks = 0;
+	}
+
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.lob.... IList <Bullets>
+	 * ...this.missile ...Missile
+	 * ...this.loss .... IList<SpaceShip>
+	 * ...this.sb ..... ScoreBoard
+	 * ...this.bulletsRemaining .....int
+	 * METHODS
+	 * ...this.makeScene   ..... WorldScene
+	 * ...this.onTick..... MyWorld
+	 * ...this.worldEnds ....MyWorld
+	 * ...this.onTick .... MyWorld
+	 * ...this.onMouseClicked ....MyWorld
+	 * 
+	 */
+
+	//WRITING the STANDARD METHODS
+
+	//METHOD MAKESCENE
+	//This method will draw a scene on a world canvas
+	//--Places all the elements in loss on screen
+	//--Places all the elements in lob on screen
+	//--Places the sb on screen
+	//--Places the missile on screen 
+	@Override
+	public WorldScene makeScene() {
+		System.out.println("Bullets: " + this.lob.lenList() + " | SS: " + this.loss.lenList());
+		return sb.place(missile.place(loss.placeAll(lob.placeAll(this.getEmptyScene()))));}
+
+	//METHOD WORLDENDS
+	//Determines when the gmae is over which is when the count f circles to go offscreen is 0 or less
+	@Override
+	public WorldEnd worldEnds(){
+		if (this.bulletsRemaining == 0) {return new WorldEnd(true, this.getEmptyScene());}
+		else {return new WorldEnd(false, this.makeScene());}
+	}
+
+	//METHOD onTICK
+	//Will do the following with every tick:
+	//-- generate a new spaceship every 3 ticks (either from left to right, or rtl, and with varied y and x positions and add to loss - helper method done
+	//-- move the existing spaceships in left or right directions based on their xspeed and direction - helper method done
+	//-- move the exisiting bullets in list of bullets upwards based on velocity - helper method done
+	//--remove bullet from lob and reduce bullets remaining by 1 if it hits a spaceship from list of bullet - helpers done
+	//--remove bullet freom lob and reduce bullets remaining by 1 if bullet passes 0 on y axis - helper method done 
+	//-- remove spaceship if it is hit by a bullet - helpers done
+	//-- remove spaceship from loss it it passes 500 on rhs or lhs based on direction - helper method done 
+	@Override
+	public MyWorldFinal onTick() {
+		if (this.noTicks%3 == 0) {this.noTicks = this.noTicks + 1;return this.addSS().moveLob().moveLoss().removeBullets().removeSS();}
+		else {this.noTicks = this.noTicks + 1; return this.moveLob().moveLoss().removeBullets().removeSS();}}
+	
+	
+	//METHOD onKEYEVENT
+	//For every space bar press we would want to:
+	//--add a new bullet to the list of bullets
+	// decrease bullets remaining by 1
+	@Override
+	public MyWorldFinal onKeyEvent(String key) {
+    if (key.equals(" ")) {
+      Bullet newBullet = new Bullet(20, new Posn(this.missile.pos.x+10, this.missile.pos.y+10));
+      this.lob = this.lob.addToList(newBullet);
+      this.bulletsRemaining--;
+  }
+  return this;
+	}
+
+	
+	//WRITING HELPER METHODS
+	
+	//METHOD ADDSS
+	//Signature> Self > MyWorld
+	//Returns a new MyWorld by adding a new spaceship to the loss
+	//Randon values of x (0 or 500), if 0 then direction = 1, if 500, direction = -1, random value of y (between 50 to 450)
+	
+	public MyWorldFinal addSS() {
+    int yCorRand = 50 + 25 * new Random().nextInt(17);
+    int xCorRand = 500 * new Random().nextInt(2);
+    int direction = (xCorRand == 0) ? 1 : -1;
+
+    SpaceShip newSS = new SpaceShip(new Posn(xCorRand, yCorRand), direction);
+    this.loss = this.loss.addToList(newSS);
+    return this;
+}
+	
+	//METHOD MOVELOSS
+	//Signature>Self>MyWorld
+	//Returns a new world where each f the spaceships in the loss has changed its coordinates by the xspeet
+	
+	public MyWorldFinal moveLoss () {
+		this.loss = this.moveLossHelper(this.loss); // we request for a helper function which changes the x and y cor for the ss by the xspeed and direction
+		return this;
+	}
+	
+	//METHOD MOVELOSSHELPER
+	//will increement all the spaceships in the loss based on xspeed
+	public IList<SpaceShip> moveLossHelper(IList<SpaceShip> los) {
+		if (los.isEmpty()) {return los;}
+		else {return new ConsList<SpaceShip> 
+								(new SpaceShip (new Posn(los.getFirst().pos.x + los.getFirst().direction*los.getFirst().xspeed, los.getFirst().pos.y), los.getFirst().direction), 
+									this.moveLossHelper(los.getRest()));}}
+	
+//METHOD MOVELOB
+	//Signature>Self>MyWorld
+	//Returns a new world where each f the bullets in the lob has changed its coordinates by the corresponding velocity
+	
+	public MyWorldFinal moveLob () {
+		this.lob = this.moveLobHelper(this.lob); // we request for a helper function which changes the x and y cor for the lob by the corresponding velocity and direction
+		return this;
+	}
+	
+	//METHOD MOVELOBHELPER
+	//will return a new lob by changing x and y cor for each of the element in lob based on velcotiy
+	public IList<Bullet> moveLobHelper(IList<Bullet> lob) {
+		if (lob.isEmpty()) {return lob;}
+		else {
+			int xVelocity = (int) (lob.getFirst().velocity * Math.cos(Math.toRadians(lob.getFirst().angle)));
+			int yVelocity = (int) (lob.getFirst().velocity * Math.sin(Math.toRadians(lob.getFirst().angle)));
+			return new ConsList<Bullet> 
+			(new Bullet (20, new Posn(lob.getFirst().pos.x  + xVelocity, lob.getFirst().pos.y - yVelocity)), 
+					this.moveLobHelper(lob.getRest()));}}
+	
+	//METHOD REMOVESS
+	//Will remove all SS which have moved outside of the frame or has been hit by a bullet and return myworld
+	//Signature Self > MyWorldFinal
+	public MyWorldFinal removeSS() {
+		this.loss = this.removeSSHelper(this.loss);
+		return this;}
+	
+	//METHOD REMOVESSHELPER
+	//Will remove all SS which have moved outside of the frame or has been hit by a bullet and return LOSS
+	//Signature Self > IList<SpaceShip>
+	public IList<SpaceShip> removeSSHelper(IList<SpaceShip> loss) {
+		if (loss.isEmpty()) {return loss;}
+		else {if (loss.getFirst().pos.x >= 500 || loss.getFirst().pos.x <= 0 || loss.getFirst().isHit(this.lob)) {return this.removeSSHelper(loss.getRest());}
+				 else {return new ConsList<SpaceShip>(loss.getFirst(), this.removeSSHelper(loss.getRest()));}}}
+	
+	//METHOD REMOVEBULLETS
+	//Will remove all BULLETS which have moved outside of the frame or has hit a spaceShip and return myworld
+	//Signature Self > MyWorldFinal
+	public MyWorldFinal removeBullets() {
+		this.lob = this.removeBulletsHelper(this.lob);
+		return this;}
+	
+	//METHOD REMOVESSHELPER
+	//Will remove all Bullets which have moved outside of the frame or has been hit by a spaceshipe and return new LOB
+	//Signature Self > IList<SpaceShip>
+	public IList<Bullet> removeBulletsHelper(IList<Bullet> lob) {
+		if (lob.isEmpty()) {return lob;}
+		else {if (lob.getFirst().pos.x >= 500 || lob.getFirst().pos.x <= 0 || lob.getFirst().pos.y >= 500 || lob.getFirst().pos.y <= 0 || lob.getFirst().hasHit(this.loss)) {this.bulletsRemaining = bulletsRemaining - 1; return this.removeBulletsHelper(lob.getRest());}
+				 else {return new ConsList<Bullet>(lob.getFirst(), this.removeBulletsHelper(lob.getRest()));}}}
+}
+
+
+
+
+
+//================================================================================================
+
+//CLASS EXAMPLESWORLDFINAL
+class ExamplesWorldFinal {
+	ExamplesWorldFinal() {}
+	
+	boolean testBigBang(Tester t) {
+		MyWorldFinal mw1 = new MyWorldFinal (10);
+		return mw1.bigBang(500, 500, 1.0/20.0);
+	}
+}
+
+
+
+
+
+
+
+
+
+

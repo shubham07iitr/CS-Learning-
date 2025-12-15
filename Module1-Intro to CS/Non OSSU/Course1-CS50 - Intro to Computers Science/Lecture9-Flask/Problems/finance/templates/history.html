@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <style>
+
+        table {
+            background-color: transparent;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        table th,
+        table td {
+            padding: 0.75rem;
+            vertical-align: middle;
+        }
+        tbody tr:nth-of-type(odd) {
+            background-color: rgb(179, 208, 255, 0.3)
+        }
+
+        #stocksHeader, #cashLeft {
+            height: 60px;
+            background-color: lightblue;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+
+        }
+
+    </style>
+    <div id = "stocksHeader"> Below are the transactions completed by you</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Symbol</th>
+                <th>Txn Type</th>
+                <th>Quantity</th>
+                <th>Txn Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for stock in stocks %}
+                <tr>
+                    <td> {{ stock.date}} </td>
+                    <td>{{ stock.symbol }}</td> 
+                    <td> {{ stock.txn_type }}</td>
+                    <td> ${{ stock.quantity }} </td>
+                    <td> ${{ stock.price }} </td>
+                </tr> 
+                {% endfor %}
+        </tbody>
+    </table>
+    <div id = "cashLeft">Current cash left is <strong> ${{ cash_left }}</strong> </div>
+
+{% endblock %}

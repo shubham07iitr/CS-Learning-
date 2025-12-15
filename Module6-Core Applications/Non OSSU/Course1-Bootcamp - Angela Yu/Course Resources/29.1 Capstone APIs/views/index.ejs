@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joke a name</title>
+    <link href = "/styles/style.css" rel = "stylsheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <style>
+        body {background-color: lightgreen; display: flex;}
+        #joke-container {margin: 7% 20% 20% 33%; font-size: 20px; padding: 25px;}
+        label {min-width: 350px; height: 30px; margin-top: 10px;}
+        input {min-width: 250px; height: 30px; }
+        button {margin-top: 20px; min-width: 200px; margin-left: 30%;}
+        #jokebox {border: solid 2px gray; margin: 15px; height: 200px; padding: 20px; text-align: center;}
+        select {min-width: 250px;}
+        
+
+    </style>
+
+</head>
+<body>
+    <div id = "joke-container">
+        <form action = "/getJoke" method="POST">
+            <label name="category">Choose a category</label>
+            <select name="category">
+                <% for (var i = 0; i < categories.length; i++) {%>
+                    <option value = "<%=categories[i]%>"><%=categories[i]%></option>
+                <%}%>
+            </select>
+            <br>
+            <label name="languages">Choose a language</label>
+            <select name="language">
+                <% for (var i = 0; i < languages.length; i++) {%>
+                    <option value = "<%=languages[i]%>"><%=languages[i]%></option>
+                <%}%>
+            </select>
+            <br>
+            <label name="contains">Enter some text which joke contains</label>
+            <input type = "text" name = "contains" placeholder="Enter joke content w/o space">
+            <br>
+            <button type = "submit" class="btn btn-primary">Get a joke</button>
+        </form>
+        <div id = "jokebox">
+            <% if (locals.joke) {%>
+                <p><%= joke%></p>
+            <% } %>
+        </div>
+    </div>
+</body>
+</html>

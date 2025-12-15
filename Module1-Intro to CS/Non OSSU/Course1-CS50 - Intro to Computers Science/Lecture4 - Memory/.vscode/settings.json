@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "string": "c",
+        "iosfwd": "c",
+        "stdio.h": "c",
+        "ctype.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

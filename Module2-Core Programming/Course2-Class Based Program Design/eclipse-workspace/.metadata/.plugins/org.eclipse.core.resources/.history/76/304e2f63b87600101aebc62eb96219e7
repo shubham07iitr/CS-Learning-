@@ -1,0 +1,44 @@
+import tester.*;
+import java.util.*;
+
+//============================================================================================================
+//ADJACENCY MATRIX REPRESENTATION
+//For n elements in the graph, we will have n sub-arrays with each sub-array having n element
+//(i,j) element would represent jth element inside the ith sub-array
+
+
+
+//We first define one element of graph which will have a vertext string, and the list of weights from the current vertex to all the vertices in the graph including itself
+class GraphElement<T> {
+	String vertex;
+	ArrayList<T> listOfEdges;
+	
+	GraphElement(String vertex, ArrayList<T> listOfEdges) {this.vertex = vertex; this.listOfEdges = listOfEdges;}}
+
+class GraphMatrix<T> {
+	ArrayList<GraphElement<T>> listOfArray;
+	//Defining the constructor
+	GraphMatrix(ArrayList<GraphElement<T>> listOfArray) {this.listOfArray = listOfArray;}}
+
+
+
+
+
+
+
+
+
+//============================================================================================================
+//CLASS EXAMPLES
+
+class ExamplesGraph {
+	ExamplesGraph() {}
+	
+	void testMatrixGraph(Tester t) {
+		GraphElement<Integer> aEdge = new GraphElement<Integer> ("A", new ArrayList<Integer> (Arrays.asList(null , 3, 4)));
+		GraphElement<Integer> bEdge = new GraphElement<Integer> ("B", new ArrayList<Integer> (Arrays.asList(null , null, 5)));
+		GraphElement<Integer> cEdge = new GraphElement<Integer> ("C", new ArrayList<Integer> (Arrays.asList(null , null, null)));
+		GraphMatrix<Integer> graphMatrix = new GraphMatrix<Integer>(new ArrayList<GraphElement<Integer>>(Arrays.asList(aEdge, bEdge, cEdge)));
+		t.checkExpect(graphMatrix.listOfArray.get(0).listOfEdges.get(1), 3);
+	}
+}

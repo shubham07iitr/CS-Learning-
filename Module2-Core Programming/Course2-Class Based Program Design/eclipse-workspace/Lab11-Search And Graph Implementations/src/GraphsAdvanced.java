@@ -1,0 +1,431 @@
+import tester.*;
+import java.util.*;
+
+//============================================================================================================
+//SIMPLE EDGE SORTER
+//Helps sort the edge 
+class EdgeSorter implements IFunc2<EdgeA, IList<EdgeA>, IList<EdgeA>> {
+ public IList<EdgeA> apply(EdgeA edge, IList<EdgeA> sortedList) {
+     if (sortedList.isEmpty()) {
+         return new ConsList<>(edge, new MtList<>());
+     }
+     if (edge.weight <= sortedList.getFirst().weight) {
+         return new ConsList<>(edge, sortedList);
+     }
+     return new ConsList<>(sortedList.getFirst(), apply(edge, sortedList.getRest()));
+ }
+}
+
+
+
+//============================================================================================================
+//UNION FIND IMPLEMENTATION
+
+//BASIC UNION-FIND (NO OPTIMIZATIONS)
+class UnionFind {
+ private Map<String, String> parent;
+ 
+ //Deifning the constructor
+ public UnionFind() {this.parent = new HashMap<>();}
+ 
+ // Make each vertex its own parent
+ public void makeSet(String vertex) {parent.put(vertex, vertex);}
+ 
+ // Find root of vertex
+ public String find(String vertex) {
+     if (parent.get(vertex).equals(vertex)) {return vertex;}
+     return find(parent.get(vertex));}
+ 
+ // Union two sets
+ public boolean union(String vertex1, String vertex2) {
+     String root1 = find(vertex1);
+     String root2 = find(vertex2);
+     
+     if (root1.equals(root2)) {return false;} // Same set, would create cycle
+     parent.put(root1, root2); // Simple union
+     return true;}
+}
+
+
+//============================================================================================================
+//ADJACENCY LIST REPRESENTATION
+
+//CLASS VERTEX
+//Each vertex will have name of vertex, and the list of edges from the vertext
+
+class VertexA {
+String name;
+
+IList<EdgeA> listOfEdges ; //all edges emanating from the vertex
+
+//Defining the Constructor
+VertexA (String name, IList<EdgeA> listOfEdges) {this.name = name; this.listOfEdges = listOfEdges; }
+
+//TEMPLATE
+/*
+ * FIELDS
+ * ...this.listOfEdges ... IList<Edge>
+ * METHODS
+ * ...this.pathExistsVertex(Vertex v2) .... boolean
+ */
+
+//METHODS
+
+//METHO PATHEXISTSVERTEX
+//Returns true if path exists from this vertex to given vertex
+//Signature> Self, Vertex v2 > boolean
+
+
+
+//HELPER METHOD for PATHEXISTS
+//We check for whether:
+//-- there is a direct edge from v2 > v2
+//-- or the first vertex is connected to v2
+//-- or any of the ther vertices are connected to v2
+
+}
+
+//CLASS EDGE
+//Edge is of type (From - Vertex, To - Vertex, Weight - Int)
+
+class EdgeA {
+VertexA from;
+VertexA to;
+int weight;
+
+//Defining the constructor 
+EdgeA (VertexA from, VertexA to, int weight) {this.from = from; this.to = to; this.weight = weight;}
+}
+
+
+//============================================================================================================
+//CLASS GRAPHLIST
+//It will be just a list of vertices
+
+class GraphListA {
+	IList<VertexA> listOfVertices;
+
+	//Defining the constructor 
+	GraphListA(IList<VertexA> listOfVertices) {this.listOfVertices = listOfVertices;}
+
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.listOfVertices.... IList<Vertex>
+	 * METHODS
+	 * ...this.pathExists(Vertex v1, Vertex v2) ... boolean
+	 */
+
+
+	//METHODS
+
+
+	//METHOD PATHEXISTSDFS
+	//Returns true if starting from a particular vertex, it is possible to reach to the destination vertex
+	//We will need one accumulator for worklist, which all nodes we want to cover, and visited list, so lets use Deque
+	//Will run through a stack where we go deep into a branch before backtracking
+	//Signature> Vertex v1, Vertex v2 > boolean
+	
+	boolean pathExistsDFS (VertexA a, VertexA b) {
+		Deque<VertexA> worklist = new ArrayDeque<VertexA>(); //we use Java's inbuilt interface for Deque, which has two implementations - ArrayDeque for arrays, and LinkedList() for recursion
+		Deque<VertexA> visited = new ArrayDeque<VertexA>();
+
+		worklist.addFirst(a); // we kick off by adding the from element in the worklist
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.removeFirst();  //we define the next element as the first element from the wrklist, next would be checked for destination, and its neighbors would be added to wrorklist
+			if (next.equals(b)) {return true;} //we check wthere next element is same as the destination
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				worklist.addFirst(e.to);
+				edges = cons.rest;}
+			visited.addFirst(next);}}} //and then we add eleemnt/next to the visited deque
+		return false;}
+	
+	//METHOD PATHEXISTSBFS
+	//Exactly same as DFS, instead we will add at the end from the deque 
+	
+	boolean pathExistsBFS (VertexA a, VertexA b) {
+		Deque<VertexA> worklist = new ArrayDeque<VertexA>(); //we use Java's inbuilt interface for Deque, which has two implementations - ArrayDeque for arrays, and LinkedList() for recursion
+		Deque<VertexA> visited = new ArrayDeque<VertexA>();
+
+		worklist.addLast(a); // we kick off by adding the from element in the worklist
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.removeFirst();  //we define the next element as the first element from the wrklist, next would be checked for destination, and its neighbors would be added to wrorklist
+			if (next.equals(b)) {return true;} //we check wthere next element is same as the destination
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				worklist.addLast(e.to);
+				edges = cons.rest;}
+			visited.addFirst(next);}}} //and then we add eleemnt/next to the visited deque
+		return false;}
+	
+	
+	//METHOD SHORTESTPATH
+	//We maintain a dictionary which will capture the parent node/or the shortest path from the from node to the to node
+	//W/o weights shortest path would mean that we need to visit least no. of nodes to get to the destination
+	//Signature> Vertex a, Vertex b > IList<Vertex>
+	Deque<VertexA> shortestPath (VertexA a, VertexA b) {
+		if (this.pathExistsBFS(a, b)) {return shortestPathHelper(a, b);} 
+		else {return new ArrayDeque<VertexA> ();} } //we return an empty list in cases where no such path exist
+	
+	
+	//METHOD SHORTESTPATHHELPER
+	Deque<VertexA> shortestPathHelper (VertexA a, VertexA b) {
+		Deque<VertexA> worklist = new ArrayDeque<VertexA>(); //we use Java's inbuilt interface for Deque, which has two implementations - ArrayDeque for arrays, and LinkedList() for recursion
+		Deque<VertexA> visited = new ArrayDeque<VertexA>();
+		Map<VertexA, VertexA> parentMap = new HashMap<>();
+		
+		worklist.addLast(a); // we kick off by adding the from element in the worklist
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.removeFirst();  //we define the next element as the first element from the wrklist, next would be checked for destination, and its neighbors would be added to wrorklist
+			if (next.equals(b)) {return this.constructPath(parentMap, b, a);} //if we find a match then we call a helper method which will iterate over the hashmap to produce the result
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				worklist.addLast(e.to);
+				if (!parentMap.containsKey(e.to)) {parentMap.put(e.to, e.from);} //adding the parent node and child node here
+				edges = cons.rest;}
+			visited.addFirst(next);}}}
+		return new ArrayDeque<VertexA>();} //and then we add eleemnt/next to the visited deque
+		
+	
+	
+	//METHOD CONSTRUCTPATH
+	//Takes in a hashmap (parent and child) and a to vertex and a from vertex, and constructs a shortest path 
+	//Signature> Map<VertexA, VertexA> , Vertex , Vertex > IList<Vertex>
+	
+	Deque<VertexA> constructPath (Map<VertexA, VertexA> dict, VertexA to, VertexA from) {
+		Deque<VertexA> path = new ArrayDeque<VertexA>();
+		VertexA endCounter 	= to;
+		
+		while (endCounter != from) {
+			path.addFirst(endCounter);
+			endCounter = dict.get(endCounter);}
+		path.addFirst(endCounter);
+		return path;}
+	
+	//METHOD SHORTESTPATHWEIGHTED
+	//Takes in a graph, and returns the shortest weighted path to reach from node a > node b
+	//Changes we will need to do:
+	//-- Use min heap to add and remove elements in worklist
+	//--Create a separate hashmap which stores the vertex and the lowest cumulative distance for that from point A
+	
+	Deque<VertexA> shortestWeightedPath (VertexA a, VertexA b) {
+	// Option 1: Store just vertices, use distance map for comparison
+		Map<VertexA, Integer> distances = new HashMap<>(); // this will be used to store vertex and lowest distance from point A
+		
+		PriorityQueue<VertexA> worklist = new PriorityQueue<>((v1, v2) -> Integer.compare(distances.get(v1), distances.get(v2))); //this will be used to store elements in order of least cumulative distance
+		
+		Deque<VertexA> visited = new ArrayDeque<VertexA>(); //will be used to store all the elements we have visited
+		Map<VertexA, VertexA> parentMap = new HashMap<>(); // will be used to store the parent node for each vertex
+
+		// Initialize starting vertex
+		distances.put(a, 0);
+		worklist.add(a);
+		
+		//Lets start the loop 
+		while (!worklist.isEmpty()) {
+			VertexA next = worklist.remove();  //we remove from the top of the heap which is currently the lowest distance from point A
+			if (next.equals(b)) {return this.constructPath(parentMap, b, a);} //if we find a match then we call a helper method which will iterate over the hashmap to produce the result
+			
+			else {if (visited.contains(next)) {} //if the element is present in visited we do nothing
+			
+			else {IList<EdgeA> edges = next.listOfEdges; //if element is not present in visited, we add the neighbors to the worklist
+			while (edges instanceof ConsList) {
+				ConsList<EdgeA> cons = (ConsList<EdgeA>) edges;
+				EdgeA e = cons.first;
+				
+				if (!distances.containsKey(e.to) || distances.get(e.from) + e.weight < distances.get(e.to)) {
+			    // Update distance and parent
+			    
+			    distances.put(e.to, distances.get(e.from) + e.weight); //update the distances map
+			    worklist.add(e.to);  // Only add when distance improves
+			    parentMap.put(e.to, e.from);} // update the parent map}
+				
+				edges = cons.rest;}
+			visited.addFirst(next);}}}
+		return new ArrayDeque<VertexA>();} //and then we add eleemnt/next to the visited deque
+	
+	
+	//METHOD MSTPRIM
+	//Returns a MST from a graph, by picking the least expensive edge from the already connected vertices
+	//We will need 3 additional data structures:
+	//-- List of Edges called tree, which will add edges which create the tree
+	//--Hashmap <Vertex, boolean> - called Connected which will start with false for each vertex and then as we visit a vertex, we will add it
+	//-- Frontier - or priority queu of edges - basically equivalent to the the worklist min heap in Djkistra algorithm
+	//Will return a list of edges or the tree
+	//Signature> Self > IList<Edge>
+	
+	ArrayList<EdgeA> mstPrim () {
+		ArrayList<EdgeA> tree = new ArrayList<EdgeA>(); //initialising the return tree as an empty list of edges
+		ArrayList<VertexA> connected = new ArrayList<VertexA>(); //initialising the connected list, which will store all the  vertices which we have connected so far
+		
+		PriorityQueue<EdgeA> worklist = new PriorityQueue<>((EdgeA e1, EdgeA e2) -> Integer.compare(e1.weight, e2.weight)); //this will be used to store elements in order of least cumulative distance
+		
+		//Initialising the values in connected and worklist
+		connected.add(this.listOfVertices.getFirst());
+		IList<EdgeA> firstVertexListOfEdges = this.listOfVertices.getFirst().listOfEdges;
+		while (!firstVertexListOfEdges.isEmpty()) {worklist.add(firstVertexListOfEdges.getFirst()) ; firstVertexListOfEdges = firstVertexListOfEdges.getRest();}
+		
+		while (!worklist.isEmpty()) {
+			EdgeA next = worklist.remove();
+			
+			if (!connected.contains(next.to)) {  // if this edge is not present in the connected list
+				connected.add(next.to);  // we first add the vertex to connected
+				tree.add(next);  // we add the edge to the tree
+				
+				IList<EdgeA> listEdges = next.to.listOfEdges; // and we add the edges from the to vertex to our worklist
+				while(!listEdges.isEmpty()) {worklist.add(listEdges.getFirst()); listEdges = listEdges.getRest();}}}
+		return tree;}
+	
+	
+	//METHOD MSTKRUSKAL
+	//REturns a MST froma graph, by picking the least expensive edge from all the edges of the tree
+	//Signature Self> IList<Edge>
+	IList<EdgeA> kruskalMST() {
+    // 1. Get all edges
+    IList<EdgeA> allEdges = new MtList<>();
+    IList<VertexA> vertices = this.listOfVertices;
+    while (!vertices.isEmpty()) {
+        allEdges = allEdges.addList(vertices.getFirst().listOfEdges);
+        vertices = vertices.getRest();}
+    
+    // 2. Sort edges by weight
+    EdgeSorter sorter = new EdgeSorter();
+    IList<EdgeA> sortedEdges = allEdges.foldR(sorter, new MtList<>());
+    
+    // 3. Initialize Union-Find
+    UnionFind uf = new UnionFind();
+    vertices = this.listOfVertices;
+    while (!vertices.isEmpty()) {
+        uf.makeSet(vertices.getFirst().name);
+        vertices = vertices.getRest();}
+    
+    // 4. Pick MST edges
+    IList<EdgeA> mstEdges = new MtList<>();
+    while (!sortedEdges.isEmpty()) {
+        EdgeA edge = sortedEdges.getFirst();
+        if (uf.union(edge.from.name, edge.to.name)) {
+            mstEdges = mstEdges.add(edge);}
+        sortedEdges = sortedEdges.getRest();}
+    return mstEdges;}
+
+}
+	
+
+
+
+
+
+
+//============================================================================================================
+class ExamplesGraphAdvanced {
+	ExamplesGraphAdvanced() {}
+	
+	//Graph defined as per this link -https://course.ccs.neu.edu/cs2510sp22/lecture30.html
+	
+	
+	//Defining the vertices
+	VertexA a = new VertexA("A", new MtList<EdgeA>());
+	VertexA b = new VertexA("B", new MtList<EdgeA>());
+	VertexA c = new VertexA("C", new MtList<EdgeA>());
+	VertexA d = new VertexA("D", new MtList<EdgeA>());
+	VertexA e = new VertexA("E", new MtList<EdgeA>());
+	
+	//Defining the Edges
+	EdgeA ab = new EdgeA(a,b, 3);
+	EdgeA bc = new EdgeA(b,c, 4);
+	EdgeA bd = new EdgeA(b, d,2);
+	EdgeA ca = new EdgeA(c,a, 6);
+	EdgeA eb = new EdgeA(e, b, 5);
+	
+	//Defining list of edges 
+	IList<EdgeA> aEdges = new ConsList<EdgeA>(ab, new MtList<EdgeA>());
+	IList<EdgeA> bEdges = new ConsList<EdgeA>(bc, new ConsList<EdgeA> (bd, new MtList<EdgeA>()));
+	IList<EdgeA> cEdges = new ConsList<EdgeA> (ca, new MtList<EdgeA>());
+	IList<EdgeA> eEdges = new ConsList<EdgeA> (eb, new MtList<EdgeA>());
+	
+	//Defining the list of vertices
+	IList<VertexA> listVertices = new ConsList<VertexA>(a, new ConsList<VertexA>(b, new ConsList<VertexA>(c, new ConsList<VertexA>(d, new ConsList<VertexA>(e,new MtList<VertexA>()))))); 
+	
+	//Defining the graph
+	GraphListA newGraph = new GraphListA (listVertices);
+
+
+//Updating the list of edges for vertices 
+	void initConditions() {
+		a.listOfEdges = aEdges;
+		b.listOfEdges = bEdges;
+		c.listOfEdges = cEdges;
+		e.listOfEdges = eEdges;}
+		
+		
+		
+		//Testing the pathexists
+		
+	
+	void testPathExists (Tester t) {
+		this.initConditions();
+		t.checkExpect(newGraph.pathExistsBFS(b, e), false);
+		t.checkExpect(newGraph.pathExistsBFS(b, a), true);
+		t.checkExpect(newGraph.pathExistsDFS(b, e), false);
+		t.checkExpect(newGraph.pathExistsDFS(b, a), true);}
+	
+	//Testing for shortest path
+	
+	void testShortestPath (Tester t) {
+		this.initConditions();
+		t.checkExpect(newGraph.shortestPath(b, a), new ArrayDeque<VertexA>(Arrays.asList(b, c, a)));
+		t.checkExpect(newGraph.shortestWeightedPath(b, a), new ArrayDeque<VertexA>(Arrays.asList(b, c, a)));}
+	
+	
+	
+	
+	
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

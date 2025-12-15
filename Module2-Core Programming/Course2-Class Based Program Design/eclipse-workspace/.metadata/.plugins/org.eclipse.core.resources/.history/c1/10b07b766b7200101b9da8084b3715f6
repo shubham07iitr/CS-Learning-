@@ -1,0 +1,94 @@
+import tester.*;
+import java.util.ArrayList;
+
+//=========================================================
+//FUNCTION OBJECTs
+
+interface IFunc<T, U> {U apply (T arg);}
+
+class IntToStringTransform implements  IFunc<Integer, String> {
+	public String apply (Integer i) {
+		return Integer.toString(i);
+	}
+}
+
+//=========================================================
+//UTIL CLASS EXTENDING FUNCTIONALITY FOR ARRAYLIST OBJECT
+
+class Util {
+	Util() {}
+	<U> ArrayList<U> buildList(int n, IFunc<Integer, U> func) {
+		ArrayList<U> result = new ArrayList<U> ();
+		for (int i = 0; i < n; i++) {
+			result.add(func.apply(i));} 
+		return result;}
+
+
+	<T,U> ArrayList <U> map (ArrayList<T> arr, IFunc<T,U> func) {
+		ArrayList<U> result = new ArrayList<U> ();
+		for (T t: arr) {
+			result.add(func.apply(t));}
+		return result;}
+	
+	//CAPITALIZE METHOD FOR BOOKS
+	void capitalizeTitles1(ArrayList<Book> books) {
+		for (Book b : books) {
+			//b.title.toUpperCase();
+			//b = new Book(b.title.toUpperCase(), b.author);
+			b.title = b.title.toLowerCase();
+		}
+	}
+	
+	
+}
+
+//=========================================================
+//CLASS BOOK
+
+class Book {
+	String title;
+	String author;
+	
+	Book(String title, String author) {this.title = title; this.author  = author;}
+	
+	void capitalizeTitle() {
+		this.title = this.title.toUpperCase();
+	}
+}
+
+//=========================================================
+//CLASS EXAMPLES
+
+class ArrayListExamples {
+	ArrayListExamples() {}
+	
+	Util util;
+	
+	void initData() {
+		this.util = new Util();
+	}
+	
+	void testBuildList(Tester t) {
+		//Racket's build-list
+		ArrayList<String> list1 = (new Util()).buildList(5, new IntToStringTtransform());
+		ArrayList<String> expected = new ArrayList<String>();
+		expected.add("0");expected.add("1"); expected.add("2");expected.add("3"); expected.add("4");
+		t.checkExpect(list1, expected);}
+	
+
+	void testCapitalizeTitles (Tester t) {
+		initData();
+		ArrayList<Book> books = new ArrayList<Book>();
+		books.add(new Book("hp1", "JKR"));
+		this.util.capitalizeTitles1(books);
+		//TEST for Changes
+		t.checkExpect(books.get(0).title, "HP1");
+	}
+	
+}
+
+
+
+
+
+

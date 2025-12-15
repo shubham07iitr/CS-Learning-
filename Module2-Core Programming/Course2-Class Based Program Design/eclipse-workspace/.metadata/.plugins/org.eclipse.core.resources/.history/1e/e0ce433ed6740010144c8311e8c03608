@@ -1,0 +1,87 @@
+import tester.*;
+import java.util.*;
+//=======================================================
+//ListofLists<T>
+//Stores an ArrayList of ArrayList<T>
+
+class ListOfLists<T> {
+	ArrayList<ArrayList<T>> lol;
+	
+	ListOfLists (ArrayList<ArrayList<T>> lol) {this.lol = lol;}
+	
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.lol.....ArrayList<ArrayList<T>>
+	 * METHODS
+	 * ...this.addNewList() ....void
+	 * ...this.add(int index, T object)...void
+	 * ...this.get(int index)....ArrayList<T>
+	 * ...this.size() .....Int
+	 * METHODS for FIELDS
+	 * ...this.lol.add ....void
+	 * ...this.lol.get(T object) ...T
+	 * ...this.lol.size() ....int
+	 */
+	
+	//METHD ADDNEWLIST
+	//Signature> Self > Void
+	//Adds a new empty ArrayList<T> to the end of the list-of-lists
+	void addNewList() {this.lol.add(new ArrayList<T>());}
+	
+	
+	//METHOD ADD
+	//Signature> Self, Int, T > Void
+	//Adds the provided object to the end of the ArrayList<T> at the provided index in teh list-of-lists
+	//If the index is invalid, this method should throw an IndexOutOfBoundsException with a suitable message
+	void add (int index, T object) {
+		if (index > this.lol.size()-1) {throw new IndexOutOfBoundsException("Provided index is more than length of list");}
+		else {this.lol.get(index).add(object);}}
+
+	
+	//METHOD GET
+	//Signature> Self, Int> Void
+	//Returns the ArrayList<T> at the provided index in the list-of-lists
+	//If the index is invalid, this method should throw an IndexOutOfBoundsException with a suitable message
+	ArrayList<T> get (int index) {
+		if (index > this.lol.size()-1) {throw new IndexOutOfBoundsException("Provided index is more than length of list");}
+		else {return this.lol.get(index);}}
+	
+	//METHOD SIZE
+	//Signature> Self > Int
+	//Returns number of lists in LoL
+
+	int size () {return this.lol.size();}		
+}
+
+
+//=======================================================
+//CLASS EXAMPLES
+
+class ExamplesLoL {
+	ExamplesLoL() {}
+	
+	ArrayList<Integer> list1 = new ArrayList<Integer>(Arrays.asList(1,2,3));
+	ArrayList<Integer> list2 = new ArrayList<Integer>(Arrays.asList(4,5,6));
+	ArrayList<Integer> list3 = new ArrayList<Integer>(Arrays.asList(7,8));
+	ArrayList<ArrayList<Integer>> lol= new ArrayList<ArrayList<Integer>>(Arrays.asList(list1,list2, list3));
+	
+	
+	
+	void test 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

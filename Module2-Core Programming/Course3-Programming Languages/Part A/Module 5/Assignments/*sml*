@@ -1,0 +1,1018 @@
+Standard ML of New Jersey [Version 110.99.8; 64-bit; April 25, 2025]
+- OS.FileSys.getDir();
+[autoloading]
+[library $SMLNJ-BASIS/basis.cm is stable]
+[library $SMLNJ-BASIS/(basis.cm):basis-common.cm is stable]
+[autoloading done]
+val it =
+  "/Users/shubhamgupta/Computers Science/Core Programming/Programming Lan#"
+  : string
+- print(OS.FileSys.getDir());
+/Users/shubhamgupta/Computers Science/Core Programming/Programming Languages/Part A/Module 5/Assignmentsval it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:60.21-60.29 Error: unbound variable or constructor: NoAnswer
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:57.5-62.25 Error: expression does not match constraint [UBOUND match]
+  expression: 'c option
+  constraint: 'int
+  in expression:
+    (case (g a)
+    of NONE => NONE
+     | SOME b =>
+         (case (f b)
+         of NONE => NONE
+          | SOME c => SOME c)): 'int
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+extra.sml:57.5-62.25 Error: expression does not match constraint [UBOUND match]
+  expression: 'c option
+  constraint: 'a
+  in expression:
+    (case (g a)
+    of NONE => NONE
+     | SOME b =>
+         (case (f b)
+         of NONE => NONE
+          | SOME c => SOME c)): 'a
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+extra.sml:65.121 Error: syntax error: replacing  COMMA with  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+extra.sml:66.113-66.116 Error: unbound variable or constructor: int
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val it = () : unit
+- val test1 = (’a -> ’a) -> (’a -> bool) -> ’a;
+stdIn:8.14 Error: non-Ascii character (ord 226)
+stdIn:8.15 Error: non-Ascii character (ord 128)
+stdIn:8.16 Error: non-Ascii character (ord 153)
+stdIn:8.22 Error: non-Ascii character (ord 226)
+stdIn:8.23 Error: non-Ascii character (ord 128)
+stdIn:8.24 Error: non-Ascii character (ord 153)
+stdIn:8.19-8.26 Error: syntax error: deleting  ARROW IDA
+stdIn:8.32 Error: non-Ascii character (ord 226)
+stdIn:8.33 Error: non-Ascii character (ord 128)
+stdIn:8.34 Error: non-Ascii character (ord 153)
+stdIn:8.28-8.32 Error: syntax error: deleting  ARROW LPAREN
+stdIn:8.37-8.45 Error: syntax error: deleting  ARROW IDA RPAREN
+stdIn:8.49 Error: non-Ascii character (ord 226)
+stdIn:8.50 Error: non-Ascii character (ord 128)
+stdIn:8.51 Error: non-Ascii character (ord 153)
+- val test2 = f o g;
+stdIn:1.18 Error: unbound variable or constructor: g
+stdIn:1.14 Error: unbound variable or constructor: f
+- use "extra.sml"
+= ;
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : 'a -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.39-146.41 Error: syntax error: replacing  DARROW with  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.35-146.38 Error: syntax error: replacing  FUN with  FN
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> int * int
+extra.sml:173.39-173.41 Error: syntax error: replacing  DARROW with  EQUALOP
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> int * int
+map2_test1 failed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+extra.sml:206.31-206.38 Error: unbound variable or constructor: app_app
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+extra.sml:206.1-206.109 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: string * char list * char list
+  operand:         string * char list * string list
+  in expression:
+    check_expect
+    ("app_all_test1",
+     ((app_all (fn x => x :: x :: nil)) (fn x => String.explode x)) "sh",
+     "s" :: "s" :: "h" :: "h" :: nil)
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+extra.sml:230.5 Error: syntax error: replacing  EQUALOP with  DARROW
+[unexpected exception: Compile]
+
+uncaught exception Compile [Compile: "syntax error"]
+  raised at: ../compiler/Parse/main/smlfile.sml:19.24-19.46
+             ../compiler/TopLevel/interact/evalloop.sml:45.54
+             ../compiler/TopLevel/interact/evalloop.sml:306.20-306.23
+             ../compiler/TopLevel/interact/interact.sml:65.39-65.42
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+extra.sml:232.12-232.15 Error: unbound variable or constructor: ::#
+extra.sml:233.35-233.38 Error: unbound variable or constructor: ::#
+extra.sml:232.10-232.61 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:233.10-233.60 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:229.5-233.60 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'a list -> unit
+  this rule: 'a list -> _ * _
+  in rule:
+    x :: xs' =>
+      if f x
+    then (((x <errorvar>) 1) (partition (f,xs')),
+          (fn {2=2,...} => 2) (partition (f,xs')))
+    else ((fn {1=1,...} => 1) (partition (f,xs')),
+          ((x <errorvar>) 2) (partition (f,xs')))
+extra.sml:228.5-233.60 Error: case object and rules do not agree [tycon mismatch]
+  rule domain: ('a -> bool) * 'a list
+  object: (('a -> bool) * 'a list) * 'Z
+  in expression:
+    (case (arg,arg)
+    of (f : 'a -> bool,loe : 'a list) =>
+         (case loe
+         of nil => ()
+          | x :: xs' =>
+              if f x
+            then (((x <errorvar>) 1) (partition (f,xs')),
+                  (fn {2=<pat>,...} => 2) (partition (f,xs')))
+            else ((fn {1=<pat>,...} => 1) (partition (f,xs')),
+                  ((x <errorvar>) 2) (partition (f,xs')))))
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+extra.sml:232.12-232.15 Error: unbound variable or constructor: ::#
+extra.sml:233.36-233.39 Error: unbound variable or constructor: ::#
+extra.sml:232.10-232.57 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:233.10-233.59 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:229.5-233.59 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'a list -> unit
+  this rule: 'a list -> _ * _
+  in rule:
+    x :: xs' =>
+      if f x
+    then (((x <errorvar>) 1) ((partition f) xs'),
+          (fn {2=2,...} => 2) ((partition f) xs'))
+    else ((fn {1=1,...} => 1) ((partition f) xs'),
+          ((x <errorvar>) 2) ((partition f) xs'))
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+extra.sml:232.12-232.15 Error: unbound variable or constructor: ::#
+extra.sml:233.37-233.40 Error: unbound variable or constructor: ::#
+extra.sml:232.10-232.59 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:233.10-233.61 Error: operator is not a function [UBOUND match]
+  operator: 'a
+  in expression:
+    x <errorvar>
+extra.sml:229.5-233.61 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'a list -> unit
+  this rule: 'a list -> _ * _
+  in rule:
+    x :: xs' =>
+      if f x
+    then (((x <errorvar>) 1) ((partition f) xs'),
+          (fn {2=2,...} => 2) ((partition f) xs'))
+    else ((fn {1=1,...} => 1) ((partition f) xs'),
+          ((x <errorvar>) 2) ((partition f) xs'))
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+extra.sml:229.5-233.63 Error: types of rules do not agree [tycon mismatch]
+  earlier rule(s): 'a list -> unit
+  this rule: 'a list -> 'a list * 'a list
+  in rule:
+    x :: xs' =>
+      if f x
+    then (x :: (fn {1=1,...} => 1) ((partition f) xs'),
+          (fn {2=2,...} => 2) ((partition f) xs'))
+    else ((fn {1=1,...} => 1) ((partition f) xs'),
+          x :: (fn {2=2,...} => 2) ((partition f) xs'))
+extra.sml:228.5-233.63 Error: right-hand-side of clause does not agree with function result type [record labels]
+  expression:  'a list -> unit
+  result type:  'a list -> {1:'a list, 2:'a list; 'Z}
+  in declaration:
+    partition =
+      (fn arg =>
+            (fn arg =>
+                  (case (arg,arg)
+                  of (f : 'a -> bool,loe : 'a list) =>
+                       (case loe
+                       of nil => ()
+                        | <pat> :: <pat> => if <exp> then <exp> else <exp>))))
+extra.sml:228.1-233.63 Error: unresolved flex record (need to know the names of ALL the fields
+ in this context)
+  type: {1:'a list, 2:'a list; 'Z}
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+val partition = fn : ('a -> bool) -> 'a list -> 'a list * 'a list
+extra.sml:241.13-241.91 Error: operator and operand do not agree [tycon mismatch]
+  operator domain: 'Z[INT] -> 'Y list
+  operand:         'Z[INT] -> bool
+  in expression:
+    app_all (fn x => x >= 5)
+val it = () : unit
+- use "extra.sml";
+[opening extra.sml]
+val LOI1 = [2,6,3,4,1] : int list
+extra.sml:16.15 Warning: calling polyEqual
+val check_expect = fn : string * ''a * ''a -> unit
+Check_expect_Test1 passed
+val it = () : unit
+Check_expect_Test2 failed
+val it = () : unit
+Check_expect_Test3 passed
+val it = () : unit
+Check_expect_Test4 failed
+val it = () : unit
+Check_expect_Test5 failed
+val it = () : unit
+Check_expect_Test6 passed
+val it = () : unit
+val compose_opt = fn
+  : ('a -> 'b option) -> ('c -> 'a option) -> 'c -> 'b option
+compose_opt_test1 passed
+val it = () : unit
+compose_opt_test1 passed
+val it = () : unit
+val do_until = fn : ('a -> 'a) -> ('a -> bool) -> 'a -> 'a
+do_until_test1 passed
+val it = () : unit
+val fact = fn : int -> int
+fact_test0 passed
+val it = () : unit
+fact_test1 passed
+val it = () : unit
+extra.sml:146.48 Warning: calling polyEqual
+val fixed_point = fn : (''a -> ''a) -> ''a -> ''a
+val map2 = fn : ('a -> 'b) -> 'a * 'a -> 'b * 'b
+map2_test1 passed
+val it = () : unit
+val app_all = fn : ('a -> 'b list) -> ('c -> 'a list) -> 'c -> 'b list
+app_all_test1 passed
+val it = () : unit
+val partition = fn : ('a -> bool) -> 'a list -> 'a list * 'a list
+partition_test1 passed
+val it = () : unit
+val it = () : unit
+- 

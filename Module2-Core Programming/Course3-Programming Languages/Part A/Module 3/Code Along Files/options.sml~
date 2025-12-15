@@ -1,0 +1,5 @@
+fun max1 (xs : int list) =
+    if null xs
+else
+
+    

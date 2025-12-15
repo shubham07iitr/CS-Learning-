@@ -1,0 +1,89 @@
+//IMPORTING LIBRARIES
+import java.util.ArrayList;
+import java.util.Arrays;
+import tester.*;
+import javalib.impworld.*;
+import javalib.worldimages.*;
+import java.awt.Color;
+
+
+//============================================================
+//FUNCTINO OBJECTS
+
+interface IPredicate<T> {
+	boolean apply(T arg);
+}
+
+class OnlyEven implements IPredicate <Integer> {
+	public boolean apply (Integer arg) {return arg %2 ==0;}
+}
+
+
+//============================================================
+//UTIL CLASS
+
+class Utils {
+	Utils () {}
+	
+	
+	//FILTER METHOD
+	//Produces a new list which has all elements from given list satisfying the predicate
+	<T> ArrayList<T> filter (ArrayList<T> arr, IPredicate<T> pred) {
+		ArrayList<T> returnList = new ArrayList<T>();
+		for (int i = 0; i <= arr.size()-1; i++) {
+			if (pred.apply(arr.get(i))) {returnList.add(arr.get(i));}}
+
+		return returnList;
+	}
+	
+	//REMOVE EXCEPT
+	//Modifies the given list to remove everything that fails the predicate
+	<T> void removeExcept(ArrayList<T> arr, IPredicate<T> pred) {
+		ArrayList<T> removeList = new ArrayList<T>();
+		for (int i = 0; i <= arr.size()-1; i++) {
+			if (!pred.apply(arr.get(i))) {removeList.add(arr.get(i));}}
+		
+		for (int i =0; i <= removeList.size() -1 ; i++) {
+			if (removeList.contains(removeList.get(i))) {arr.remove(removeList.get(i));}
+		}
+		
+	}
+
+}
+
+//============================================================
+//EXAMPLE CLASS
+
+class ExamplesLab8 {
+	ExamplesLab8() {}
+	Utils util = new Utils(); 
+	
+	//Testing for the filter method
+	void testFilter(Tester t) {
+		ArrayList<Integer> testList = new ArrayList<Integer>();
+		testList.add(3); testList.add(4); testList.add(5); testList.add(6);
+				
+		t.checkExpect(util.filter(testList, new OnlyEven()), new ArrayList<Integer>(Arrays.asList(4,6)));
+	}
+	//Testing for removeExcept method
+	void testRemoveExcept (Tester t) {
+		ArrayList<Integer> testList = new ArrayList<Integer>();
+		testList.add(3); testList.add(4); testList.add(5); testList.add(6);
+		util.removeExcept(testList, new OnlyEven());
+		t.checkExpect(testList.get(0), 4);
+		t.checkExpect(testList.get(1), 6);
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+

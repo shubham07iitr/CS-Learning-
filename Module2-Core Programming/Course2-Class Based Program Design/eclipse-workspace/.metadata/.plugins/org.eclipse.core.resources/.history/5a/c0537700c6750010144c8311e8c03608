@@ -1,0 +1,47 @@
+import tester.*;
+import java.util.*;
+
+//ICOMPARE Interface
+
+interface ICompare<T> {
+	int compare(T e1, T e2);}
+
+class CompareInts implements ICompare<Integer> {
+	public int compare (Integer e1, Integer e2) {return e1-e2;}
+}
+
+
+
+//===========================================================================
+//INSERTSEARCH ALGO
+
+interface IListNew<T> {
+	IListNew<T> sort(); //sorts the given list as per the comparator
+	IListNew<T> insert(T element, ICompare<T> compareFunc); // adds a given element in a sorted list of elements
+}
+
+class MtListNew<T> implements IListNew<T> {
+	//Defining the constructor
+	MtListNew() {}
+	
+	public IListNew<T> sort() {return this;} //sorting an empty list returns an empty list
+	public IListNew<T> insert(T element, ICompare<T> compareFunc) {return new ConsListNew<T>(element, this);}
+}
+
+class ConsListNew<T> implements IListNew<T> {
+	T first;
+	IListNew<T> rest;
+	
+	//Defining the constructor
+	ConsListNew(T first, IListNew<T> rest) {this.first = first; this.rest = rest;}
+	
+	//METHODS
+	public IListNew<T> sort() {
+		return this.rest.sort().insert(this.first);} //inserts the given first element in a sorted list oof rest of elements
+	
+	public IListNew<T> insert(T element, ICompare<T> compareFunc) {
+		if (compareFunc.compare(element, this.first) <= 0) {return new ConsListNew<T> (element, this);}
+		else {return new ConsListNew<T>(this.first, this.rest.insert(element, compareFunc));}
+	}
+
+}

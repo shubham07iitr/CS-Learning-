@@ -1,0 +1,109 @@
+import tester.*;                // The tester library
+import javalib.worldimages.*;   // images, like RectangleImage or OverlayImages
+import javalib.funworld.*;      // the abstract World class and the big-bang library
+import java.awt.Color;          // general colors (as triples of red,green,blue values)
+
+
+//==================================================================================================== 
+//Defining the final myworld class to run the game
+//Will have the following fields, properties
+//-- List of Bullets - to be initialised to MtList<Bullet>
+//-- Missile - will be fixed and will be initialised to standard missile config: new Missile(new Posn (250, 475));
+//--List of SpaceSihps - will be initialised to MtList to begin with 
+//--Scoreboard - will be initialised to standard scoreboard config
+class MyWorldFinal extends World{
+	IList<Bullet> lob;
+	Missile missile;
+	IList<SpaceShip> loss;
+	ScoreBoard sb;
+	int bulletsRemaining;
+	Bullet standardBullet;
+	SpaceShip standardSpaceShip;
+
+	MyWorldFinal(int bulletsRemaining) {
+		this.lob = new MtList<Bullet>();
+		this.missile  = new Missile(new Posn (250, 475));
+		this.loss = new MtList<SpaceShip>();
+		this.sb = new ScoreBoard(10, 0, new Posn(450, 25));
+		this.bulletsRemaining = bulletsRemaining;
+		this.standardBullet = new Bullet (20, new Posn (250,250));;
+		this.standardSpaceShip = new SpaceShip(new Posn (50, 400), -1);
+	}
+
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.lob.... IList <Bullets>
+	 * ...this.missile ...Missile
+	 * ...this.loss .... IList<SpaceShip>
+	 * ...this.sb ..... ScoreBoard
+	 * ...this.bulletsRemaining .....int
+	 * METHODS
+	 * ...this.makeScene   ..... WorldScene
+	 * ...this.onTick..... MyWorld
+	 * ...this.worldEnds ....MyWorld
+	 * ...this.onTick .... MyWorld
+	 * ...this.onMouseClicked ....MyWorld
+	 * 
+	 */
+
+	//WRITING the STANDARD METHODS
+
+	//METHOD MAKESCENE
+	//This method will draw a scene on a world canvas
+	//--Places all the elements in loss on screen
+	//--Places all the elements in lob on screen
+	//--Places the sb on screen
+	//--Places the missile on screen 
+	@Override
+	public WorldScene makeScene() {return sb.place(missile.place(loss.placeAll(lob.placeAll(this.getEmptyScene()))));}
+
+	//METHOD WORLDENDS
+	//Determines when the gmae is over which is when the count f circles to go offscreen is 0 or less
+	@Override
+	public WorldEnd worldEnds(){
+		if (this.bulletsRemaining == 0) {return new WorldEnd(true, this.getEmptyScene());}
+		else {return new WorldEnd(false, this.makeScene());}
+	}
+
+	//METHOD onTICK
+	//Determines when the gmae is over which is when the count f circles to go offscreen is 0 or less
+	@Override
+	public MyWorldFinal onTick() {return this;}
+	
+	
+	//METHOD onKEYEVENT
+	//For every space bar press we would want to:
+	//--add a new bullet to the list of bullets
+	// decrease bullets remaining by 1
+	@Override
+	public MyWorldFinal onKeyEvent(String key) {
+		this.lob = this.lob.addToList(standardBullet);
+		return this;
+	}
+
+}
+
+
+
+
+
+//================================================================================================
+
+//CLASS EXAMPLESWORLDFINAL
+class ExamplesWorldFinal {
+	ExamplesWorldFinal() {}
+	
+	Bullet baseBullet = new Bullet (20, new Posn (250,250));
+	SpaceShip baseSS = new SpaceShip(new Posn (50, 400), -1);
+}
+
+
+
+
+
+
+
+
+
+

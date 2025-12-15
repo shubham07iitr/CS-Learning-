@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <style>
+        label{
+            margin-left: 0%;
+            text-align: left;
+        }
+        input {
+            min-width: 300px;
+            margin-top: 10px;
+        }
+        h3 {
+            margin-top: 20px;
+            color: green;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+        button {
+            margin-top: 15px;
+            width: 120px;
+            margin-right: 0%;
+            padding-right: 0%;
+        }
+        select {
+            min-width: 300px;
+            height: 25px;
+            margin: 5px;
+        }
+    </style>
+
+
+    <form action="/sell" method="post">
+        <label name="symbol">Enter a stock you want to sell</label>
+        <select name = "symbol">
+            <option disabled selected>Symbol </option>
+            {% for i in stocks %}
+                <option value = "{{ i['symbol'] }}"> {{ i["symbol"] }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label name = "quantity"> Enter quantity you want to sell</label>
+        <input type="number" name = "quantity" placeholder="Sell Quantity" required min = "1" max = "1000000" step = 1>
+        <br>
+        <button class="btn btn-primary" type="submit">Sell Stock</button>
+    </form>
+
+    {% if message_quote %}
+        <h3> LTP for {{ message_quote.name }} was ${{ message_quote.price }}</h3>
+
+    {% endif %}
+{% endblock %}

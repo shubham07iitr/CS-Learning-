@@ -1,0 +1,104 @@
+//===========================================================================
+//CLASS DEQUE
+//Will just have a header which is a sentinel node which may point to 
+class Deque<T> {
+	Sentinel<T> header;
+	
+	//CONSTRUCTOR - 0 arguments
+	Deque() {
+		this.header = new Sentinel<T>();}
+	//Convenience Constructor
+	Deque(Sentinel<T> header) {this.header = header;}
+}
+
+//===========================================================================
+//CLASS ANODE 
+//Abstract class which gets extended by Sentinel and Node class
+abstract class ANode<T> {
+	ANode<T> next;
+	ANode<T> prev;
+}
+
+//CLASS SENTINEL
+//Defining the Sentinel Class which in isolation will refer to itself
+class Sentinel<T> extends ANode<T> {
+	Sentinel() {
+		this.next = this;
+		this.prev = this;}
+}
+
+//CLASS NODE
+class Node<T> extends ANode<T> {
+	T data;
+	//Constructor which takes in only data and initalises next and pre to null
+	Node(T data) {
+		this.data = data;
+		this.prev = null;
+		this.next = null;
+	}
+	//Convenience constructor
+	Node (T data, ANode<T> prev, ANode<T> next) {
+		if (prev==null || next ==null) {throw new IllegalArgumentException("Null passed as a node");}
+		else {
+			this.data = data;
+			this.prev = prev;
+			this.next = next;
+			prev.next = this;
+			next.prev = this;
+		}
+	}
+}
+
+
+
+//===========================================================================
+//CLASS EXAMPLESDEQUE
+
+class ExamplesDeque {
+	ExamplesDeque(){}
+	
+	ANode<String> nodeSentinel = new Sentinel<String>();
+	ANode<String>  node1 = new Node<String>("abc");
+	ANode<String>  node2 = new Node<String>("bcd");
+	ANode<String>  node3 = new Node<String>("cde");
+	ANode<String>  node4 = new Node<String>("def");
+	
+	Deque<String> emptyD = new Deque<String>();  //empty deque
+	Deque<String> orderedD = new Deque<String>(new Sentinel<String>())
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

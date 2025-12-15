@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <style>
+        label{
+            min-width: 200px;
+        }
+        input {
+            min-width: 300px;
+            margin-top: 10px;
+        }
+        h3 {
+            margin-top: 20px;
+            color: green;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            font-style: italic;
+            font-weight: bold;
+        }
+        button {
+            margin-top: 15px;
+            width: 120px;
+            margin-right: 0%;
+            padding-right: 0%;
+        }
+    </style>
+
+
+    <form action="/quote" method="post">
+        <label name="symbol">Enter a valid symbol</label>
+            <input type="text" name = "symbol" placeholder="Symbol" required>
+        <br>
+
+        <button class="btn btn-primary" type="submit">Check Quote</button>
+    </form>
+
+    {% if message_quote %}
+        <h3> LTP for {{ message_quote.name }} was ${{ message_quote.price }}</h3>
+
+    {% endif %}
+{% endblock %}

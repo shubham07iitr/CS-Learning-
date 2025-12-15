@@ -1,0 +1,42 @@
+import java.util.Comparator; 
+//====================================================================
+//ABSTRACT BST
+// It has either a leaf or a Node
+// Node is of type (T data, ABST left, ABST Right)
+
+abstract class ABST<T> {
+	Comparator<T> order;
+}
+
+
+//====================================================================
+//CLASS BOOK
+//Book is of type (String title, String author, int price)
+//interp. as a book to be read
+
+class Book {
+	String title;
+	String author;
+	int price;
+	
+	//Defining the constructor
+	Book (String title, String author, int price) {
+		this.title = title;
+		this.author = author;
+		this.price = price;
+	}
+}
+
+//====================================================================
+//CLASS EXAMPLES
+
+class Assignment6Examples{
+	Assignment6Examples() {}
+	
+	Book b1 = new Book("HP1" , "JKR", 15);
+	Book b2 = new Book("Dark Matter" , "Blake Crouch", 12);
+	Book b3 = new Book("HP2", "JKR", 17);
+	Book b4 = new Book("Concepts of Physics1", "HCV", 20);
+	Book b5 = new Book("Concepts of Physics2", "HCV2", 24);
+	Book B6 = new Book("Physics by Irodov", "Irodov", 26);
+}

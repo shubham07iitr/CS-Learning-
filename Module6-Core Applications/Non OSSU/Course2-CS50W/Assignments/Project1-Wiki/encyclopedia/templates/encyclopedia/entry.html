@@ -1,0 +1,19 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+    {% if entryname == "Requested page does not exist" %}
+        <h1>Requested page does not exist</h1>
+        <a href = "{% url 'index' %}">Go back to home</a>
+    {% else %}
+        {{ entryname|safe }}
+    {% endif %}
+    <form action = "{% url 'editpage' %}">
+        <input type="hidden" name="title" value="{{ title }}">
+        <input type = "submit" value = "Edit Page" >
+    </form>
+
+{% endblock %}

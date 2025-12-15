@@ -1,0 +1,55 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <!--Defining the style element-->
+    <style>
+        #userDiv  {padding-left: 15px; border: solid 2px ; border-color: lightgray; margin-top: 10px; padding-top: 10px; margin-bottom: 15px; padding-bottom: 10px;}
+        .individualPost {padding-left: 15px; border: solid 2px ; border-color: lightgray; margin-top: 10px; padding-top: 10px; margin-bottom: 10px;}
+        #userProfile {cursor: pointer;}
+        .editButton {cursor: pointer; margin-bottom: 10px; margin-top: 5px;}
+        .likes {cursor: pointer; display: inline-block;}
+    </style>
+    <!--Displaying messages as received from the server-->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <!--Defining the profile of the User-->
+    <div id = "userDiv">
+    <h5>Username: {{ profile.username }}</h5>
+    <h6>{{ profile.first_name }} {{ profile.last_name }}</h6>
+    <h6> Following: {{ following_count }} , Followers: {{ follower_count }}</h6>
+    
+    <!--Defining the functionality of follow button-->
+    {% if user.username != profile.username %}
+        <form id = "formFollow" action = "{% url 'followPage' %}" method = "POST">
+            {% csrf_token %}
+            <input type ="hidden" name = "follower" value = "{{profile.username}}">
+            <input type = "hidden" name = "action" value = "{{following}}" >
+            <button id = "followerButton" class="btn btn-primary" type="submit">{{following}}</button>
+        </form>
+    {% endif %}
+    </div>
+
+    <!--Defining posts of that user-->
+    {% if posts %}
+        {% for post in posts %}
+            <div class = "individualPost">
+                <h5>Posted by <strong> <a id = "userProfile" href = "{% url 'profilePage' post.posted_by.username %}">{{ post.posted_by.username }} </a></strong></h5>
+                <h6 class = "actualPostDetails"> {{ post.post_details }}</h6>
+                <h7> Last updated on: {{ post.updated_at }}</h7>
+                <br>
+                <h6 class="likes" data-postid="{{ post.id }}" data-state="Like" data-user="{{ user.username }}" data-count="{{ post.likes.count }}"> <span>❤️</span> {{ post.likes.count }}</h6>
+                <br>
+                <button class="btn btn-primary editButton">Edit</button>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+        

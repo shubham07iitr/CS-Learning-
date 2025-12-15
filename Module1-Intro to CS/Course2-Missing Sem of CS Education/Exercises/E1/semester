@@ -1,0 +1,20 @@
+#Below are all the exercises from L1
+#Problem: Create a new directory called missing under /tmp.
+##Solution: mkdir E1/semester
+
+##Problem: Write the following into that file, one line at a time
+##Solution below:
+'#!/bin/sh'
+curl --head --silent https://missing.csail.mit.edu
+
+##Problem: Try to execute the file, i.e. type the path to the script (./semester) into your shell and press enter
+##Solution: ls -l
+
+##Problem: Run the command by explicitly starting the sh interpreter, and giving it the file semester as the first argument, i.e. sh semester
+##Solution: sh ./semester
+
+##Problem: Use chmod to make it possible to run the command ./semester rather than having to type sh semester
+##Solution: chmod +x ./semester
+
+##Problem: Use | and > to write the “last modified” date output by semester into a file called last-modified.txt in your home directory
+##Solution: ./semester | grep "last-modified" > last-modified.txt

@@ -1,0 +1,109 @@
+/*Defining the BG color for the page */
+*{
+    background-color: #0B1A25;
+    color: white;
+}
+
+
+/*Defining the iniital heading and text at the top*/
+.header h1{
+    font-family: Georgia, 'Times New Roman', serif;
+    text-align: center;
+    font-size: 70px;
+}
+.header h2{
+    font-family: "Brush Script MT", cursive;
+    text-align:right;
+    font-size: 80px;
+    margin-top: 150px;
+    margin-left: 60%;
+}
+
+.header p{
+    font-family: 'Courier New', Courier, monospace;
+    text-align: right;
+    margin-left: 40%;
+
+}
+
+/*Table properties*/
+.tables{
+    display: flex;
+    flex-direction: column;   /* Items stack vertically */
+    align-items: center; 
+    text-align: center;
+}
+
+/* for Types of room*/
+.tables h3{
+    text-align: center;
+    font-size: medium;
+    font-family: Courier New, Courier, monospace;
+    margin-top: 100px;    
+}
+#book{
+    text-decoration: underline;
+}
+
+/*Adding the table properties, including making sure equal column width through table layout fixed*/
+.tables table{
+    border: 1px solid red;
+    border-collapse: collapse;
+    width: 60%;
+    height: 200px;
+    table-layout: fixed;
+}
+
+
+/*Ensuring the middle columne is left aligned*/
+.tables ul{
+    text-align: left;
+}
+
+/*Ensuring image is center aligned inside table*/
+
+
+/*Defining the size of image inside the table*/
+.tables img{
+    width: 150px;
+    height: auto
+}
+
+
+/*defining the header properties including border , size  and align*/
+.tables th{
+    background-color: red;
+    text-align: left;
+    height: 30px;
+    border: 1px solid red;
+}
+
+/*ensuring there are borders insude the table as well*/
+.tables td{
+    border: 1px solid red;
+}
+
+/*Leaving space at the top for each table*/
+#table1 {
+    margin-top: 30px;
+}
+
+#table2, #table3 {
+    margin-top: 50px;
+}
+
+/*Defining footer height and the text properties*/
+
+.footer{
+    min-height: 50px;
+    background-color: #4B2F1B;
+    text-align: center;
+    padding: 10px;
+    margin-top: 30px;
+}
+
+.footer p{
+    background-color: #4B2F1B;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

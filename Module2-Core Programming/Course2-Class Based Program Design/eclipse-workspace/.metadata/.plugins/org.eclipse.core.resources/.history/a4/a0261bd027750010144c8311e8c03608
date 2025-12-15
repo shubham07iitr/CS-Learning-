@@ -1,0 +1,118 @@
+import tester.*;
+//===========================================================================
+//CLASS DEQUE
+//Will just have a header which is a sentinel node which may point to 
+class Deque<T> {
+	ANode<T> header;
+	
+	//CONSTRUCTOR - 0 arguments
+	Deque() {
+		this.header = new Sentinel<T>();}
+	//Convenience Constructor
+	Deque(ANode<T> header) {this.header = header;}
+}
+
+//===========================================================================
+//CLASS ANODE 
+//Abstract class which gets extended by Sentinel and Node class
+abstract class ANode<T> {
+	ANode<T> next;
+	ANode<T> prev;
+}
+
+//CLASS SENTINEL
+//Defining the Sentinel Class which in isolation will refer to itself
+class Sentinel<T> extends ANode<T> {
+	Sentinel() {
+		this.next = this;
+		this.prev = this;}
+}
+
+//CLASS NODE
+class Node<T> extends ANode<T> {
+	T data;
+	//Constructor which takes in only data and initalises next and pre to null
+	Node(T data) {
+		this.data = data;
+		this.prev = null;
+		this.next = null;
+	}
+	//Convenience constructor
+	Node (T data, ANode<T> prev, ANode<T> next) {
+		if (prev==null || next ==null) {throw new IllegalArgumentException("Null passed as a node");}
+		else {
+			this.data = data;
+			this.prev = prev;
+			this.next = next;
+			prev.next = this;
+			next.prev = this;
+		}
+	}
+}
+
+
+
+//===========================================================================
+//CLASS EXAMPLESDEQUE
+
+class ExamplesDeque {
+	ExamplesDeque(){}
+
+	ANode<String> nodeSentinel; 
+	ANode<String>  node1 ;
+	ANode<String>  node2 ;
+	ANode<String>  node3 ;
+	ANode<String>  node4 ;
+
+	void initConditions() {
+		nodeSentinel = new Sentinel<String>();
+		node1 = new Node<String>("abc", nodeSentinel, nodeSentinel);
+		node2 = new Node<String>("bcd", node1, nodeSentinel);
+		node3 = new Node<String>("cde", node2, nodeSentinel);
+		node4 = new Node<String>("def", node3, nodeSentinel);}
+	
+	Deque<String> emptyD = new Deque<String>();  //empty deque
+	Deque<String> orderedD = new Deque<String>(nodeSentinel);
+	
+	void testInitConditions(Tester t) {
+		this.initConditions();
+		t.checkExpect(this.orderedD.header.next, node1);
+		t.checkExpect(this.orderedD.header.prev, node4);
+	}
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

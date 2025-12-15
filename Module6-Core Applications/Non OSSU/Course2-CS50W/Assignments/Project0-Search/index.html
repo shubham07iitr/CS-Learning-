@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--Using external CSS here-->
+    <link rel = "stylesheet" href = "style.css"> 
+</head>
+<body>
+    
+    <!--Creating the first div for nav bar - using flex box-->
+    <div class="navBar">
+        <a id = "imageSearch" href = "./images.html"> Image</a>
+        <a id = "advancedSearch" href = "./advanced.html"> Advanced </a>
+    </div>
+
+    <!--Adding the image of google-->
+    <div class ="googleImage"> 
+        <img src = "./public/images/Google Logo.png">
+    </div>    
+    <!--Adding the form to send the request-->
+    <form action="https://www.google.com/search">
+
+        <input  id = "querySearch" type = "text" name="q" placeholder="Plae your query here">
+        <div id ="buttons">
+            <input id= "submitButton" type="submit" value = "Google Search">
+            <button id = "luckyButton" type="submit" name="btnI" value="1">I'm Feeling Lucky</button>
+        </div>
+    </form>
+    
+</body>
+</html>

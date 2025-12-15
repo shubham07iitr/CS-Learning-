@@ -1,0 +1,213 @@
+import tester.*;                // The tester library
+import javalib.worldimages.*;   // images, like RectangleImage or OverlayImages
+import javalib.funworld.*;      // the abstract World class and the big-bang library
+import java.awt.Color;          // general colors (as triples of red,green,blue values)
+                                // and predefined colors (Color.RED, Color.GRAY, etc.)
+//====================================================================================================
+//WORLD OBJECT
+//CLASS BULLET
+//inter. as a bullet fired from a missile
+//will have the following properties
+//--int radius - interp. as the radius of the circle
+//--OutlineMode - fill of the bullet - we will keep it as OUTLINE
+//--COLOR - we will keep it as BLACK
+//-- POSN pos - for determining the position of the bullet
+//-- velocity - movement in a particular direction in 1 tick
+//--Shape which is the worldimage of circle produced from the inputs
+
+class Bullet {
+	int radius;
+	OutlineMode fill;
+	Color color;
+	Posn pos;
+	int velocity;
+	WorldImage shape;
+	double angle;
+
+	Bullet (int radius, Posn pos) {
+		this.radius = radius;
+		fill = OutlineMode.OUTLINE;
+		color = Color.GREEN;
+		this.pos= pos;
+		this.velocity = 8; //Defined as default
+		this.shape = new CircleImage(this.radius, this.fill, this.color);
+		this.angle = 90.0;
+	}
+
+	//METHOD PLACE
+	//Places the bullet on a given WorldScene at the corresponding position
+	//Signature> Self, WS > WS
+	public WorldScene place(WorldScene ws) { return ws.placeImageXY(this.shape, this.pos.x, this.pos.y);}
+	
+	//METHOD hasHIT
+	//Returns true if the given bullet has hit any ofss in a given list of ss
+	//Signature> Self, IList<SpaceShip> > Boolean
+	public boolean hasHit(IList<SpaceShip> los) {
+		if (los.isEmpty()) {return false;}
+		else {double distance = Math.sqrt(Math.pow(this.pos.x - los.getFirst().pos.x, 2) + Math.pow(this.pos.y - los.getFirst().pos.y, 2));
+					if (distance < 25.0) {return true;}
+					else {return this.hasHit(los.getRest());}
+		}
+	}
+
+}
+
+
+//CLASS MISSILE
+//interp. as a missile at the bottom of the screen which throws bullets to the spaceship
+//--Will be of shape rectangle and a triangle placed on top
+//This will be a static class as it is not moving
+//Will have 2 fields - shape , and posn 
+
+class Missile {
+	WorldImage shape; //will be default
+	Posn pos; // will have to be specified
+
+
+	Missile (Posn pos) {
+		this.shape = new AboveImage(new EquilateralTriangleImage(20, OutlineMode.SOLID, Color.RED), 
+				new RectangleImage(20, 20, OutlineMode.SOLID, Color.RED));
+		this.pos = pos;
+	}
+
+	//METHOD PLACE
+	//Places the bullet on a given WorldScene at the corresponding position
+	//Signature> Self, WS > WS
+	public WorldScene place(WorldScene ws) { return ws.placeImageXY(this.shape, this.pos.x, this.pos.y);}
+}
+
+
+//CLASS SPACESHIP
+//interp. as alien space ships which fly around from left to right or right to left
+//Will have the following prperties:
+//-- Should be of shape rectangle - with height 20, and width 40, color - blue, and fill - solid
+//-- Posn - to define x and y coordinate of the spaceship 
+//-- int direction +1 for left to right, -1 for right to left
+//-- xspeed - how many x steps it moves in 1 tick - lets define it as 20
+
+class SpaceShip {
+	WorldImage shape; //represents the shape of the space ship with w - 40, h - 20, color - blue, fill - solid
+	Posn pos; //defining the x and y coordinate of the spaceship
+	int direction; // + 1 or -1 to repreent left to right or right to left
+	int xspeed; //determines how many x steps it moves in 1 tick
+
+	SpaceShip  (Posn pos, int direction) {
+		this.shape = new RectangleImage(50, 25, OutlineMode.SOLID, Color.BLUE);
+		this.pos = pos; 
+		this.direction = direction;
+		this.xspeed = 5;
+	}
+
+	//METHOD PLACE
+	//Places the bullet on a given WorldScene at the corresponding position
+	//Signature> Self, WS > WS
+	public WorldScene place(WorldScene ws) { return ws.placeImageXY(this.shape, this.pos.x, this.pos.y);}
+	
+	//METHOD isHIT
+	//Returns true if the given SS has been hit by any of the bullets in the given list of bullets
+	//Signature> Self, IList<Bullets> > Boolean
+	public boolean isHit(IList<Bullet> los) {
+		if (los.isEmpty()) {return false;}
+		else {double distance = Math.sqrt(Math.pow(this.pos.x - los.getFirst().pos.x, 2) + Math.pow(this.pos.y - los.getFirst().pos.y, 2));
+					if (distance < 25.0) {return true;}
+					else {return this.isHit(los.getRest());}
+		}
+	}
+	
+}
+
+
+
+//CLASS SCORE
+//interp. as the scorecard, which keeps track of two things - score, and no. of bullets left
+//Will have a shape of text image which will have 2 texts - bullets Left, SS destroyed
+class ScoreBoard {
+	int bulletsLeft;
+	int spacesihpsDestroyed;
+	WorldImage shape; //will be designed by Default
+	Posn pos;
+
+	ScoreBoard(int bulletsLeft, int spaceshipsDestroyed, Posn pos) {
+		this.bulletsLeft = bulletsLeft; 
+		this.spacesihpsDestroyed	= spaceshipsDestroyed;
+		this.pos = pos;
+		this.shape = new AboveImage (new TextImage("Bullets Left" + ":" +  " " + Integer.toString(this.bulletsLeft), 10, Color.BLACK),
+				new TextImage("SS Destroyed" + ":" + " " + Integer.toString(this.spacesihpsDestroyed), 10 , Color.BLACK));
+	}
+	//METHOD PLACE
+	//Places the bullet on a given WorldScene at the corresponding position
+	//Signature> Self, WS > WS
+	public WorldScene place(WorldScene ws) { return ws.placeImageXY(this.shape, this.pos.x, this.pos.y);}
+}
+
+
+//====================================================================================================
+//CLASS WORLD
+
+class MyWorld extends World {
+	Bullet bullet;
+	Missile missile;
+	SpaceShip ss;
+	ScoreBoard score;
+	int height; //height of the screen
+	int width; // width of the screen
+
+
+	MyWorld(Bullet bullet, Missile missile, SpaceShip ss, ScoreBoard score) {
+		this.bullet = bullet; 
+		this.missile = missile; 
+		this.ss = ss;
+		this.score = score;
+		this.height = 500;
+		this.width= 500;}
+
+
+	@Override
+	public WorldScene makeScene() {
+		return this.getEmptyScene().placeImageXY(
+				this.bullet.shape, this.bullet.pos.x, this.bullet.pos.y).placeImageXY(
+						this.missile.shape, this.missile.pos.x, this.missile.pos.y).placeImageXY(
+								this.ss.shape, this.ss.pos.x, this.ss.pos.y).placeImageXY(
+										this.score.shape, this.score.pos.x, this.score.pos.y);}
+}
+
+
+//====================================================================================================
+//CLASS EXAMPLES
+
+class TestWorldExamples {
+	TestWorldExamples() {}
+
+	Bullet b1 = new Bullet (20, new Posn (250,250));
+	Missile m1 = new Missile(new Posn (250, 475));
+	SpaceShip ss1 = new SpaceShip(new Posn (50, 400), -1);
+	ScoreBoard sb1 = new ScoreBoard(10, 0, new Posn(450, 25));
+
+
+
+	boolean testBigBang(Tester t) {
+		MyWorld mw1 = new MyWorld (b1, m1, ss1, sb1);
+		return mw1.bigBang(mw1.height, mw1.width, 1.0/1.0);
+
+	}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+import tester.Tester;
+import java.util.*;
+import java.util.Iterator;
+
+
+class ArrayListReverseIterator<T> implements Iterator<T>{
+	ArrayList<T> arrayList; 
+	int currentElement;
+
+	ArrayListReverseIterator(ArrayList<T> arrayList) {
+		this.arrayList = arrayList;
+		this.currentElement = this.arrayList.size() -1 ;}
+
+	public boolean hasNext() {return this.currentElement < this.arrayList.size();}
+
+	public T next() {
+		T answer = this.arrayList.get(currentElement); //current element starts with 0 and gets incremented
+		this.currentElement = this.currentElement -1 ;
+		return answer;}
+	
+	public void remove() {throw new UnsupportedOperationException("Remove is not implemented");
+	
+}}
+

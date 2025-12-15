@@ -1,0 +1,305 @@
+import tester.*; 
+import java.util.Comparator; 
+
+//====================================================================
+//EXTENDING COMPARATOR
+
+class BooksByTitle implements Comparator<Book> {
+	
+	BooksByTitle(){}
+	public int compare (Book b1, Book b2) {
+		return b1.title.compareTo(b2.title);
+	}
+}
+
+class BooksByAuthor implements Comparator<Book> {
+	
+	BooksByAuthor() {}
+	public int compare (Book b1, Book b2) {
+		return b1.author.compareTo(b2.author);
+	}
+}
+
+class BooksByPrice implements Comparator<Book> {
+	BooksByPrice() {}
+	public int compare (Book b1, Book b2) {
+		return b1.price - b2.price;
+	}
+}
+
+//====================================================================
+//ABSTRACT BST
+// Is one of Leaf or a Node
+// Node is of type (T data, ABST left, ABST Right)
+
+abstract class ABST<T> {
+	Comparator<T> order;
+	
+	//Defining the constructor
+	ABST(Comparator<T> order) {this.order = order;}
+	
+	abstract ABST<T> insert(T arg);
+	abstract boolean present (T arg);
+	abstract T getLeftMost();
+	abstract boolean isLeaf(); //Checks if the current ABST is a leaf or not
+	abstract ABST<T> getRightTree(); //returns the tree containing all but the leftmost item of this tree.
+	abstract boolean sameTree (ABST<T> that); //checks whether that tree is same as this tree
+	abstract ABST<T> getLeft(); //Returns the left node of a node
+	abstract ABST<T> getRight(); //Returns the right node of a node
+	abstract boolean sameData(ABST<T> that); //checking if the current ABST has the same data as the given ABST
+}
+
+
+//IMPLEMENTING the Leaf Node
+//Leaf node which interprets as an empty or false node
+class Leaf<T> extends ABST<T> {
+	
+	//Defining the constructor
+	Leaf(Comparator<T> order) {
+		super(order);
+	}
+	
+	public ABST<T> insert(T arg) {
+		return new Node<T>(this.order, arg, new Leaf<T>(this.order), new Leaf<T>(this.order)); // inserting at an empty node will create a non empty node with data as the given arg, and the left and right node being empty
+	}
+	public boolean present(T arg) {return false;} // We always return false because an element cant be present in a leaf
+	public T getLeftMost() {throw new RuntimeException("No leftmost item of an empty tree");}
+	public boolean isLeaf() {return true; } // returns tre for a leaf
+	public ABST<T> getRightTree() {throw new RuntimeException("No right of an empty tree");}
+	public boolean sameTree(ABST<T> that) {
+		if (that.isLeaf()) {return true;}
+		else {return false;}
+	}
+	public ABST<T> getLeft() {throw new RuntimeException("No left node of an empty tree");}
+	public ABST<T> getRight() {throw new RuntimeException("No right node of an empty tree");}
+	public boolean sameData(ABST<T> that) {return this.sameTree(that);} //we return tree if the other is also an emty tree else fasle
+	
+}
+
+
+
+//CLASS NODE
+//Node is of type <T> data, ABST Left, ABST Right
+//Interp. as a node on an ABST
+
+class Node<T> extends ABST<T> {
+	T data;
+	ABST<T> left;
+	ABST<T> right;
+	
+	//Defining the constructor 
+	Node (Comparator<T> order,   T data, ABST<T> left, ABST<T> right) {
+		super(order);
+		this.data = data;
+		this.left = left;
+		this.right = right;
+	}
+	
+	public ABST<T> insert(T arg) {
+		if (order.compare(arg, this.data) < 0) {return new Node<T>(this.order, this.data, this.left.insert(arg), this.right);}
+		else {return new Node<T>(this.order, this.data, this.left, this.right.insert(arg));}
+	}
+	
+	public boolean present(T arg) {
+		if (order.compare(arg, this.data) == 0) {return true;}
+		else {return this.left.present(arg) || this.right.present(arg);}
+	}
+	
+	public boolean isLeaf() {return false; } // returns tree for a leaf
+	public T getLeftMost() {
+		if (this.left.isLeaf()) {return this.data;}
+		else {return this.left.getLeftMost()	;}
+	}
+	public ABST<T> getRightTree() {
+		if (this.left.isLeaf()) {return this.right;}
+		else {return new Node<T> (this.order, this.data, this.left.getRightTree(), this.right) ;} 
+	}
+	
+	public boolean sameTree(ABST<T> that) {
+		 if (that instanceof Node) {
+       Node<T> thatNode = (Node<T>) that;
+       return this.data.equals(thatNode.data) && 
+              this.left.sameTree(thatNode.left) && 
+              this.right.sameTree(thatNode.right);
+   } else {
+       return false;  // that is a Leaf, this is a Node
+   }
+	}
+	
+	public boolean sameData(ABST<T> that) {
+		return that.present(this.data) && this.left.sameData(that) && this.right.sameData(that) && that.sameData(this);
+	}
+	
+	public ABST<T> getLeft() {return this.left;}
+	public ABST<T> getRight() {return this.right;}
+		
+	
+		
+}
+
+//====================================================================
+//CLASS BOOK
+//Book is of type (String title, String author, int price)
+//interp. as a book to be read
+
+class Book {
+	String title;
+	String author;
+	int price;
+	
+	//Defining the constructor
+	Book (String title, String author, int price) {
+		this.title = title;
+		this.author = author;
+		this.price = price;
+	}
+}
+
+//====================================================================
+//CLASS EXAMPLES
+
+class Assignment6Examples{
+	Assignment6Examples() {}
+	
+	Book b1 = new Book("HP1" , "JKR", 15);
+	Book b2 = new Book("Dark Matter" , "Blake Crouch", 12);
+	Book b3 = new Book("HP2", "JKR", 17);
+	Book b4 = new Book("Concepts of Physics1", "HCV", 20);
+	Book b5 = new Book("Concepts of Physics2", "HCV2", 24);
+	Book b6 = new Book("Physics by Irodov", "Irodov", 26);
+	
+	//Defining the elements for Constructor interface 
+	BooksByTitle bbt = new BooksByTitle();
+	BooksByAuthor bba = new BooksByAuthor();
+	BooksByPrice bbp = new BooksByPrice();
+	
+	//Defining the elements for Leaves
+	ABST<Book> leafNodeBooksByTitle = new Leaf<Book>(bbt);
+	ABST<Book> leafNodeBooksByAuthor = new Leaf<Book>(bba);
+	ABST<Book> leafNodeBooksByPrice = new Leaf<Book>(bbp);
+	
+	ABST<Book> bstByTitlePartial = new Node<Book>(bbt, b5, 
+																					new Node<Book>(bbt, b4, leafNodeBooksByTitle, leafNodeBooksByTitle),
+																					new Node<Book>(bbt, b6, leafNodeBooksByTitle, leafNodeBooksByTitle)); 
+	
+	
+	ABST<Book> bstByTitlePartialInsert = new Node<Book>(bbt, b5, 
+																													new Node<Book>(bbt, b4, leafNodeBooksByTitle, leafNodeBooksByTitle),
+																													new Node<Book>(bbt, b6, new Node<Book>(bbt, b3, leafNodeBooksByTitle, leafNodeBooksByTitle), leafNodeBooksByTitle)); 
+	
+	
+	ABST<Book> bstByAuthorPartial = new Node<Book>(bba, b5, 
+																								new Node<Book>(bba, b4, leafNodeBooksByAuthor, leafNodeBooksByAuthor),
+																								new Node<Book>(bba, b6, leafNodeBooksByAuthor, leafNodeBooksByAuthor));
+	
+	
+	
+	ABST<Book> bstByAuthorPartialInsert = new Node<Book>(bba, b5, 
+	    																					new Node<Book>(bba, b4, leafNodeBooksByAuthor, leafNodeBooksByAuthor),
+	    																					new Node<Book>(bba, b6, leafNodeBooksByAuthor, new Node<Book>(bba, b3, leafNodeBooksByAuthor, leafNodeBooksByAuthor)));
+	
+	 
+	ABST<Book> bstByPricePartial = new Node<Book>(bbp, b5, 
+																								new Node<Book>(bbp, b4, leafNodeBooksByPrice, leafNodeBooksByPrice),
+																								new Node<Book>(bbp, b6, leafNodeBooksByPrice, leafNodeBooksByPrice));
+	
+	
+	ABST<Book> bstByPricePartialInsert = new Node<Book>(bbp, b5, 
+																						    new Node<Book>(bbp, b4, new Node<Book>(bbp, b3, leafNodeBooksByPrice, leafNodeBooksByPrice), leafNodeBooksByPrice),
+																						    new Node<Book>(bbp, b6, leafNodeBooksByPrice, leafNodeBooksByPrice));
+	
+	
+	
+	
+	
+
+	ABST<Book> bstByTitleFull = new Node<Book>(bbt, b1,  // Root: HP1
+			new Node<Book>(bbt, b2,  // Left subtree root: Dark Matter
+					new Node<Book>(bbt, b4,  // Left-left: Concepts of Physics1
+							leafNodeBooksByTitle,
+							new Node<Book>(bbt, b5, leafNodeBooksByTitle, leafNodeBooksByTitle)),  // Concepts of Physics2
+					leafNodeBooksByTitle),  // Right of Dark Matter
+			new Node<Book>(bbt, b3,  // Right subtree root: HP2
+					leafNodeBooksByTitle,
+					new Node<Book>(bbt, b6, leafNodeBooksByTitle, leafNodeBooksByTitle)));  // Physics by Irodov
+	
+	
+	
+	ABST<Book> bstByAuthor = new Node<Book>(bba, b5,  // Root: HCV2
+	    new Node<Book>(bba, b2,  // Left: Blake Crouch
+	    		leafNodeBooksByAuthor,
+	        new Node<Book>(bba, b4, leafNodeBooksByAuthor, leafNodeBooksByAuthor)),  // HCV
+	    new Node<Book>(bba, b1,  // Right: JKR (b1)
+	    		leafNodeBooksByAuthor,
+	        new Node<Book>(bba, b3,  // JKR (b3)
+	        		leafNodeBooksByAuthor,
+	            new Node<Book>(bba, b6, leafNodeBooksByAuthor, leafNodeBooksByAuthor))));  // Irodov
+	
+	
+	ABST<Book> bstByPrice = new Node<Book>(bbp, b3,  // Root: price 17
+	    new Node<Book>(bbp, b1,  // Left: price 15
+	        new Node<Book>(bbp, b2, leafNodeBooksByPrice, leafNodeBooksByPrice),  // price 12
+	        leafNodeBooksByPrice),
+	    new Node<Book>(bbp, b4,  // Right: price 20
+	    		leafNodeBooksByPrice,
+	        new Node<Book>(bbp, b5,  // price 24
+	        		leafNodeBooksByPrice,
+	            new Node<Book>(bbp, b6, leafNodeBooksByPrice, leafNodeBooksByPrice))));  // price 26
+	
+	
+	//Testing for insert method 
+	boolean testInsert(Tester t) {
+		return t.checkExpect(bstByTitlePartial.insert(b3), bstByTitlePartialInsert) &&
+					 t.checkExpect(bstByAuthorPartial.insert(b3), bstByAuthorPartialInsert) &&
+					 t.checkExpect(bstByPricePartial.insert(b3), bstByPricePartialInsert);
+	}
+	
+	//Testing for present method
+	
+	boolean testPresent(Tester t) {
+		return t.checkExpect(bstByAuthorPartialInsert.present(b1), true) &&
+				t.checkExpect(bstByTitlePartialInsert.present(b1), false);
+	}
+	
+	//Testing for getLeftMost method
+	boolean testGetLeftMost (Tester t) {
+		return t.checkExpect(bstByAuthorPartial.getLeftMost(), b4) &&
+				t.checkExpect(bstByPricePartialInsert.getLeftMost(), b3);}
+	
+	
+	//Testinf for sameTree
+	boolean testSameTree (Tester t) {
+	return t.checkExpect(bstByAuthorPartial.sameTree(bstByTitlePartial), true) &&
+			t.checkExpect(bstByPricePartialInsert.sameTree(bstByTitlePartial	), false);}
+	
+	//Testing for getRight method
+	boolean testGetRight (Tester t) {
+		return t.checkExpect(bstByPricePartialInsert.getRightTree(), bstByPricePartial);
+	}
+	
+	//Testing for sameData method
+	boolean testSameData (Tester t) {
+		return t.checkExpect(bstByPricePartialInsert.sameData(bstByAuthorPartialInsert), true) &&
+				t.checkExpect(bstByPricePartialInsert.sameData(bstByAuthorPartialInsert), fasle)
+				
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

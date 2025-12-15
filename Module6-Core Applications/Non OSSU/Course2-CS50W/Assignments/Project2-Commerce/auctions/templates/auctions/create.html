@@ -1,0 +1,53 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <style>
+        label {
+            width: 120px;
+            font-weight: bold;
+        }
+        input, select {
+            width: 400px;
+        }
+        #submit {
+            width: 530px;
+            background-color: lightskyblue;
+            border: none;
+            border-radius: 5%;
+            margin-top: 10px;
+        }
+    </style>
+
+    {% if user.is_authenticated %}
+        {% if message is none%}
+            <form action= "{% url 'save' %}" method="POST">
+                {% csrf_token %}
+                <label> Title</label>
+                <input type="text" name = "title" required placeholder="Enter title upto 50 chars">
+                <br>
+                <label> Description </label>
+                <input type="text" name = "description" required placeholder="Enter description">
+                <br>
+                <label> Minimum Bid </label>
+                <input type="number" name="min_bid" step="0.01" min="0" required placeholder="Enter minimun bid upto 2 decimal places">
+                <br>
+                <label>Category</label>
+                <select id = "category" name = "category">
+                    {% for i in categories %}
+                    <option value=" {{i}} "> {{ i }}</option>
+                    {% endfor %}
+                </select>
+                <br>
+                <label> Image URL </label>
+                <input type="text" name = "image_url" placeholder="Enter image url">
+                <br>
+                <input type = "submit" id = "submit">
+            </form>
+        {% else %}
+            <h1>{{ message }}</h1>
+        {% endif %}
+    {% else %}
+        <h1> Please login to create some listing</h1>
+    {% endif %}
+
+{% endblock %}

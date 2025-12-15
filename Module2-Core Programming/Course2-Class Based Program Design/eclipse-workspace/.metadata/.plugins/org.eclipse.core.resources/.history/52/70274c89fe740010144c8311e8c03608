@@ -1,0 +1,156 @@
+import tester.*;
+import java.util.*;
+//=======================================================
+//ITERATOR
+
+interface Iterator<T> {
+	boolean hasNext();
+	T next();
+}
+
+
+class  ListofListsIterator implements Iterator<Integer> {
+	ListOfLists<Integer> listoflists;
+	int outerIndex;
+	int innerIndex;
+	
+	ListofListsIterator(ListOfLists<Integer> listoflists) {
+		this.listoflists = listoflists;
+		this.outerIndex = 0;
+		this.innerIndex = 0;
+	}
+	
+	public boolean hasNext() {return this.outerIndex <= this.listoflists.size();}
+	public Integer next() {
+		if (this.innerIndex < this.listoflists.get(outerIndex).size()) {
+			int answer = this.listoflists.get(outerIndex).get(innerIndex);
+			this.innerIndex = this.innerIndex + 1;
+			return answer;}
+		else {
+			this.outerIndex = this.outerIndex + 1;
+			this.innerIndex = 0;
+			int answer = this.listoflists.get(outerIndex).get(innerIndex);
+			this.innerIndex  = this.innerIndex + 1;
+			return answer;}}
+}
+
+//=======================================================
+//ListofLists<T>
+//Stores an ArrayList of ArrayList<T>
+
+class ListOfLists<T> {
+	ArrayList<ArrayList<T>> lol;
+	
+	ListOfLists (ArrayList<ArrayList<T>> lol) {this.lol = lol;}
+	
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.lol.....ArrayList<ArrayList<T>>
+	 * METHODS
+	 * ...this.addNewList() ....void
+	 * ...this.add(int index, T object)...void
+	 * ...this.get(int index)....ArrayList<T>
+	 * ...this.size() .....Int
+	 * METHODS for FIELDS
+	 * ...this.lol.add ....void
+	 * ...this.lol.get(T object) ...T
+	 * ...this.lol.size() ....int
+	 */
+	
+	//METHD ADDNEWLIST
+	//Signature> Self > Void
+	//Adds a new empty ArrayList<T> to the end of the list-of-lists
+	void addNewList() {this.lol.add(new ArrayList<T>());}
+	
+	
+	//METHOD ADD
+	//Signature> Self, Int, T > Void
+	//Adds the provided object to the end of the ArrayList<T> at the provided index in teh list-of-lists
+	//If the index is invalid, this method should throw an IndexOutOfBoundsException with a suitable message
+	void add (int index, T object) {
+		if (index > this.lol.size()-1) {throw new IndexOutOfBoundsException("Provided index is more than length of list");}
+		else {this.lol.get(index).add(object);}}
+
+	
+	//METHOD GET
+	//Signature> Self, Int> Void
+	//Returns the ArrayList<T> at the provided index in the list-of-lists
+	//If the index is invalid, this method should throw an IndexOutOfBoundsException with a suitable message
+	ArrayList<T> get (int index) {
+		if (index > this.lol.size()-1) {throw new IndexOutOfBoundsException("Provided index is more than length of list");}
+		else {return this.lol.get(index);}}
+	
+	//METHOD SIZE
+	//Signature> Self > Int
+	//Returns number of lists in LoL
+
+	int size () {return this.lol.size();}		
+}
+
+
+//=======================================================
+//CLASS EXAMPLES
+
+class ExamplesLoL {
+	ExamplesLoL() {}
+	
+	ArrayList<Integer> list1;
+	ArrayList<Integer> list2;
+	ArrayList<Integer> list3;
+	ArrayList<ArrayList<Integer>> lol;
+	ListOfLists<Integer> list4;
+	
+	void initConditions() {
+		list1 = new ArrayList<Integer>(Arrays.asList(1,2,3));
+		list2 = new ArrayList<Integer>(Arrays.asList(4,5,6));
+		list3 = new ArrayList<Integer>(Arrays.asList(7,8));
+		lol = new ArrayList<ArrayList<Integer>>(Arrays.asList(list1,list2, list3));
+		list4 = new ListOfLists<Integer>(lol);}
+	
+	//Testing The AddNewList method
+	void testAddNewList(Tester t) {
+		this.initConditions();
+		this.list4.addNewList();
+		t.checkExpect(list4.lol.get(3), new ArrayList<Integer>());}
+	
+	//Testing The Add method
+	void testAdd(Tester t) {
+		this.initConditions();
+		this.list4.add(2, 100);
+		t.checkExpect(list4.get(2), new ArrayList<Integer>(Arrays.asList(7, 8, 100)));
+		t.checkException(new IndexOutOfBoundsException("Provided index is more than length of list"), this.list4, "add",3, 100);}
+	
+	//Testing for Get and Size Method
+	void testGetSize(Tester t ) {
+		this.initConditions();
+		t.checkExpect(this.list4.get(2), list3);
+		t.checkExpect(this.list4.size(), 3);}
+	
+	//Testing for the iterator
+	void testIterator (Tester t) {
+		this.initConditions();
+		ListofListsIterator lolIterator = new ListofListsIterator (this.list4);
+		int number = 1;
+		while(lolIterator.hasNext()) {
+			int elem = lolIterator.next();
+			t.checkExpect(elem, number);
+			number = number+1;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

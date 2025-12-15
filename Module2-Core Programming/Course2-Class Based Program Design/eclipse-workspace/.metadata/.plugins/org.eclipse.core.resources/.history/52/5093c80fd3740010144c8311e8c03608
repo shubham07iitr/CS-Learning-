@@ -1,0 +1,36 @@
+import tester.*;
+import java.util.*;
+//=======================================================
+//ListofLists<T>
+//Stores an ArrayList of ArrayList<T>
+
+class ListOfLists<T> {
+	ArrayList<ArrayList<T>> lol;
+	
+	ListOfLists (ArrayList<ArrayList<T>> lol) {this.lol = lol;}
+	
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.lol.....ArrayList<ArrayList<T>>
+	 * METHODS
+	 * ...this.addNewList() ....void
+	 * ...this.add(int index, T object)...void
+	 * ...this.get(int index)....ArrayList<T>
+	 * ...this.size() .....Int
+	 * METHODS for FIELDS
+	 * ...this.lol.add ....void
+	 * ...this.lol.get(T object) ...T
+	 * ...this.lol.size() ....int
+	 */
+	
+	//METHD ADDNEWLIST
+	//Signature> Self > Void
+	//Adds a new empty ArrayList<T> to the end of the list-of-lists
+	void addNewList() {
+		this.lol.add(new ArrayList<T>());
+	}
+	
+	
+	//METHOD
+}

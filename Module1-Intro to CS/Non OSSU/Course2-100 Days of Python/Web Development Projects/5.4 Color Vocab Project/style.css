@@ -1,0 +1,31 @@
+
+/* 1st title of the list*/
+#red{
+    color: red;
+}
+
+
+/* 2nd title of the list*/
+#blue{
+    color: blue;
+}
+
+/* 3rd title of the list*/
+#orange{
+    color: orange;
+}
+
+/* 4th title of the list*/
+#green{
+    color: green;
+}
+
+/* 5th title of the list*/
+#yellow{
+    color: yellow;
+}
+
+/* Changing font weight to normal for color title*/
+.color-title{font-weight: normal;}
+
+img{height: 200px; width: 200px;}

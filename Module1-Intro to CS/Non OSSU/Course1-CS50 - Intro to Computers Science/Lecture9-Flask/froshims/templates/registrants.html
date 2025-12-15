@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block body %}
+    <ul>
+        {% for name in registrants %} <!--Jinja syntax for looping over the REGISTRANTS dictionary -->
+        <li> {{ name }}: {{ registrants[name] }}</li>
+        {% endfor %}
+    </ul>
+{% endblock body %}

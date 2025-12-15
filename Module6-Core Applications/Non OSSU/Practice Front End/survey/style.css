@@ -1,0 +1,68 @@
+/*Ensuring backgorund color and the form is centeredd aligned*/
+
+body{
+    background-color: #00C9A7;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/*Ensuring  form properties*/
+form {
+    width: 90%;
+    border-radius: 20px;
+    background-color: white;
+    padding:5% 5%;
+    margin: auto 20%
+
+}
+
+/*Ensuring header is center aligned and enough space on bottom*/
+form h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+/*Ensuring the width of input boxes are good and height is good*/
+.textinput {
+    width: 100%;
+    min-height: 25px;
+}
+
+/*Text attached to each caption of input is properly aligned*/
+form p{
+    margin: 5px;
+    margin-top: 20px;
+}
+
+/*Bolding the services used section*/
+#services_used{
+    font-weight: bold;
+}
+
+
+
+
+form select{
+    width: 100%;
+    min-height: 30px;
+}
+
+form textarea{
+    width: 100%;
+}
+form button {
+    margin-top: 20px;
+    width: 100%;
+    min-height: 40px;
+    background-color: green;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+form button:hover{
+    background-color: lightseagreen;
+}

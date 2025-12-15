@@ -1,0 +1,198 @@
+//IMPORTING LIBRARIES
+import java.util.ArrayList;
+import java.util.Arrays;
+import tester.*;
+import javalib.impworld.*;
+import javalib.worldimages.*;
+import java.awt.Color;
+
+
+//============================================================
+//FUNCTINO OBJECTS
+
+interface IPredicate<T> {
+	boolean apply(T arg);
+}
+
+class OnlyEven implements IPredicate <Integer> {
+	public boolean apply (Integer arg) {return arg %2 ==0;}
+}
+
+
+//============================================================
+//UTIL CLASS
+
+class Utils {
+	Utils () {}
+	
+	
+	//FILTER METHOD
+	//Produces a new list which has all elements from given list satisfying the predicate
+	<T> ArrayList<T> filter (ArrayList<T> arr, IPredicate<T> pred) {
+		ArrayList<T> returnList = new ArrayList<T>();
+		for (int i = 0; i <= arr.size()-1; i++) {
+			if (pred.apply(arr.get(i))) {returnList.add(arr.get(i));}}
+
+		return returnList;
+	}
+	
+	//REMOVE EXCEPT
+	//Modifies the given list to remove everything that fails the predicate
+	<T> void removeExcept(ArrayList<T> arr, IPredicate<T> pred) {
+		ArrayList<T> removeList = new ArrayList<T>();
+		for (int i = 0; i <= arr.size()-1; i++) {
+			if (!pred.apply(arr.get(i))) {removeList.add(arr.get(i));}}
+		
+		for (int i =0; i <= removeList.size() -1 ; i++) {
+			if (removeList.contains(removeList.get(i))) {arr.remove(removeList.get(i));}
+		}
+		
+	}
+}
+
+//============================================================
+//15PUZZLE GAME
+
+//CLASS TILE
+//Represents an individual tile
+class Tile {
+
+	int value; 	// The number on the tile.  Use 0 to represent the hole
+	int height;
+	int width;
+	
+	//Defining the constructor
+	Tile(int value) {
+		this.value = value;
+		this.height = 100; // defining standard height and width of the tile
+		this.width = 100;  //defining standard height and width of the tile
+				
+	}
+
+	// Draws this tile onto the background at the specified logical coordinates
+	WorldImage drawAt(int row, int col) {
+    WorldImage tile = new OverlayImage(
+        new TextImage(Integer.toString(this.value), 24, Color.BLACK),
+        new RectangleImage(this.width, this.height, OutlineMode.OUTLINE, Color.CYAN)
+    );
+    return tile;}
+}
+
+
+class FifteenGame extends World {
+  // represents the rows of tiles
+  ArrayList<ArrayList<Tile>> tiles;
+  ArrayList<String> keysPressed;
+  WorldImage background;
+  WorldScene ws;
+
+  
+  //Defining the constructor
+  FifteenGame(ArrayList<ArrayList<Tile>> tiles) {
+  	this.tiles = tiles;
+  	this.keysPressed = new ArrayList<String>();
+  	this.background = new RectangleImage (400, 400, OutlineMode.OUTLINE, Color.WHITE);
+  	this.ws = this.getEmptyScene();
+  }
+  
+  // draws the game
+  public WorldScene makeScene() {
+  	
+  	for (int i = 0; i <= 3; i ++) {
+  		for (int j = 0; j <= 3; j++) {
+  			this.ws.placeImageXY(this.tiles.get(i).get(j).drawAt(i, j), i*100+50, j*100+50);
+  		}}
+  	return ws;
+
+
+  	
+  }
+
+  
+  // handles keystrokes
+  public void onKeyEvent(String k) {
+    // needs to handle up, down, left, right to move the hole
+    // extra: handle "u" to undo moves
+    return;
+  }
+}	
+
+
+
+//============================================================
+//EXAMPLE WORLD
+
+class Example15Puzzle {
+	Example15Puzzle() {}
+	
+	Tile t00 = new Tile(1);
+	Tile t01 = new Tile(2);
+	Tile t02 = new Tile(3);
+	Tile t03 = new Tile(4);
+	Tile t10 = new Tile(5);
+	Tile t11 = new Tile(6);
+	Tile t12 = new Tile(7);
+	Tile t13 = new Tile(8);
+	Tile t20 = new Tile(9);
+	Tile t21 = new Tile(10);
+	Tile t22 = new Tile(11);
+	Tile t23 = new Tile(12);
+	Tile t30 = new Tile(13);
+	Tile t31 = new Tile(14);
+	Tile t32 = new Tile(15);
+	Tile t33 = new Tile(0);
+	
+	ArrayList<Tile> row1 = new ArrayList<Tile>(Arrays.asList(t00, t01, t02, t03));
+	ArrayList<Tile> row2 = new ArrayList<Tile>(Arrays.asList(t10, t11, t12, t13));
+	ArrayList<Tile> row3 = new ArrayList<Tile>(Arrays.asList(t20, t21, t22, t23));
+	ArrayList<Tile> row4 = new ArrayList<Tile>(Arrays.asList(t30, t31, t32, t33));
+	ArrayList<ArrayList<Tile>> newGame = new ArrayList<ArrayList<Tile>>(Arrays.asList(row1, row2, row3, row4));  
+	
+  void testGame(Tester t) {
+    FifteenGame g = new FifteenGame(newGame);
+    g.bigBang(400, 400);
+  }
+	
+	
+	
+	
+}
+
+
+
+//============================================================
+//EXAMPLE CLASS SIMPLE METHODS
+
+class ExamplesLab8 {
+	ExamplesLab8() {}
+	Utils util = new Utils(); 
+	
+	//Testing for the filter method
+	void testFilter(Tester t) {
+		ArrayList<Integer> testList = new ArrayList<Integer>();
+		testList.add(3); testList.add(4); testList.add(5); testList.add(6);
+				
+		t.checkExpect(util.filter(testList, new OnlyEven()), new ArrayList<Integer>(Arrays.asList(4,6)));
+	}
+	//Testing for removeExcept method
+	void testRemoveExcept (Tester t) {
+		ArrayList<Integer> testList = new ArrayList<Integer>();
+		testList.add(3); testList.add(4); testList.add(5); testList.add(6);
+		util.removeExcept(testList, new OnlyEven());
+		t.checkExpect(testList.get(0), 4);
+		t.checkExpect(testList.get(1), 6);
+	}
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+

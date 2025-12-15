@@ -1,0 +1,96 @@
+import tester.*;                // The tester library
+import javalib.worldimages.*;   // images, like RectangleImage or OverlayImages
+import javalib.funworld.*;      // the abstract World class and the big-bang library
+import java.awt.Color;          // general colors (as triples of red,green,blue values)
+                                // and predefined colors (Color.RED, Color.GRAY, etc.)
+//INTERFACE ILIST<T>
+
+//INTERFACE ILIST Generic
+
+interface IList<T> {
+	IList<T> addToList(T arg); //adds an account at the end of a list
+	T getFirst(); //gets the first element 
+	IList<T> getRest(); //gets the last element of a list
+	boolean isEmpty(); // checks if the given list is empty or not
+	boolean contains(T arg) ; //checks if the given element is present in the list of elements
+	int lenList(); //Returns the length of the list
+	IList<T> removeDuplicates() ; //Removes duplicates from a given list of accounts
+	IList<T> addFullList(IList<T> that); //appends the given list to the current list
+	IList<T> removeElement (T arg); // removes a given element from the list of elements
+	WorldScene placeAll(WorldScene ws); // places all elements of a list on a world scene
+	IList<T> removeSubList (IList<T> subList); //removes all the element from the given list (if present) from the base list
+}
+
+
+//MTLIST CLASS
+
+class MtList<T> implements IList<T> {
+	MtList() {} // defining the constructor
+	//METHODS
+	public T getFirst() {throw new RuntimeException ("Cannot access First of an empty list");}
+	public IList<T> getRest() {throw new RuntimeException ("Cannot access Rest of an empty list");}
+	public IList<T> addToList(T arg) {return new ConsList<T>(arg, this);}
+	public boolean isEmpty() {return true;} //we always return true here
+	public boolean contains (T arg) {return false;} //we always return false as empty list does not contain anything
+	public int lenList() {return 0;} 
+	public IList<T> removeDuplicates() {return this;} //we return the same list for remove duplicates
+	public IList<T> addFullList(IList<T> that) {return that;} //we return the other list for current list as empty list
+	public IList<T> removeElement(T arg) {return this;} //returns an empty list, we can't remove from an empty list 
+	public WorldScene placeAll(WorldScene ws) {return ws;} // no elements to be placed, so returns the scene itself
+	public IList<T> removeSubList (IList<T> subList) {return this;} // we return the an empty list itself 
+}
+
+//CONSLIST CLASS
+class ConsList<T> implements IList<T> {
+	T first;
+	IList<T> rest;
+	
+	ConsList(T first, IList<T> rest) {this.first = first; this.rest = rest;}
+	
+	//METHODS
+	public IList<T> addToList(T arg) {
+  	if (this.getRest().isEmpty()) {return new ConsList<T>(this.first, new ConsList<T> (arg, this.getRest())); }
+  	else {return new ConsList<T>(this.first, this.rest.addToList(arg));}}
+  public T getFirst () {return this.first;}
+  public IList<T> getRest () {return this.rest;}
+  public boolean isEmpty() {return false;}
+  public boolean contains	(T arg) {return this.first.equals(arg) || this.rest.contains(arg);}
+  public IList<T> removeDuplicates() {if (this.rest.contains(this.first)) {return this.rest.removeDuplicates();} else {return new ConsList<T>(this.first, this.rest.removeDuplicates());}} 
+  public IList<T> addFullList(IList<T> that) {	
+  	if (that.isEmpty()) {return this;} 
+  	else {return this.addToList(that.getFirst()).addFullList(that.getRest());}}
+  public int lenList() {return 1+ this.rest.lenList();}
+  public IList<T> removeElement(T arg) {
+  	if (this.first.equals(arg)) {return this.rest;} else {return new ConsList<T> (this.first, this.rest.removeElement(arg));}
+  }
+  public WorldScene placeAll (WorldScene ws) {
+  	if (this.first instanceof Bullet) {Bullet b = (Bullet) this.first;  return this.rest.placeAll(ws.placeImageXY(b.shape, b.pos.x, b.pos.y));}
+  	else if (this.first instanceof SpaceShip) {SpaceShip ss = (SpaceShip) this.first; return this.rest.placeAll(ws.placeImageXY(ss.shape, ss.pos.x, ss.pos.y));}
+  	else {return ws;}
+  }
+  public IList<T> removeSubList(IList<T> subList) {
+  	if (subList.contains(this.first)) {return this.rest.removeSubList(subList);}
+  	else {return new ConsList<T>(this.first, this.rest.removeSubList(subList));}
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

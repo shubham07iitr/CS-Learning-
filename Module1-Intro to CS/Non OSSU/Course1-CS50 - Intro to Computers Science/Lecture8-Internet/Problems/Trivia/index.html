@@ -1,0 +1,141 @@
+<!--Trivia challenge-->
+
+
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title> Trivia</title>
+        <link rel = "stylesheet", href = "./style.css">
+    </head>
+    <style>
+        #header {
+            height: 20vh;
+            background-color: rgb(90, 159, 247);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: xx-large;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+        }
+        #questions {
+            padding-left: 10%;
+            padding-right: 10%;
+            padding-top: 5%;
+        }
+        #responsesQ1 {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            background-color:  #d4e9f7;
+            border: none;
+            padding: 5px;
+            min-width: 100px;
+            min-height: 25px;
+            border-radius: 5px;
+        }
+        #question2 {
+            padding-top: 5%;
+        }
+        #response2 {
+            display: flex;
+            gap: 10px   
+        }
+
+    </style>
+    <body>
+        <!--Definig the header-->
+        <div id = "header">
+            Trivia!
+        </div>
+
+        <!--Defining the div for questions-->
+        <div id = "questions">
+            <h3>Part1: Multiple Choice</h3>
+            <hr>
+            <h4>What is the approx. ratio of sheep to people in New Zealand   </h4>
+            <h5 id = "correctQ1"></h5>
+            <div id = "responsesQ1">
+                <button type="submit" class = "buttonQ1">6 people per 1 sheep</button>
+                <button type="submit" class = "buttonQ1">3 people per 1 sheep</button>
+                <button type="submit" class = "buttonQ1">1 person per 1 sheep</button>
+                <button type="submit" class = "buttonQ1">1 person per 3 sheep</button>
+                <button type="submit" class = "buttonQ1">1 person per 6 sheep</button>
+            </div>  
+
+            <h3 id = "question2">Part 2: Free Response</h3>
+            <hr>
+            <h4>In which country is it illegal to own only one guinea pig, as one pig may get lonely</h4>
+            <h5 id = "correctQ2"></h5>
+            <form>
+                <div id = "response2">
+                <input type = "text" id = "responseQ2">
+                <button id = "submitQ2">Check Answer</button>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            //Function for Part 1
+            
+        document.querySelectorAll("button").forEach((button) => {
+            button.addEventListener('click', function() {
+                const feedback = document.querySelector("#correctQ1");
+                if (this.innerHTML === "1 person per 3 sheep") {
+                    feedback.innerHTML = "Correct!";
+                    this.style.color = "green";
+                    setTimeout(() => {
+                        feedback.innerHTML = "";
+                        this.style.color = "black";
+                    }, 2000);
+                }
+                else {
+                    feedback.innerHTML = "Incorrect!";
+                    this.style.color = "red";
+                    setTimeout(() => {
+                        feedback.innerHTML = "";
+                        this.style.color = "black";
+                    }, 2000);  // 👈 You were missing the delay here!
+                }
+            });
+        });
+
+            //Function for Part 2
+            document.querySelector("#submitQ2").addEventListener('click', function(event) {
+                event.preventDefault(); 
+                const response = document.querySelector("#responseQ2")
+                const feedback = document.querySelector("#correctQ2")
+                if(response.value === "") {
+                    feedback.innerHTML = "Please type an answer"
+                    setTimeout(()=> {
+                        feedback.innerHTML = ""
+                    }, 2000)
+                }
+                else if (response.value === "India") {
+                    feedback.innerHTML = "Correct"
+                    response.style.color = "green"
+                    setTimeout(()=> {
+                        feedback.innerHTML = ""
+                        response.style.color = "white"
+                    }, 2000);
+
+                }
+                else {
+                    feedback.innerHTML = "Incorrect"
+                    response.style.color = "red"
+                    setTimeout(()=> {
+                        feedback.innerHTML = "";
+                        response.style.color = "white"
+                    }, 2000)
+                }
+
+            })
+        </script>
+
+
+    </body>
+
+</html>

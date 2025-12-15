@@ -1,0 +1,37 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    {% if title is None %}
+    <h1>Please create your new wiki entry here</h1>
+    <form action= "{% url 'savepage' %}" method="post">
+        {% csrf_token %}
+        <label> Please enter your title here</label>
+        <input type="text" name = "title">
+        <br>
+        <label>Please enter the Markdown content in the below area</label>
+        <br>
+        <textarea name = "content" style="width: 600px; height: 200px;"></textarea>
+        <br>
+        <input type="submit" value = "Submit">
+    </form>
+    {% else %}
+    <h1>Please edit your new wiki entry here</h1>
+    <form action= "{% url 'saveeditpage' %}" method="post">
+        {% csrf_token %}
+        <label> Please update your title here</label>
+        <input type="text" name = "title" value = "{{ title }}">
+        <br>
+        <label>Please update the Markdown content in the below area</label>
+        <br>
+        <textarea name = "content" style="width: 600px; height: 200px;"> {{ content }} </textarea>
+        <br>
+        <input type="submit" value = "Submit">
+    </form>
+    {% endif %}
+
+
+{% endblock %}

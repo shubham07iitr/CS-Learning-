@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mondrian Project</title>
+  <style>
+    /* 
+    Write your CSS here 
+    Gap Colour: #000
+    White: #F0F1EC
+    Red: #E72F24
+    Black: #232629
+    Blue: #004592
+    Yellow: #F9D01E
+
+    For dimensions, see dimensions.png image.
+    HINT: Remember you can't change the properties of grid lines.
+    But grid lines are transparent!
+    */
+    body {background-color: #F0F1EC;}
+    .container {display: grid ; grid-template-columns: 3.2fr 1.98fr 1.53fr 0.5fr; grid-template-rows: 4.14fr 1.3fr 1.55fr 0.2fr; gap: 9px; background-color: black; height: 100vh;}
+    .c1 {grid-area: 1/1/2/2 ; background-color:#E72F24 ;}
+    .c2 {grid-area: 1/2/2/5 ; background-color:#F0F1EC ;}
+    .c3 {grid-area: 2/1/4/2 ; background-color:#F0F1EC ;}
+    .c4 {grid-area: 2/2/4/4 ; background-color:#F0F1EC ;}
+    .c5 {grid-area: 2/4/3/5 ; background-color: #004592 ; border-bottom: 10px solid black;}
+    .c6 {grid-area: 4/1/5/2 ; background-color:#F0F1EC ;}
+    .c7 {grid-area: 4/2/5/3 ; background-color:#F9D01E ;}
+    .c8 {grid-area: 3/4/5/5 ; background-color:#F0F1EC ;}
+
+  </style>
+</head>
+
+<body>
+  <!-- Write your HTML here -->
+  <div class = "container">
+    <div class = "c1"></div>
+    <div class = "c2"></div>
+    <div class = "c3"></div>
+    <div class = "c4"></div>
+    <div class = "c5"></div>
+    <div class = "c6"></div>
+    <div class = "c7"></div>
+    <div class = "c8"></div>
+  </div>
+</body>
+
+</html>

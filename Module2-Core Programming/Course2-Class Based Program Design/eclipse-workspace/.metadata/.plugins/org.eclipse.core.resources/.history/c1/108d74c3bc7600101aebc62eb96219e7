@@ -1,0 +1,110 @@
+import tester.*;
+import java.util.*;
+
+//============================================================================================================
+//ADJACENCY MATRIX REPRESENTATION
+//For n elements in the graph, we will have n sub-arrays with each sub-array having n element
+//(i,j) element would represent jth element inside the ith sub-array
+
+
+
+//We first define one element of graph which will have a vertext string, and the list of weights from the current vertex to all the vertices in the graph including itself
+class GraphElement<T> {
+	String vertex;
+	ArrayList<T> listOfEdges;
+	
+	GraphElement(String vertex, ArrayList<T> listOfEdges) {this.vertex = vertex; this.listOfEdges = listOfEdges;}}
+
+class GraphMatrix<T> {
+	ArrayList<GraphElement<T>> listOfArray;
+	//Defining the constructor
+	GraphMatrix(ArrayList<GraphElement<T>> listOfArray) {this.listOfArray = listOfArray;}}
+
+
+//============================================================================================================
+//ADJACENCY LIST REPRESENTATION
+
+//CLASS VERTEX
+//Each vertex will have name of vertex, and the list of edges from the vertext
+
+class Vertex {
+	String name;
+	IList<Edge> listOfEdges ; //all edges emanating from the vertex
+	
+	//Defining the Constructor
+	Vertex (String name, IList<Edge> listOfEdges) {this.name = name; this.listOfEdges = listOfEdges;}
+}
+
+//CLASS EDGE
+//Edge is of type (From - Vertex, To - Vertex, Weight - Int)
+
+class Edge {
+	Vertex from;
+	Vertex to;
+	int weight;
+	
+	//Defining the constructor 
+	Edge (Vertex from, Vertex to, int weight) {this.from = from; this.to = to; this.weight = weight;}
+}
+
+//CLASS GRAPHLIST
+//It will be just a list of vertices
+
+class GraphList {
+	IList<Vertex> listOfVertices;
+	
+	//Defining the constructor 
+	GraphList(IList<Vertex> listOfVertices) {this.listOfVertices = listOfVertices;}
+}
+
+
+//============================================================================================================
+//CLASS EXAMPLES
+
+class ExamplesGraph {
+	ExamplesGraph() {}
+	
+	void testMatrixGraph(Tester t) {
+		GraphElement<Integer> aEdge = new GraphElement<Integer> ("A", new ArrayList<Integer> (Arrays.asList(null , 3, 4)));
+		GraphElement<Integer> bEdge = new GraphElement<Integer> ("B", new ArrayList<Integer> (Arrays.asList(null , null, 5)));
+		GraphElement<Integer> cEdge = new GraphElement<Integer> ("C", new ArrayList<Integer> (Arrays.asList(null , null, null)));
+		GraphMatrix<Integer> graphMatrix = new GraphMatrix<Integer>(new ArrayList<GraphElement<Integer>>(Arrays.asList(aEdge, bEdge, cEdge)));
+		t.checkExpect(graphMatrix.listOfArray.get(0).listOfEdges.get(1), 3);
+	}
+	
+	void testGraphList(Tester t) {
+		Vertex a = new Vertex ("A", new MtList<Edge>());
+		Vertex b = new Vertex ("B", new MtList<Edge>());
+		Vertex c = new Vertex ("C", new MtList<Edge>());
+		
+		Edge ab = new Edge (a, b, 3);
+		Edge ac = new Edge (a , c, 4);
+		Edge bc = new Edge(b, c, 5);
+		
+		a.listOfEdges = new ConsList<Edge> (ab, new ConsList<Edge> (ac, new MtList<Edge>()));
+		b.listOfEdges = new ConsList<Edge> (ab, new ConsList<Edge> (ac, new MtList<Edge>()));
+		
+		GraphList newGraph = new GraphList(new ConsList<Vertex>(a, new ConsList<Vertex> (b, new ConsList<Vertex> (c, new MtList<T>()));
+		
+		t.checkExpect(newGraph.listOfVertices.get(0).listOfEdges.get(0), ab);
+		
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

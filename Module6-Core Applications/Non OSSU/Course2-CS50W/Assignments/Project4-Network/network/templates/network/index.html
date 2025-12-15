@@ -1,0 +1,60 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+    <!--Defining the styling element-->
+    <style>
+        body {margin-left: 20px; margin-right: 20px;}
+        #headerNewPost {margin-top: 20px; margin-bottom: 20px;}
+        #newPost {border: solid 2px; border-color: lightgray; padding: 15px;}
+        textarea {height: 100px; width: 100%; border: solid 2px; border-color: lightgray;}
+        #formButton {margin-top: 5px;}
+        .individualPost {padding-left: 15px; border: solid 2px ; border-color: lightgray; margin-top: 10px; padding-top: 10px; margin-bottom: 10px;}
+        #userProfile {cursor: pointer;}
+        .editButton {cursor: pointer; margin-bottom: 10px; margin-top: 5px;}
+        .likes {cursor: pointer; display: inline-block;}
+    </style>
+    <!--Displaying messages as received from the server-->
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    {% if user.is_authenticated %}
+    <!--Defining the post form for posting a new tweet-->
+    <h2 id = "headerNewPost">All Posts</h2>
+    <div id = "newPost">
+        <h3>New Post</h3>
+
+        <form id = "formPost" action = "{% url 'newpost'%}" method = "POST">
+             {% csrf_token %}
+            <textarea name = "description"  required></textarea>
+            <br>
+            <button id = "formButton" class="btn btn-primary" type="submit">Post</button>
+        </form>  
+    </div>
+    {% endif %}
+
+    <!--Creating separate elements for each of the posts retreived-->
+    <!--First check if there is any post-->
+    {% if posts %}
+        {% for post in posts %}
+            <div class = "individualPost">
+                <h5>Posted by <strong> <a id = "userProfile" href = "{% url 'profilePage' post.posted_by.username %}">{{ post.posted_by.username }} </a></strong></h5>
+                <h6 class = "actualPostDetails"> {{ post.post_details }}</h6>
+                <h7> Last updated on: {{ post.updated_at }}</h7>
+                <br>
+                <h6 class="likes" data-postid="{{ post.id }}" data-state="Like" data-user="{{ user.username }}" data-count="{{ post.likes.count }}"> <span>❤️</span> {{ post.likes.count }}</h6>
+                {% if post.posted_by.username == user.username %}
+                    <br>
+                    <button data-postid = "{{ post.id }}" class="btn btn-primary editButton">Edit</button>
+                {% endif %} 
+            </div>
+
+        {% endfor %}
+    {% endif %}
+        
+{% endblock %}

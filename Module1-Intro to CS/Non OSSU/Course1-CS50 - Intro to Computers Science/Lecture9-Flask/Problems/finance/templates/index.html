@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block main %}
+    <style>
+
+        table {
+            background-color: transparent;
+            margin-bottom: 1rem;
+            width: 100%;
+        }
+        table th,
+        table td {
+            padding: 0.75rem;
+            vertical-align: middle;
+        }
+        tbody tr:nth-of-type(odd) {
+            background-color: rgb(179, 208, 255, 0.3)
+        }
+
+        #stocksHeader, #valueStocks, #cashLeft {
+            height: 60px;
+            background-color: lightblue;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+
+        }
+
+    </style>
+    <div id = "stocksHeader"> Below are the stocks you own and their current price </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Quantity Owned</th>
+                <th>Last Traded Price</th>
+                <th>Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- TODO: Loop through the database entries to display them in this table -->
+                {% for stock in stocks %}
+                <tr>
+                    <td> {{ stock.symbol}} </td>
+                    <td>{{ stock.quantity }}</td> 
+                    <td> ${{ stock.ltp }}</td>
+                    <td> ${{ stock.value }} </td>
+                </tr> 
+                {% endfor %}
+        </tbody>
+    </table>
+
+    <div id = "valueStocks">Total value of stocks owned is <strong> $ {{ total_value }} </strong></div>
+    <div id = "cashLeft">Current cash left is <strong> ${{ cash_left }}</strong> </div>
+
+{% endblock %}

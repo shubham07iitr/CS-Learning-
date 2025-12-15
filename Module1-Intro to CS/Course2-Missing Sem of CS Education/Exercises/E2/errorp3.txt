@@ -1,0 +1,2 @@
+The error was using magic numbers
+It took 151 attempts to fail

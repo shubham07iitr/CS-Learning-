@@ -1,0 +1,5 @@
+#lang racket
+
+; 1 1 1 1 1 1 1 1 1 ... infinite sequrnce of 1s
+
+(define ones (lambda () (cons 1 ones)))

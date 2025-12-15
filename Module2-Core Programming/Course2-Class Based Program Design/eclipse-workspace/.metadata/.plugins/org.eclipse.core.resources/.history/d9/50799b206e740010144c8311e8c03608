@@ -1,0 +1,70 @@
+import java.util.*;
+
+/**
+ * A class that defines a new permutation code, as well as methods for encoding
+ * and decoding of the messages that use this code.
+ */
+class PermutationCode {
+		//============================================================
+		//FIELDS
+    // The original list of characters to be encoded
+    ArrayList<Character> alphabet = 
+        new ArrayList<Character>(Arrays.asList(
+                    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 
+                    'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
+                    't', 'u', 'v', 'w', 'x', 'y', 'z'));
+
+    ArrayList<Character> code = new ArrayList<Character>(26);
+    Random rand = new Random();// A random number generator
+    
+    //============================================================
+    //CONSTRUCTORS
+    //DEFINING THE CONSTRUCTOR w/o specifying encoding list
+    // Create a new instance of the encoder/decoder with a new permutation code 
+    PermutationCode() {this.code = this.initEncoder();}
+    
+    
+    //DEFINING THE CONSTRUCTOR w/ specifying encoding list
+    // Create a new instance of the encoder/decoder with the given code 
+    PermutationCode(ArrayList<Character> code) {
+        this.code = code;
+    }
+
+    //TEMPLATE
+    /*
+     * FIELDS
+     * ...this.alphabet ..... ArrayList<Character>
+     * ...this.code ....ArrayList<Character>
+     * METHODS
+     * ...this.initEncoder() ....ArrayList<Character>
+     * ...this.encode(String source) .... String
+     * 
+     */
+    
+    
+    //============================================================
+    //METHODS
+    // Initialize the encoding permutation of the characters
+    //produces a random permutation of the 26 letters of the alphabet and returns it as an ArrayList of Characters.
+    ArrayList<Character> initEncoder() {
+    	ArrayList<Character> codeNew = new ArrayList<Character> (26);
+    	ArrayList<Integer> randomNos = new ArrayList<Integer>();
+    	for (int i = 0; i < 26; i++) {
+    		int randomInt;
+    		while (true) {
+    			randomInt = rand.nextInt(26);
+    			if (!randomNos.contains(randomInt)) {randomNos.add(randomInt);  break;}}
+    		codeNew.add(this.alphabet.get(randomInt));}
+    	return codeNew;
+    }
+
+    // produce an encoded String from the given String
+    String encode(String source) {
+        return ""; //you should complete this method
+    }
+
+    // produce a decoded String from the given String
+    String decode(String code) {
+        return ""; //you should complete this method
+    }
+}

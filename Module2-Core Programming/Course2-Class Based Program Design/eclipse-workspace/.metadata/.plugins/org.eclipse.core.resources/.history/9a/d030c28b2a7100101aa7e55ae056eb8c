@@ -1,0 +1,74 @@
+import tester.*;
+//INTERFACE ILIST<T>
+
+//INTERFACE ILIST Generic
+
+interface IList<T> {
+	IList<T> addToList(T arg); //adds an account at the end of a list
+	T getFirst(); //gets the first element 
+	IList<T> getRest(); //gets the last element of a list
+	boolean isEmpty(); // checks if the given list is empty or not
+	boolean contains(T arg) ; //checks if the given element is present in the list of elements
+	int lenList(); //Returns the length of the list
+	IList<T> removeDuplicates() ; //Removes duplicates from a given list of accounts
+	IList<T> addFullList(IList<T> that); //appends the given list to the current list
+}
+
+
+//MTLIST CLASS
+
+class MtList<T> implements IList<T> {
+	MtList() {} // defining the constructor
+	//METHODS
+	public T getFirst() {throw new RuntimeException ("Cannot access First of an empty list");}
+	public IList<T> getRest() {throw new RuntimeException ("Cannot access Rest of an empty list");}
+	public IList<T> addToList(T arg) {return new ConsList<T>(arg, this);}
+	public boolean isEmpty() {return true;} //we always return true here
+	public boolean contains (T arg) {return false;} //we always return false as empty list does not contain anything
+	public int lenList() {return 0;} 
+	public IList<T> removeDuplicates() {return this;} //we return the same list for remove duplicates
+	public IList<T> addFullList(IList<T> that) {return that;} //we return the other list for current list as empty list
+}
+
+//CONSLIST CLASS
+class ConsList<T> implements IList<T> {
+	T first;
+	IList<T> rest;
+	
+	ConsList(T first, IList<T> rest) {this.first = first; this.rest = rest;}
+	
+	//METHODS
+	public IList<T> addToList(T arg) {
+  	if (this.getRest().isEmpty()) {return new ConsList<T>(this.first, new ConsList<T> (arg, this.getRest())); }
+  	else {return new ConsList<T>(this.first, this.rest.addToList(arg));}}
+  public T getFirst () {return this.first;}
+  public IList<T> getRest () {return this.rest;}
+  public boolean isEmpty() {return false;}
+  public boolean contains	(T arg) {return this.first.equals(arg) || this.rest.contains(arg);}
+  public IList<T> removeDuplicates() {if (this.rest.contains(this.first)) {return this.rest.removeDuplicates();} else {return new ConsList<T>(this.first, this.rest.removeDuplicates());}} 
+  public IList<T> addFullList(IList<T> that) {	
+  	if (that.isEmpty()) {return this;} 
+  	else {return this.addToList(that.getFirst()).addFullList(that.getRest());}}
+  public int lenList() {return 1+ this.rest.lenList();}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-beginner-reader.ss" "lang")((modname |File2-Tall HTDF|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #f #t none #f () #f)))
+(require 2htdp/image)
+; check in an image if the image is tall
+
+
+;; Image -> true
+; prodcue true if the image is tall, else produce false
+
+(check-expect (tall? (rectangle 2 3 "solid" "red")) true)
+
+; (define (tall? img) false) ;; stub
+
+;(define (tall? img) ;; template
+;  (... img))
+
+
+(define (tall? img)
+  (if (> (image-height img) (image-width img))
+      true
+      false))
+
+

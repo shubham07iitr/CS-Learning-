@@ -1,0 +1,322 @@
+import tester.*;
+
+//===========================================================================
+//FUNCTION OBJECTS
+interface IPredicate<T> {
+	boolean apply(T arg);
+}
+
+class IsABC implements IPredicate<String> {
+	IsABC() {}
+	public boolean apply(String arg) {return arg.equals("abc");}}
+
+class IsPQR implements IPredicate<String> {
+	IsPQR() {}
+	public boolean apply(String arg) {return arg.equals("pqr");}}
+
+//===========================================================================
+//CLASS DEQUE
+//Will just have a header which is a sentinel node which may point to 
+class Deque<T> {
+	ANode<T> header;
+	
+	//CONSTRUCTOR - 0 arguments
+	Deque() {
+		this.header = new Sentinel<T>();}
+	//Convenience Constructor
+	Deque(ANode<T> header) {this.header = header;}
+	
+	//TEMPLATE
+	/*
+	 * FIELDS
+	 * ...this.header ..... Sentinel<T>
+	 * METHODS
+	 * ...this.size() ....int
+	 * ...this.addAtHead(ANode<T> arg) ....void
+	 * ...this.addAtHead(ANode<T> arg) ....void
+	 * ...this.addAtTail(ANode<T> ard) ...void
+	 * ...this.removeeFromHead()....ANode<T>
+	 * ...this.removeeFromTail()....ANode<T>
+	 * ...this.find(IPredicate<T> arg) ...ANode<T>
+	 * ...this.removeNode(ANode<T> arg)...void
+	 * 
+	 */
+	
+	//METHOD SIZE
+	//counts the number of nodes in a list Deque, not including the header node
+	//Signature> Self> Int
+	int size() {
+		if (this.header.next == null) {return 0;} //if an empty deque we return 0
+		else {return this.header.next.size();} //else we check for size of node list from 1st element
+	}
+	
+	//METHOD ADDATHEAD
+	//consumes a value of type T and inserts it at the front of the list
+	//Signature> Self, ANode<T>> Void
+	void addAtHead(ANode<T> newNode) {
+		if (this.header.next == null) {
+			this.header.next = newNode;
+			this.header.next.next = this.header;
+			this.header.prev = newNode;
+			this.header.next.prev = this.header;}
+		else {
+			ANode<T> tempNode = this.header.next;
+			this.header.next = newNode;
+			this.header.next.next = tempNode;
+			this.header.next.prev = this.header;
+			this.header.next.next.prev = newNode;}}
+		
+	
+	
+	//METHOD ADDATTAIL
+	//consumes a value of type T and inserts it at the tail of this list
+	//Signature> Self, ANode<T>> Void
+	void addAtTail(ANode<T> newNode) {
+		if (this.header.next == null) {
+			this.header.next = newNode;
+			this.header.next.next = this.header;
+			this.header.prev = newNode;
+			this.header.next.prev = this.header;}
+		else {
+			ANode<T> tempNode = this.header.prev;
+			this.header.prev = newNode;
+			this.header.prev.prev = tempNode;
+			this.header.prev.next = this.header;
+			this.header.prev.prev.next = newNode;}}
+	
+	
+	//METHOD REMOVEFROMHEAD
+	//removes the first node from this Deque
+	//RuntimeException if an attempt is made to remove from an empty list
+	//Signature> Self> ANode<T>
+	ANode<T> removeFromHead() {
+		if (this.header.next == null) {throw new RuntimeException("Can't remove item from empty list");}
+		else {
+			ANode<T> tempNode = this.header.next;
+			this.header.next = tempNode.next;
+			this.header.next.prev = this.header;
+			return tempNode;}}
+	
+	//METHOD REMOVEFROMTAIL
+	//removes the Last node from this Deque
+	//RuntimeException if an attempt is made to remove from an empty list
+	//Signature> Self> ANode<T>
+	ANode<T> removeFromTail() {
+		if (this.header.prev == null) {throw new RuntimeException("Can't remove item from empty list");}
+		else {
+			ANode<T> tempNode = this.header.prev;
+			this.header.prev = tempNode.prev;
+			this.header.prev.next = this.header;
+			return tempNode;}}
+	
+	
+	//METHOD FIND
+	//takes an Predicate<T> and produces the first node in this Deque for which the given predicate returns true.
+	//Signature> Self, IPredicate<T> > ANode<T>
+	ANode<T> find(IPredicate<T> arg) {return this.header.find(arg);}
+	
+
+	//METHOD REMOVENODE
+	// removes the given node from this Deque
+	//Signature> Self, ANode<T> > Void
+	void removeNode(ANode<T> arg) {
+		if (arg.isSentinel()) {return;}
+		else {this.header.removeNode(arg);}}
+
+}
+
+//===========================================================================
+//CLASS ANODE 
+//Abstract class which gets extended by Sentinel and Node class
+abstract class ANode<T> {
+	ANode<T> next;
+	ANode<T> prev;
+	
+	abstract boolean isSentinel();
+	ANode<T> getNext() {return this.next;}
+	ANode<T> getPrev() {return this.prev;}
+	abstract int size(); 
+	abstract ANode<T> find(IPredicate<T> arg); //returns the first element in a node list
+	abstract T getData(); //returns the data from node, throws exception for sentinel
+	abstract void removeNode(ANode<T> arg); //
+}
+
+//CLASS SENTINEL
+//Defining the Sentinel Class which in isolation will refer to itself
+class Sentinel<T> extends ANode<T> {
+	Sentinel() {
+		this.next = this;
+		this.prev = this;}
+	
+	//Defining the methods
+	public boolean isSentinel() {return true;} //checks whether the given node is sentinel or not
+	public int size() {return 0;}//returns 0 for a sentinel node
+	public T getData() {throw new RuntimeException("Can't access data for a sentinel node");}
+	public ANode<T> find(IPredicate<T> arg) {
+		if (this.next == null) {return this;}
+		else {return this.next.find(arg);}}
+	
+	public void removeNode(ANode<T> arg) {
+		if (this.next == null) {return;}
+		else {if (this.next.equals(arg)) {ANode<T> tempNode = this.next;
+																			this.next = tempNode.next;
+																			this.next.prev = this;}
+					else {this.next.removeNode(arg);}}} 
+		
+	
+}
+
+//CLASS NODE
+class Node<T> extends ANode<T> {
+	T data;
+	//Constructor which takes in only data and initalises next and pre to null
+	Node(T data) {
+		this.data = data;
+		this.prev = null;
+		this.next = null;}
+	
+	//Convenience constructor
+	Node (T data, ANode<T> prev, ANode<T> next) {
+		if (prev==null || next ==null) {throw new IllegalArgumentException("Null passed as a node");}
+		else {
+			this.data = data;
+			this.prev = prev;
+			this.next = next;
+			prev.next = this;
+			next.prev = this;}}
+	
+	//Defining the methods
+	public boolean isSentinel() {return false;} //checks whether the given node is sentinel or not
+	
+	public int size() {return 1 + this.next.size();}
+	
+	public T getData() {return this.data;} //returns the data from this ndoe
+	
+	public ANode<T> find(IPredicate<T> arg) {
+		if (arg.apply(this.data)) {return this;}
+		else {if (this.next.isSentinel()) {return this.next;}
+				else {return this.next.find(arg);}}}
+	
+	public void removeNode(ANode<T> arg) {
+		if (this.next.isSentinel()) {return;}
+		else {if (this.next.equals(arg)) {ANode<T> tempNode = this.next;
+																			this.next = tempNode.next;
+																			this.next.prev = this;}
+				 else {this.next.removeNode(arg); }}}
+		
+}
+
+
+
+//===========================================================================
+//CLASS EXAMPLESDEQUE
+
+class ExamplesDeque {
+	ExamplesDeque(){}
+
+	ANode<String> nodeSentinel; 
+	ANode<String>  node1 ;
+	ANode<String>  node2 ;
+	ANode<String>  node3 ;
+	ANode<String>  node4 ;
+	Deque<String> emptyD ;
+	Deque<String> orderedD ;
+	
+	
+
+	void initConditions() {
+		nodeSentinel = new Sentinel<String>();
+		node1 = new Node<String>("abc", nodeSentinel, nodeSentinel);
+		node2 = new Node<String>("bcd", node1, nodeSentinel);
+		node3 = new Node<String>("cde", node2, nodeSentinel);
+		node4 = new Node<String>("def", node3, nodeSentinel);
+		emptyD = new Deque<String>();  //empty deque
+		orderedD = new Deque<String>(nodeSentinel);}
+	
+
+	
+	void testInitConditions(Tester t) {
+		this.initConditions();
+		t.checkExpect(this.orderedD.header.next, node1);
+		t.checkExpect(this.orderedD.header.prev, node4);
+		t.checkExpect(this.orderedD.header.prev.prev, node3);}
+	
+	void testSize(Tester t) {
+		this.initConditions();
+		t.checkExpect(this.orderedD.size(), 4);}
+	
+	void testAddAtHead(Tester t) {
+		this.initConditions();
+		ANode<String> node5 = new Node<String>("efg");
+		this.orderedD.addAtHead(node5);
+		t.checkExpect(this.orderedD.header.next, node5);
+		t.checkExpect(this.orderedD.header.next.prev, this.orderedD.header);}
+	
+	void testAddAtTail(Tester t) {
+		this.initConditions();
+		ANode<String> node5 = new Node<String>("efg");
+		this.orderedD.addAtTail(node5);
+		t.checkExpect(this.orderedD.header.prev, node5);
+		t.checkExpect(this.orderedD.header.prev.prev, node4);
+		t.checkExpect(this.orderedD.header.prev.next, this.orderedD.header);}
+	
+	void testRemoveHead(Tester t) { 
+		this.initConditions();
+		this.orderedD.removeFromHead();
+		t.checkExpect(this.orderedD.size(), 3);
+		t.checkExpect(this.orderedD.header.next, node2);
+		t.checkExpect(this.orderedD.header.next.prev, this.orderedD.header);
+	}
+	
+	void testRemoveTail(Tester t) { 
+		this.initConditions();
+		this.orderedD.removeFromTail();
+		t.checkExpect(this.orderedD.size(), 3);
+		t.checkExpect(this.orderedD.header.prev, node3);
+		t.checkExpect(this.orderedD.header.prev.next, this.orderedD.header);}
+	
+	void testFind (Tester t) {
+		this.initConditions();
+		t.checkExpect(this.orderedD.find(new IsABC()), node1);
+		t.checkExpect(this.orderedD.find(new IsPQR()), this.orderedD.header);}
+	
+	void testRemoveNode(Tester t) {
+		this.initConditions();
+		this.orderedD.removeNode(node2);
+		t.checkExpect(this.orderedD.header.next.next, node3);
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

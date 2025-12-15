@@ -1,0 +1,336 @@
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* CONSTANTS *)
+
+exception NoAnswer
+
+val LOI1 = [2,6,3,4,1]; (*random test case *)
+val LOS0 = [] ; (* empty LOS useful for P1 *)
+val LOS1 = ["Shubham" , "survi" , "Sharvil" , "mummy", "Shivansh"];(*string list to test out rsesults for problem 1*)
+val LOS2 = ["shubham", "survi"]; (* case when no elements in list are capitalised , useful for P1*)
+val LOS3 = ["shubham" , "survi" , "Sharvil" , "mummy"];(*string list useful for testing P2 *)
+val S0 = ""; (* sample empty string useful for testing P6*)
+val S1 = "shubham"; (* sample string useful for testing P6*)
+val S2 = "shubham gupta"; (* sample string useful for testing P6*)
+val LOS4  = ["shubham" , "survi"]; (* list of strings which are useful for testing P8*)
+	      
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* HELPER FUNCTIONS *)
+
+(*Implementing the check-expect function to test our functions*)
+(* Signature -> String, Function with argument, Expected Value -> String*)
+(*defining check-expect function which takes in a string (test name), and a value expected from a function and param, and the expected value, and prints pass or fail *)
+
+fun check_expect (name: string, actual: ''a, expected: ''a) =
+    if actual = expected then
+	print (name ^ " passed\n")
+    else
+	print (name ^ " failed\n") ;
+
+
+(* Testing the check_expect *)
+check_expect("Check_expect_Test1" , Int.abs ~5, 5); (* testing on integer for pass*)
+check_expect("Check_expect_Test2" , Int.abs ~5, 6); (* testing on integer for fail*)
+check_expect("Check_expect_Test3" ,String.size "hello", 5); (* testing on string for pass*)
+check_expect("Check_expect_Test4" ,String.size "hello", 6); (* testing on string for fail*)
+check_expect("Check_expect_Test5" ,hd LOI1, 6); (* testing on list for fail*)
+check_expect("Check_expect_Test6" ,hd LOI1, 2); (* testing on list for pass*)
+
+
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* DATA DEFINITIONS *)
+
+datatype pattern = Wildcard
+		 | Variable of string
+		 | UnitP
+		 | ConstP of int
+		 | TupleP of pattern list
+		 | ConstructorP of string * pattern;
+
+(* pattern is one of *)
+(* -- Wildcard which can take any value *)
+(* -- Variable of string - which can take only string value *)
+(* -- Unitp which signifies a type of pattern *)
+(* -- ConstP which reflects an int value *)
+(* -- TupleP which is actually a recursive call to each pattern in the list of patterns through self reference *)
+(* -- ConstructorP of string*pattern which is again a recursive call to pattern*)
+(* interp. as a tpe of pattern whic we use to pattern match data in SML*)
+
+val PW = Wildcard;
+val PV = Variable "P0";
+val PU = UnitP;
+val PC = ConstP 10;
+val PT = [PW, PV, PU, PC];
+val PCT = ("Random" , Wildcard)
+
+(* template for pattern *)
+
+(*
+fun fn-for-p p
+   case p of
+   Wildcard => (.... Wildcard)
+   Variable s => (....s)
+   UnitP => (....UnitP)
+   ConstP i => (.... i)
+   TupleP [] => (...)
+   TupleP p:p' => (...p) (fn-for-p p')
+   ConstructorP (s , p) => (...s) (fn-for-p p)
+*)
+		  
+datatype valu = Const of int
+	      | Unit
+	      | Tuple of valu list
+	      | Constructor of string * valu;
+
+(* datatype is one of *)
+(* -- Const of type int representing constant *)
+(* -- Unit 
+					    
+
+					    
+fun g f1 f2 p =
+    let 
+	val r = g f1 f2 
+    in
+	case p of
+	    Wildcard          => f1 ()
+	  | Variable x        => f2 x
+	  | TupleP ps         => List.foldl (fn (p,i) => (r p) + i) 0 ps
+	  | ConstructorP(_,p) => r p
+	  | _                 => 0
+    end
+
+(**** for the challenge problem only ****)
+
+datatype typ = Anything
+	     | UnitT
+	     | IntT
+	     | TupleT of typ list
+	     | Datatype of string
+
+(*------------------------------------------*)
+(*------------------------------------------*)
+(* FUNCTIONS*)
+(* Problem 1 : ONLY_CAPITALS *)
+(* Signature , List of String  -> String List *)
+(* Takes in a list of strings, and fitlers out only those strings which start with an uppercase letter *)
+
+(* defining the stub *)
+(*fun only_capitals (los: string list ) = los; *)
+
+(*template from filter *)
+(*
+fun fn-for-filter = List.filter (fn : ('a -> bool), x)
+*)
+
+
+fun only_capitals (los: string list) =
+    List.filter (fn x => Char.isUpper(String.sub (x, 0))) los;
+
+
+(* writing test cases *)
+check_expect("only_capitals_test0", only_capitals LOS0,[]); (* base case of an empty list returning an empty list *)
+check_expect("only_capitals_test1", only_capitals LOS1,["Shubham", "Sharvil", "Shivansh"] ); (* case of a list having both cpaital and non capital 1st letter *)
+check_expect("only_capitals_test2", only_capitals LOS2, []); (* case where in LOS all strings start with non capital letters *)
+
+(*------------------------------------------*)
+(* Problem 2 : LONGEST_STRING1 *)
+(* Signature , List of String  -> String  *)
+(* Takes in a list of strings, and returns longest string in the list  *)
+(* if there are strings with same length, return the one CLOSER to START of the list *)
+
+(* defining the stub *)
+(*fun longest_string1 (los: string list) = "";*)
+
+(*template from foldl *)
+(*
+fun fn-for-foldl = List.Filter (fn: ('a 'a => 'a), 'a ,  'a los)
+*) 
+
+
+
+fun longest_string1 (los: string list) =
+    List.foldl (fn (x,y) => if String.size x > String.size y then x else y) "" los;
+
+
+
+(* writing test cases *)
+check_expect("longest_string1_test0", longest_string1 LOS0, ""); (* base case of an empty list returning an empty list *)
+check_expect("longest_string1_test1", longest_string1 LOS3, "shubham"); (* compound case of two strings having same length but we return the string closer to list beginning *)
+check_expect("longest_string1_test2", longest_string1 LOS2, "shubham"); (* case where only a single longest string in the list *)
+
+
+
+(*------------------------------------------*)
+(* Problem 3 : LONGEST_STRING2 *)
+(* Signature , List of String  -> String  *)
+(* Takes in a list of strings, and returns longest string in the list  *)
+(* if there are strings with same length, return the one CLOSER to END of the list *)
+
+(* defining the stub *)
+(*fun longest_string1 (los: string list) = "";*)
+
+(*template from foldl *)
+(*
+fun fn-for-foldl = List.Filter (fn: ('a 'a => 'a), 'a ,  'a los)
+*) 
+
+
+
+fun longest_string2 (los: string list) =
+    List.foldl (fn (x,y) => if String.size x >= String.size y then x else y) "" los;
+
+
+
+(* writing test cases *)
+check_expect("longest_string2_test0", longest_string2 LOS0, ""); (* base case of an empty list returning an empty string*)
+check_expect("longest_string2_test1", longest_string2 LOS3, "Sharvil"); (* compound case of two strings having same length but we return the string closer to list beginning *)
+check_expect("longest_string2_test2", longest_string2 LOS2, "shubham"); (* case where only a single longest string in the list *)
+
+
+(*------------------------------------------*)
+(* Problem 4 : LONGEST_STRING HELPER, LONGEST_STRING3, LONGEST_STRING4 *)
+(* Signature Longest String Helper-> (int*int -> bool) -> string list -> string *)
+(* Takes in a function which takes in two ints and produces a bool , based on which we fold the function to produce the output *)
+(* produce 2 functions here using longest_string_helper, longest_string_3 and longest_string_4 which behave like longest_string_1 and longest_string_2 earlier *)
+
+(* defining the stub *)
+(*fun longest_string_helper (f: (int, int -> bool), los, "" = ""*) 
+
+(*template from function currying *)
+(*
+fun fn-for-currying x y x = fn x => fn y => fn z 
+*) 
+
+fun longest_string_helper (f: (int* int -> bool)) (los: string list) (s: string)   = List.foldl (fn (x,y) => if f (String.size x , String.size y) then x else y) s los;
+
+val longest_string3 = longest_string_helper (fn (x,y) => x >y) ;
+val longest_string4 = longest_string_helper (fn (x,y) => x >= y);
+
+(* writing test cases *)
+check_expect("longest_string3_test1", longest_string3 LOS3 "", "shubham"); (* case of using longest_string3 which returns the longest string closer to the start of list *)
+check_expect("longest_string4_test1", longest_string4 LOS3 "", "Sharvil"); (* case of useing longest_string4 which returns the longest string closer to end of the list *)
+
+
+
+
+
+(*------------------------------------------*)
+(* Problem 5 : LONGEST_CAPITALIZED *)
+(* Signature , List of String  -> String  *)
+(* Takes in a list of strings, and returns longest string in the list which beigns with a capital letters *)
+(* if there are strings with same length, return the one closer to END of the list *)
+(* avoid unnecesasry function binding , use val operator and o operator for function composition*)
+
+(* defining the stub *)
+(*fun longest_capitalized (los: string list) = "";*) 
+
+(*template from function composition *)
+(*
+val fn-for-x = f o g
+*) 
+
+val longest_capitalized = longest_string1 o only_capitals ;
+
+(* writing test cases *)
+check_expect("longest_string2_test0", longest_capitalized LOS0, ""); (* base case of an empty list returning an empty string *)
+check_expect("longest_string2_test1", longest_capitalized LOS3, "Sharvil"); (* compound case of two strings having same length but one of them is not capitalised first char *)
+check_expect("longest_string2_test2", longest_capitalized LOS2, ""); (* case where only no element in list is capitalised *)
+check_expect("longest_string2_test3", longest_capitalized LOS1, "Shivansh"); (* case where few elements capitalized and we return string with longest lenght closer to start of the list *)
+
+
+(*------------------------------------------*)
+(* Problem 6 : REV_STRING *)
+(* Signature , String  -> String  *)
+(* Takes in a string and reverses it *)
+(* produces empty string if we pass an empty string *)
+
+
+(* defining the stub *)
+(*fun rev_string (s: string) = "";*)
+
+(*template from function composition *)
+(*
+fun fn-for-string(s) = f o g o h(s)
+or equivalently
+val fn-for-string = f o g o h
+*) 
+
+val rev_string  = String.implode o List.rev o String.explode;
+
+(* writing test cases *)
+check_expect("rev_string_test0", rev_string S0, ""); (* base case of an empty string returning an empty string *)
+check_expect("rev_string_test1", rev_string S1, "mahbuhs"); (* standard case of returning a single string w/o whitespaces *)
+check_expect("rev_string_test2", rev_string S2, "atpug mahbuhs"); (*compond case where we have whitspaces*)
+
+
+(*------------------------------------------*)
+(* Problem 7 : FIRST_ANSWER *)
+(* Signature> ('a -> 'b option) -> 'a  list  -> 'b  *)
+(* Takes in two arguments which are curried and first argument should be applied to elements of the second argument in order until the first time it returns SOME v for some v and then v is the result of the call to first_answer. *)
+(*If the first argument returns NONE for all list elements, then first_answer should raise the exception for empty list that is *)
+
+
+
+(* defining the stub *)
+(*val first_answer : ('a -> 'b option) -> 'a list -> 'b;*)
+
+(*template from curried functinos *)
+(*
+fun x y z = fn x => fn y => fn z = (...x) (... y) (...z)
+*) 
+
+
+(* writing the actual function below *)
+fun first_answer (f: 'a -> 'b option) (los: 'a list) =
+    case los of
+        [] => raise NoAnswer
+      | x::xs' => if isSome (f x)
+                  then valOf (f x)
+                  else first_answer f xs';
+						     
+(* writing test cases *)
+check_expect("first_answer_test2", first_answer (fn x => if String.size x >= 6 then SOME x else NONE)  LOS2,  "shubham"); (* testing for case when we pass for list of strings *)
+check_expect("first_answer_test1", first_answer (fn x => if x >= 3 then SOME x else NONE) [1,2,3,5,7] , 3); (* testing for case when we pass list of ints *)
+
+
+
+(*------------------------------------------*)
+(* Problem 8 : ALL_ANSWERS *)
+(* Signature> ('a -> 'b list option) -> 'a  list  -> 'b list option *)
+(* Takes in two arguments which are curried and first argument should be applied to elements of the second argument in order until the first time it returns SOME v for some v and then v is the result of the call to first_answer. *)
+(*If the first argument returns NONE for all list elements, then first_answer should raise the exception for empty list that is *)
+
+
+
+(* defining the stub *)
+(*val all_answers : ('a -> 'b list option) -> 'a list -> 'b list option*)
+
+(*template from curried functinos *)
+(*
+fun x y z = fn x => fn y => fn z = (...x) (... y) (...z)
+*) 
+
+
+(* writing the actual function below *)
+
+fun all_answers (f: 'a -> 'b list option) (los: 'a list) =
+    let fun helper (f: 'a -> 'b list option) (los: 'a list) (acc: 'b list option) =
+	case los of
+	    [] => acc
+	  | x::xs' => if not (isSome (f x))
+		      then NONE
+		      else if not (isSome acc)
+		      then  helper f xs' (SOME (valOf (f x)))
+		      else helper f xs' (SOME ((valOf (f x)) @  (valOf acc)))
+    in helper f los NONE end;
+
+
+
+(* writing test cases *)
+check_expect("all_answers_test1", all_answers (fn x => if x <>  "survi" then SOME (String.explode x) else NONE)  LOS2, NONE); (* testing for case when even one element returns NONE *)
+check_expect("all_answers_test2", all_answers (fn x => if x <>  "sharvil" then SOME (String.explode x) else NONE)  LOS2,  SOME [ #"s", #"u", #"r", #"v" ,#"i",#"s",#"h",#"u",#"b",#"h",#"a",#"m"]); (* testing for case when we pass for list of strings and no element returns NONE *)
+
+

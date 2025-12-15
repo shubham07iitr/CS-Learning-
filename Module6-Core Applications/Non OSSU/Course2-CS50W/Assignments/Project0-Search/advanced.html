@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel = "stylesheet" href = "styleAdvanced.css">
+</head>
+<body>
+    <!--Creating the first div for nav bar with Google image and Search option - using flex box-->
+    <div class="navBar">
+        <img src = "./public/images/Google Logo.png" height =40px>
+        <a id = "imageSearch" href = "./index.html"> Search</a> 
+    </div>
+
+    <!--Implementing the Advanced Search Icon-->
+    <h3>Advanced Search</h3>
+
+
+    <!--Impelmenting a simlple line break-->
+    <hr>
+    <!--Implementing the Advanced Search Labels and Input Boxes-->
+    <h4>Find pages with...</h4>
+    <form action="https://www.google.com/search?tbm=isch">
+        <label id = "allWordsLabel">all these words: </label>
+        <input id = "allWords" type = "text" name = "as_q">
+        <br>
+        <label id = "exactWordsLabel">this exact word or phrase : </label>
+        <input id = "exactWords" type = "text" name = "as_epq">
+        <br>
+        <label id = "anyWordsLabel">any of these words : </label>
+        <input id = "anyWords" type = "text" name = "as_oq">
+        <br>
+        <label id = "noneWordsLabel">none of these words : </label>
+        <input id = "noneWords" type = "text" name = "as_eq">
+        <br>
+        <input id= "submitButton" type="submit" value = "Advanced Search">
+    </form>
+    
+
+
+</body>
+</html>

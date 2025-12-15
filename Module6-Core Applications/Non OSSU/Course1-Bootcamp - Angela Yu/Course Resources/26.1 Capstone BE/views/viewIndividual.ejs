@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View All Blogs</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link href = "/styles/style.css" rel = "stylesheet">
+    <style>
+        footer {position: fixed; bottom: 0; width: 100%; background-color: lightblue; }
+        main {margin-top: 2% ; margin-left: 2%; margin-right: 2%;}
+        h2 {margin-bottom: 20px;}
+        button {margin-top: 15px;}
+
+    </style>    
+</head>
+
+<body>
+    <!--Defining the header-->
+    <%- include('header')%>
+
+    <!--Defining the body-->
+    <main>
+        <% if (locals.blogIndividual) {%>
+            <h2><%= blogIndividual.title %></h2>
+            <p><%= blogIndividual.details%></p>
+        <% } else { %>
+            <h2>Sorry your request could not be completed, try again</h2>
+        <% }%>
+        <form action = "/deletePost" method = "POST">
+            <input type="hidden" name="id" value="<%= blogIndividual.id %>">
+            <button type="submit" class="btn btn-primary" data-id = "<%= blogIndividual.id%>">Delete Blog</button>
+        </form>
+    </main>
+
+    <!--Defining the footer-->
+    <%- include('footer')%>
+    
+</body>
+</html>

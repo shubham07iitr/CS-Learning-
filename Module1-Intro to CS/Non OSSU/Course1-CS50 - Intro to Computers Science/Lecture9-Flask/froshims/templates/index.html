@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% block body %}
+    <form action ="/register" method = "post"> <!--Will route to /register when submitted-->
+        <input autocomplete="off" autofocus name = "name"   placeholder="Name" type = "text">
+        <select name = "sport"> <!--This creates a drop down menu with the following options-->
+            <option disabled selected>Sports</option> <!-- this will create a title which can't be selected-->
+            {% for sport in sports %}
+                <option value="{{ sport }}"> {{ sport }}</option>
+            {% endfor %}
+        </select>
+        <button type = "submit">Register</button>
+    </form>
+    
+{% endblock %}

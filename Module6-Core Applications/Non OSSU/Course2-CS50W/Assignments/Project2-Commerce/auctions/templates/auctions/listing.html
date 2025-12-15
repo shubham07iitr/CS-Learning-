@@ -1,0 +1,109 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+     <style>
+        #listing {display: flex; border: 1px solid gray; gap: 100px;}
+        img {padding-left: 50px;}
+        #date {color: darkgray; padding-top: 10px;}
+        #title {padding-top: 40px;}
+        #bid, #comment {border: 1px solid gray; margin-top: 20px; padding-left: 20px; padding-bottom: 10px; padding-top: 10px;}
+        #bid_value {margin-top: 10px; width: 300px;}
+        #place_bid , #submit_comment, #addWatchlist, #removeWatchlist, #closeAuction {margin-top: 10px; border: none; color: white; background-color: blue; border-radius: 5%; width: 180px;}
+        #postMessage {margin-top: 10px; color: blue;}
+        #watchListMessage {margin: 10px; color: darkgray;}
+        #seeall {margin-top: 20px; font-weight: bold;}
+        #comment_details {font-weight: bolder; font-size: 20px;}
+        #postedby, #postdate {font-weight: lighter; color: lightslategray; font-size: 15px;}
+    </style>
+
+    <div id="listing">
+        <img src="{{ listing.image_url }}" height = 300px width="400px">
+        <div id = "details">
+            {% if user == listing.winner %}
+                <h3 style = "color: green">Congratulations, you won</h3>
+            {% endif %}
+            <h3 id = "title">{{ listing.title }}</h3>
+            <h4 id = "price">Price: ${{ listing.min_bid }}</h4>
+            <h5 id = "listedby">Listed by: {{ listing.listed_by }}</h5>
+            <h5 id = "category"> <a href="{% url 'categorypage'  listing.category  %}">  Category: {{ listing.category }} </a></h5>
+            <h5 id = "date">Created: {{ listing.created_at }}</h5>
+            {% if user.is_authenticated %}
+                {% if listing not in user.watchlist.all %}
+                    <form action="{% url 'add_to_watchlist' %}" method = "POST">
+                        {% csrf_token %}
+                        <input type = "hidden" name="listing_ID" value = "{{ listing.id }}">
+                        <button type="submit" id="addWatchlist">Add to Watchlist</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'remove_from_watchlist' %}" method = "POST">
+                        {% csrf_token %}
+                        <input type = "hidden" name="listing_ID" value = "{{ listing.id }}">
+                        <button type="submit" id="removeWatchlist">Remove from Watchlist</button>
+                    </form>
+                {% endif %}
+                {% if message_watchlist %}
+                <h5 id = "watchListMessage">{{ message_watchlist }}</h5>
+                {% endif %}
+            {% endif %}
+        {% if user == listing.listed_by %}
+            <form action = "{% url 'closeAuction' %}" method ="POST">
+                {% csrf_token %}
+                <input type = "hidden" name="listing_ID" value = "{{ listing.id }}">
+                <button type="submit" id="closeAuction">Close Auction</button>
+            </form>
+        {% endif %}
+        {% if message_closeAuction%}
+            <h5 id = "messageCloseAuction">{{ message_closeAuction }}</h5>
+        {% endif %}
+        
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        {% if listing.status != 'CLOSED' %}
+        <div id = "bid">
+            <h4>Place a bid</h5>
+            <h7> {{ count_bids }} bids so far. Your bid is the current bid.</h7>
+            <h7>Min bid is {% if listing.current_price %} ${{ listing.current_price }} {% else %} ${{ listing.min_bid }} {% endif %}</h7>
+            <form action="{% url 'bidpage' %}" method = "POST">
+                {% csrf_token %}
+                <input type = "hidden" name="listingid" value = "{{ listing.id }}">
+                <input type="number" id = "bid_value" name="bid_value" step="0.01" min="0" required placeholder="Enter your bid upto 2 decimal places">
+                <button id = "place_bid" type ="submit"> Place your bid </button>
+            </form>
+            {% if message is not None %}
+                <h5 id = "postMessage">{{ message }}</h5>
+            {% endif %}
+        </div> 
+        {% endif %}
+        <div id ="comment">
+            <h4> Post a comment </h4>
+            <form action="{% url 'commentpage' %}" method = "POST"> 
+                {% csrf_token %}
+                <input type = "hidden" name="listingid" value = "{{ listing.id }}">
+                <textarea name = "new_comment" placeholder="Enter your comment here" required style="width: 500px; height: 100px;"></textarea>
+                <br>
+                <button id = "submit_comment" type ="submit"> Submit Comment </button>
+            </form>
+            {% if message_comment is not None%}
+            <h5 id = "postCommentMessage">{{ message_comment }}</h5>
+            {% endif %}
+
+            {% if comments %}
+            <h4 id="seeall"> See all comments </h4>
+            {% for comment in comments %}
+            <br>
+            <div name = "comment_actual">
+                <h6 id = "comment_details"> {{ comment.comment }}</h6>
+                <h7 id = "postedby">Posted by: {{ comment.comment_user.username }}</h7>
+                <br>
+                <h7 id = "postdate">Posted at: {{ comment.bid_created_date }}</h7>
+            </div>
+            {% endfor %}
+            {% endif %}
+            
+        </div>
+    {% else %}
+    <h1></h1>
+    {% endif %}
+{% endblock %}

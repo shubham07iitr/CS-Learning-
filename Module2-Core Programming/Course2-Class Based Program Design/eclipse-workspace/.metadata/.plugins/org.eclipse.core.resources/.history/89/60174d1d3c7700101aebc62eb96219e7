@@ -1,0 +1,160 @@
+import tester.*;
+import java.util.*;
+
+
+
+//============================================================================================================
+//ADJACENCY LIST REPRESENTATION
+
+//CLASS VERTEX
+//Each vertex will have name of vertex, and the list of edges from the vertext
+
+class Vertex {
+String name;
+IList<Edge> listOfEdges ; //all edges emanating from the vertex
+
+//Defining the Constructor
+Vertex (String name, IList<Edge> listOfEdges) {this.name = name; this.listOfEdges = listOfEdges;}
+
+//TEMPLATE
+/*
+ * FIELDS
+ * ...this.listOfEdges ... IList<Edge>
+ * METHODS
+ * ...this.pathExistsVertex(Vertex v2) .... boolean
+ */
+
+//METHODS
+
+//METHO PATHEXISTSVERTEX
+//Returns true if path exists from this vertex to given vertex
+//Signature> Self, Vertex v2 > boolean
+
+boolean pathExistsVertex(Vertex v2) {
+	return this.pathExistsVertexHelper(v2, this.listOfEdges,  new MtList<Vertex>());}
+
+
+//HELPER METHOD for PATHEXISTS
+//We check for whether:
+//-- there is a direct edge from v2 > v2
+//-- or the first vertex is connected to v2
+//-- or any of the ther vertices are connected to v2
+boolean pathExistsVertexHelper(Vertex v2, IList<Edge> listEdges ,  IList<Vertex> visited) {
+	if (listEdges.isEmpty()) {return false;} // if there are no edges from the given vertex , then we woudl return false, base case 
+	Vertex firstVertex = listEdges.getFirst().to;
+	if (!visited.contains(firstVertex)) {
+					return firstVertex.equals(v2) || firstVertex.pathExistsVertexHelper(v2, firstVertex.listOfEdges , visited.add(firstVertex))  || this.pathExistsVertexHelper(v2, this.listOfEdges.getRest(), visited); }
+	else {return this.pathExistsVertexHelper(v2, this.listOfEdges.getRest(), visited); }}
+
+}
+
+//CLASS EDGE
+//Edge is of type (From - Vertex, To - Vertex, Weight - Int)
+
+class Edge {
+Vertex from;
+Vertex to;
+int weight;
+
+//Defining the constructor 
+Edge (Vertex from, Vertex to, int weight) {this.from = from; this.to = to; this.weight = weight;}
+}
+
+//CLASS GRAPHLIST
+//It will be just a list of vertices
+
+class GraphList {
+IList<Vertex> listOfVertices;
+
+//Defining the constructor 
+GraphList(IList<Vertex> listOfVertices) {this.listOfVertices = listOfVertices;}
+
+//TEMPLATE
+/*
+ * FIELDS
+ * ...this.listOfVertices.... IList<Vertex>
+ * METHODS
+ * ...this.pathExists(Vertex v1, Vertex v2) ... boolean
+ */
+
+
+//METHODS
+
+
+//METHOD PATHEXISTS
+//Returns true if starting from a particular vertex, it is possible to reach to the destination vertex
+//Signature> Vertex v1, Vertex v2 > boolean
+
+boolean pathExists(Vertex v1, Vertex v2) {
+	return this.pathExistsHelper(v1, v2, this.listOfVertices);}
+
+//METHO PATHEXISTSHELPER
+
+boolean pathExistsHelper(Vertex v1, Vertex v2, IList<Vertex> listV) {
+	if (listV.isEmpty()) {throw new RuntimeException("Graph does not have the origin vertex");}
+	else {if (listV.getFirst().equals(v1)) {return v1.pathExistsVertex(v2);}
+				else {return this.pathExistsHelper(v1, v2, listV.getRest());}}}
+
+}
+
+
+//============================================================================================================
+class ExamplesGraphAdvanced {
+	ExamplesGraphAdvanced() {}
+	
+	//Graph defined as per this link -https://course.ccs.neu.edu/cs2510sp22/lecture30.html
+	
+	
+	//Defining the vertices
+	Vertex a = new Vertex("A", new MtList<Edge>());
+	Vertex b = new Vertex("B", new MtList<Edge>());
+	Vertex c = new Vertex("C", new MtList<Edge>());
+	Vertex d = new Vertex("D", new MtList<Edge>());
+	Vertex e = new Vertex("E", new MtList<Edge>());
+	
+	//Defining the Edges
+	Edge ab = new Edge(a,b, 0);
+	Edge bc = new Edge(b,c, 0);
+	Edge bd = new Edge(b, d,0);
+	Edge ca = new Edge(c,a, 0);
+	Edge eb = new Edge(e, b, 0);
+	
+	//Defining list of edges 
+	IList<Edge> aEdges = new ConsList<Edge>(ab, new MtList<Edge>());
+	IList<Edge> bEdges = new ConsList<Edge>(bc, new ConsList<Edge> (bd, new MtList<Edge>()));
+	IList<Edge> cEdges = new ConsList<Edge> (ca, new MtList<Edge>());
+	IList<Edge> eEdges = new ConsList<Edge> (eb, new MtList<Edge>());
+	
+	//Updating the list of edges for vertices 
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

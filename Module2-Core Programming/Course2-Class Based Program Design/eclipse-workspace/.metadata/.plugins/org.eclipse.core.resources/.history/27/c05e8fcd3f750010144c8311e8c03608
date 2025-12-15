@@ -1,0 +1,55 @@
+//CLASS STACK
+
+class Stack<T> {
+  Deque<T> contents;
+  
+  Stack(Deque<T> contents) {this.contents = contents;}
+  
+  //TEMPLATE
+  /*
+   * FIELDS
+   * ...this.contents ...Deque
+   * METHODS
+   * ...this.push(T item)...void
+   * ...this.isEmpty() ...boolean
+   * ...this.pop() .....T
+   * METHODS FROM DEQUE
+   * ...this.contents.size() ....int
+	 * ...this.contents.addAtHead(ANode<T> arg) ....void
+	 * ...this.contents.addAtHead(ANode<T> arg) ....void
+	 * ...this.contents.addAtTail(ANode<T> ard) ...void
+	 * ...this.contents.removeeFromHead()....ANode<T>
+	 * ...this.contents.removeeFromTail()....ANode<T>
+	 * ...this.contents.find(IPredicate<T> arg) ...ANode<T>
+	 * ...this.contents.removeNode(ANode<T> arg)...void
+   */
+  
+  //DEFINING METHODS
+  
+  //METHOD PUSH
+  // adds an item to the top of the stack
+  //Signature> Self  , T > Void
+  void push(T item) {
+  	ANode<T> newNode = new Node<T>(item);
+  	this.contents.addAtHead(newNode) ;}
+  
+  //METHOD ISEMPTY
+  //Size of the deque is 0
+  boolean isEmpty() {return this.contents.size() ==0;}
+  
+  //METHOD POP
+  // removes an item to the top of the stack
+  //Signature> Self  > Void
+  T pop() {return this.contents.removeFromHead().getData();}}
+
+
+
+
+
+
+
+
+
+
+
+
