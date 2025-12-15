@@ -3,7 +3,7 @@
 This is my attempt at learning fundamentals of Computers Science degree (including ML) as taught in a bachelor's course + some additional applications of CS courses as a non CS grad. Most of the courses have been taken up as suggested by the [OSSU curriculum ](https://github.com/ossu/computer-science?tab=readme-ov-file#core-cs). Some other courses/resources cover the fundamentals as suggested by [teachyourselfcs curriculum](https://teachyourselfcs.com/) and some courses are just generic application courses such as ML or web development, or introductory courses
 
 
-# Courses Listg
+# Courses List
 Organised as Completed, In Progress, Yet to Begin , also qualified as OSSU or Non OSSU, mentioned in roughly the order in which I completed these,
 
 ## Completed
@@ -68,6 +68,7 @@ Organised as Completed, In Progress, Yet to Begin , also qualified as OSSU or No
 - [Elements of Statistical Learning](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf) (Non OSSU) (Yet to begin)
 - [Pattern Recognition and Machine Learning](https://www.microsoft.com/en-us/research/wp-content/uploads/2006/01/Bishop-Pattern-Recognition-and-Machine-Learning-2006.pdf) (Non OSSU) (Yet to begin)
 - [Deep Learning Specialisation](https://www.coursera.org/specializations/deep-learning) (OSSU) (Yet to begin)
+- [Dive into DL](https://d2l.ai/d2l-en.pdf) (Non OSSU) (Yet to begin)
 - [Deep Learning by GoodFellow](https://aikosh.indiaai.gov.in/static/Deep+Learning+Ian+Goodfellow.pdf) (Non OSSU) (Yet to begin)
 - [Designing Machine Learning Systems](http://103.203.175.90:81/fdScript/RootOfEBooks/E%20Book%20collection%20-%202025%20-%20H/AI%20and%20DS/designing.machine.learning.systems.pdf) (Non OSSU) (Yet to begin)
 - [Machine Learning Engineering](https://soclibrary.futa.edu.ng/books/Machine%20Learning%20Engineering%20(Andriy%20Burkov)%20(Z-Library).pdf) (Non OSSU) (Yet to begin)
@@ -90,7 +91,7 @@ Computer Science
 └── readme.md
 
 
-## Otherp points on structure
+## Other points on structure
 - Curicullum is organised into modules and each module will have:
     - OSSU Courses
     - Non OSSU courses (if applicable)
@@ -111,5 +112,5 @@ Computer Science
 | **Module5 – Core Theory** | Algorithms I, Algorithms II, Algorithms III, Algorithms IV | — |
 | **Module6 – Core Applications** | Databases: Theory & Modeling, Relational Databases & SQL, Semistructured Data | CS50W, Angela Yu Bootcamp, Intro to DB Systems, DevOps, Software Engineering, Database Internals, Frontend Practice |
 | **Module7 – Advanced Courses** | Software Debugging, Software Testing, Compilers, Theory of Computation | Crafting Interpreters |
-| **Module8 – Machine Learning** | Machine Learning Specialization, Deep Learning Specialization | ISL, ESL, PRML, Deep Learning (Goodfellow), Designing ML Systems, Machine Learning Engineering |
+| **Module8 – Machine Learning** | Machine Learning Specialization, Deep Learning Specialization | ISL, ESL, PRML, Deep Learning (Goodfellow), Dive into ML, Designing ML Systems, Machine Learning Engineering |
 
